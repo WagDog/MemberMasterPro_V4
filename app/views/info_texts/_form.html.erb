@@ -1,0 +1,57 @@
+<%= form_for(@info_text) do |f| %>
+  <% if @info_text.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@info_text.errors.count, "error") %> prohibited this info_text from being saved:</h2>
+
+      <ul>
+      <% @info_text.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :till_id %><br>
+    <%= f.text_field :till_id %>
+  </div>
+  <div class="field">
+    <%= f.label :text %><br>
+    <%= f.text_field :text %>
+  </div>
+  <div class="field">
+    <%= f.label :bold %><br>
+    <%= f.check_box :bold %>
+  </div>
+  <div class="field">
+    <%= f.label :underline %><br>
+    <%= f.check_box :underline %>
+  </div>
+  <div class="field">
+    <%= f.label :double_width %><br>
+    <%= f.check_box :double_width %>
+  </div>
+  <div class="field">
+    <%= f.label :double_height %><br>
+    <%= f.check_box :double_height %>
+  </div>
+  <div class="field">
+    <%= f.label :quadruple %><br>
+    <%= f.check_box :quadruple %>
+  </div>
+  <div class="field">
+    <%= f.label :center_aligned %><br>
+    <%= f.check_box :center_aligned %>
+  </div>
+  <div class="field">
+    <%= f.label :right_aligned %><br>
+    <%= f.check_box :right_aligned %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

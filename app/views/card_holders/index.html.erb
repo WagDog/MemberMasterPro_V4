@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Card Holders</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Member</th>
+      <th>Title</th>
+      <th>Initials</th>
+      <th>Surname</th>
+      <th>Card number</th>
+      <th>Issue number</th>
+      <th>Card profile</th>
+      <th>Status</th>
+      <th>Valid in date range</th>
+      <th>Balance 1</th>
+      <th>Balance 2</th>
+      <th>Balance 3</th>
+      <th>Balance 4</th>
+      <th>Balance 5</th>
+      <th>Birth date</th>
+      <th>Category</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @card_holders.each do |card_holder| %>
+      <tr>
+        <td><%= card_holder.member %></td>
+        <td><%= card_holder.title %></td>
+        <td><%= card_holder.initials %></td>
+        <td><%= card_holder.surname %></td>
+        <td><%= card_holder.card_number %></td>
+        <td><%= card_holder.issue_number %></td>
+        <td><%= card_holder.card_profile %></td>
+        <td><%= card_holder.status %></td>
+        <td><%= card_holder.valid_in_date_range %></td>
+        <td><%= card_holder.balance_1 %></td>
+        <td><%= card_holder.balance_2 %></td>
+        <td><%= card_holder.balance_3 %></td>
+        <td><%= card_holder.balance_4 %></td>
+        <td><%= card_holder.balance_5 %></td>
+        <td><%= card_holder.birth_date %></td>
+        <td><%= card_holder.category %></td>
+        <td><%= link_to 'Show', card_holder %></td>
+        <td><%= link_to 'Edit', edit_card_holder_path(card_holder) %></td>
+        <td><%= link_to 'Destroy', card_holder, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Card holder', new_card_holder_path %>

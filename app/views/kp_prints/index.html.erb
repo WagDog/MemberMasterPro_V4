@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Kp Prints</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Date received</th>
+      <th>Date processed</th>
+      <th>Printer number</th>
+      <th>Processed</th>
+      <th>Data</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @kp_prints.each do |kp_print| %>
+      <tr>
+        <td><%= kp_print.date_received %></td>
+        <td><%= kp_print.date_processed %></td>
+        <td><%= kp_print.printer_number %></td>
+        <td><%= kp_print.processed %></td>
+        <td><%= kp_print.data %></td>
+        <td><%= link_to 'Show', kp_print %></td>
+        <td><%= link_to 'Edit', edit_kp_print_path(kp_print) %></td>
+        <td><%= link_to 'Destroy', kp_print, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Kp print', new_kp_print_path %>

@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @info_text.name %>
+</p>
+
+<p>
+  <strong>Till:</strong>
+  <%= @info_text.till %>
+</p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @info_text.text %>
+</p>
+
+<p>
+  <strong>Bold:</strong>
+  <%= @info_text.bold %>
+</p>
+
+<p>
+  <strong>Underline:</strong>
+  <%= @info_text.underline %>
+</p>
+
+<p>
+  <strong>Double width:</strong>
+  <%= @info_text.double_width %>
+</p>
+
+<p>
+  <strong>Double height:</strong>
+  <%= @info_text.double_height %>
+</p>
+
+<p>
+  <strong>Quadruple:</strong>
+  <%= @info_text.quadruple %>
+</p>
+
+<p>
+  <strong>Center aligned:</strong>
+  <%= @info_text.center_aligned %>
+</p>
+
+<p>
+  <strong>Right aligned:</strong>
+  <%= @info_text.right_aligned %>
+</p>
+
+<%= link_to 'Edit', edit_info_text_path(@info_text) %> |
+<%= link_to 'Back', info_texts_path %>

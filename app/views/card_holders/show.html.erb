@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Member:</strong>
+  <%= @card_holder.member %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @card_holder.title %>
+</p>
+
+<p>
+  <strong>Initials:</strong>
+  <%= @card_holder.initials %>
+</p>
+
+<p>
+  <strong>Surname:</strong>
+  <%= @card_holder.surname %>
+</p>
+
+<p>
+  <strong>Card number:</strong>
+  <%= @card_holder.card_number %>
+</p>
+
+<p>
+  <strong>Issue number:</strong>
+  <%= @card_holder.issue_number %>
+</p>
+
+<p>
+  <strong>Card profile:</strong>
+  <%= @card_holder.card_profile %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @card_holder.status %>
+</p>
+
+<p>
+  <strong>Valid in date range:</strong>
+  <%= @card_holder.valid_in_date_range %>
+</p>
+
+<p>
+  <strong>Balance 1:</strong>
+  <%= @card_holder.balance_1 %>
+</p>
+
+<p>
+  <strong>Balance 2:</strong>
+  <%= @card_holder.balance_2 %>
+</p>
+
+<p>
+  <strong>Balance 3:</strong>
+  <%= @card_holder.balance_3 %>
+</p>
+
+<p>
+  <strong>Balance 4:</strong>
+  <%= @card_holder.balance_4 %>
+</p>
+
+<p>
+  <strong>Balance 5:</strong>
+  <%= @card_holder.balance_5 %>
+</p>
+
+<p>
+  <strong>Birth date:</strong>
+  <%= @card_holder.birth_date %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= @card_holder.category %>
+</p>
+
+<%= link_to 'Edit', edit_card_holder_path(@card_holder) %> |
+<%= link_to 'Back', card_holders_path %>

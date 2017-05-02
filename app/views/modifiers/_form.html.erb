@@ -1,0 +1,117 @@
+<%= form_for(@modifier) do |f| %>
+  <% if @modifier.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@modifier.errors.count, "error") %> prohibited this modifier from being saved:</h2>
+
+      <ul>
+      <% @modifier.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :function %><br>
+    <%= f.check_box :function %>
+  </div>
+  <div class="field">
+    <%= f.label :mechanism %><br>
+    <%= f.check_box :mechanism %>
+  </div>
+  <div class="field">
+    <%= f.label :percentage %><br>
+    <%= f.text_field :percentage %>
+  </div>
+  <div class="field">
+    <%= f.label :plus_minus %><br>
+    <%= f.number_field :plus_minus %>
+  </div>
+  <div class="field">
+    <%= f.label :change_from %><br>
+    <%= f.number_field :change_from %>
+  </div>
+  <div class="field">
+    <%= f.label :change_to %><br>
+    <%= f.number_field :change_to %>
+  </div>
+  <div class="field">
+    <%= f.label :plu_offset %><br>
+    <%= f.number_field :plu_offset %>
+  </div>
+  <div class="field">
+    <%= f.label :time_from_1 %><br>
+    <%= f.datetime_select :time_from_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :time_to_1 %><br>
+    <%= f.datetime_select :time_to_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :time_from_2 %><br>
+    <%= f.datetime_select :time_from_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :time_to_2 %><br>
+    <%= f.datetime_select :time_to_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :time_from_3 %><br>
+    <%= f.datetime_select :time_from_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :time_to_3 %><br>
+    <%= f.datetime_select :time_to_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :time_from_4 %><br>
+    <%= f.datetime_select :time_from_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :time_to_4 %><br>
+    <%= f.datetime_select :time_to_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :time_from_5 %><br>
+    <%= f.datetime_select :time_from_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :time_to_5 %><br>
+    <%= f.datetime_select :time_to_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :monday %><br>
+    <%= f.check_box :monday %>
+  </div>
+  <div class="field">
+    <%= f.label :tuesday %><br>
+    <%= f.check_box :tuesday %>
+  </div>
+  <div class="field">
+    <%= f.label :wednesday %><br>
+    <%= f.check_box :wednesday %>
+  </div>
+  <div class="field">
+    <%= f.label :thursday %><br>
+    <%= f.check_box :thursday %>
+  </div>
+  <div class="field">
+    <%= f.label :friday %><br>
+    <%= f.check_box :friday %>
+  </div>
+  <div class="field">
+    <%= f.label :saturday %><br>
+    <%= f.check_box :saturday %>
+  </div>
+  <div class="field">
+    <%= f.label :sunday %><br>
+    <%= f.check_box :sunday %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

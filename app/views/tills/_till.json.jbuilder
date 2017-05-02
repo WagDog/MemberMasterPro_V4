@@ -1,0 +1,2 @@
+json.extract! till, :id, :name, :last_z_transaction, :last_z_report_counter, :locked, :change_due, :change_data, :new_journal_on_startup, :allow_topup_purse_1, :allow_topup_purse_2, :allow_topup_purse_3, :allow_topup_purse_4, :allow_topup_purse_5, :purse_1_name, :purse_2_name, :purse_3_name, :purse_4_name, :purse_5_name, :auto_surcharge, :version, :compulsory_media_declaration, :created_at, :updated_at
+json.url till_url(till, format: :json)

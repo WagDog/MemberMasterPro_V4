@@ -1,0 +1,79 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Transaction Items</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Transaction</th>
+      <th>Cashier</th>
+      <th>Plu</th>
+      <th>Plu name</th>
+      <th>Plu factor</th>
+      <th>Plu factor entered</th>
+      <th>Plu price</th>
+      <th>Plu price level</th>
+      <th>Plu group</th>
+      <th>Plu price level 1</th>
+      <th>Plu cost</th>
+      <th>Vat</th>
+      <th>Void</th>
+      <th>Sale date time</th>
+      <th>Rp sort group</th>
+      <th>Kp printed</th>
+      <th>Condiment</th>
+      <th>Purse no</th>
+      <th>Line amount</th>
+      <th>Discounted amount</th>
+      <th>Single discounted amount</th>
+      <th>Nett amount</th>
+      <th>Discount</th>
+      <th>Surcharge amount</th>
+      <th>Vat amount</th>
+      <th>Single vat amount</th>
+      <th>Add surcharge</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @transaction_items.each do |transaction_item| %>
+      <tr>
+        <td><%= transaction_item.transaction %></td>
+        <td><%= transaction_item.cashier %></td>
+        <td><%= transaction_item.plu %></td>
+        <td><%= transaction_item.plu_name %></td>
+        <td><%= transaction_item.plu_factor %></td>
+        <td><%= transaction_item.plu_factor_entered %></td>
+        <td><%= transaction_item.plu_price %></td>
+        <td><%= transaction_item.plu_price_level %></td>
+        <td><%= transaction_item.plu_group_id %></td>
+        <td><%= transaction_item.plu_price_level_1 %></td>
+        <td><%= transaction_item.plu_cost %></td>
+        <td><%= transaction_item.vat %></td>
+        <td><%= transaction_item.void %></td>
+        <td><%= transaction_item.sale_date_time %></td>
+        <td><%= transaction_item.rp_sort_group %></td>
+        <td><%= transaction_item.kp_printed %></td>
+        <td><%= transaction_item.condiment %></td>
+        <td><%= transaction_item.purse_no %></td>
+        <td><%= transaction_item.line_amount %></td>
+        <td><%= transaction_item.discounted_amount %></td>
+        <td><%= transaction_item.single_discounted_amount %></td>
+        <td><%= transaction_item.nett_amount %></td>
+        <td><%= transaction_item.discount %></td>
+        <td><%= transaction_item.surcharge_amount %></td>
+        <td><%= transaction_item.vat_amount %></td>
+        <td><%= transaction_item.single_vat_amount %></td>
+        <td><%= transaction_item.add_surcharge %></td>
+        <td><%= link_to 'Show', transaction_item %></td>
+        <td><%= link_to 'Edit', edit_transaction_item_path(transaction_item) %></td>
+        <td><%= link_to 'Destroy', transaction_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Transaction item', new_transaction_item_path %>

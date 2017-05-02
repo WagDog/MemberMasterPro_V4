@@ -1,0 +1,81 @@
+<%= form_for(@card_profile) do |f| %>
+  <% if @card_profile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@card_profile.errors.count, "error") %> prohibited this card_profile from being saved:</h2>
+
+      <ul>
+      <% @card_profile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :valid_in_date_range %><br>
+    <%= f.check_box :valid_in_date_range %>
+  </div>
+  <div class="field">
+    <%= f.label :date_range_start %><br>
+    <%= f.datetime_select :date_range_start %>
+  </div>
+  <div class="field">
+    <%= f.label :date_range_end %><br>
+    <%= f.datetime_select :date_range_end %>
+  </div>
+  <div class="field">
+    <%= f.label :credit_limit_purse_1 %><br>
+    <%= f.text_field :credit_limit_purse_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :credit_limit_purse_2 %><br>
+    <%= f.text_field :credit_limit_purse_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :credit_limit_purse_3 %><br>
+    <%= f.text_field :credit_limit_purse_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :credit_limit_purse_4 %><br>
+    <%= f.text_field :credit_limit_purse_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :credit_limit_purse_5 %><br>
+    <%= f.text_field :credit_limit_purse_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :discount_on_overdrawn_1 %><br>
+    <%= f.check_box :discount_on_overdrawn_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :discount_on_overdrawn_2 %><br>
+    <%= f.check_box :discount_on_overdrawn_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :discount_on_overdrawn_3 %><br>
+    <%= f.check_box :discount_on_overdrawn_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :discount_on_overdrawn_4 %><br>
+    <%= f.check_box :discount_on_overdrawn_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :discount_on_overdrawn_5 %><br>
+    <%= f.check_box :discount_on_overdrawn_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :pay_by_cash %><br>
+    <%= f.check_box :pay_by_cash %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,45 @@
+<%= form_for(@card_system) do |f| %>
+  <% if @card_system.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@card_system.errors.count, "error") %> prohibited this card_system from being saved:</h2>
+
+      <ul>
+      <% @card_system.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :use_site_id %><br>
+    <%= f.check_box :use_site_id %>
+  </div>
+  <div class="field">
+    <%= f.label :site_id %><br>
+    <%= f.text_field :site_id %>
+  </div>
+  <div class="field">
+    <%= f.label :use_issue_number %><br>
+    <%= f.check_box :use_issue_number %>
+  </div>
+  <div class="field">
+    <%= f.label :default_time_start %><br>
+    <%= f.datetime_select :default_time_start %>
+  </div>
+  <div class="field">
+    <%= f.label :default_time_end %><br>
+    <%= f.datetime_select :default_time_end %>
+  </div>
+  <div class="field">
+    <%= f.label :use_stock_control %><br>
+    <%= f.check_box :use_stock_control %>
+  </div>
+  <div class="field">
+    <%= f.label :use_time_attendance %><br>
+    <%= f.check_box :use_time_attendance %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

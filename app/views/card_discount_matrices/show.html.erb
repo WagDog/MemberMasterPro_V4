@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Group:</strong>
+  <%= @card_discount_matrix.group %>
+</p>
+
+<p>
+  <strong>Plu:</strong>
+  <%= @card_discount_matrix.plu %>
+</p>
+
+<p>
+  <strong>Card profiles:</strong>
+  <%= @card_discount_matrix.card_profiles %>
+</p>
+
+<p>
+  <strong>Card discounts:</strong>
+  <%= @card_discount_matrix.card_discounts %>
+</p>
+
+<%= link_to 'Edit', edit_card_discount_matrix_path(@card_discount_matrix) %> |
+<%= link_to 'Back', card_discount_matrices_path %>

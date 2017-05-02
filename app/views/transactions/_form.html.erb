@@ -1,0 +1,285 @@
+<%= form_for(@transaction) do |f| %>
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% @transaction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :site_id %><br>
+    <%= f.text_field :site_id %>
+  </div>
+  <div class="field">
+    <%= f.label :location_id %><br>
+    <%= f.number_field :location_id %>
+  </div>
+  <div class="field">
+    <%= f.label :till_id %><br>
+    <%= f.text_field :till_id %>
+  </div>
+  <div class="field">
+    <%= f.label :tab_id %><br>
+    <%= f.number_field :tab_id %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date_time %><br>
+    <%= f.datetime_select :start_date_time %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date_time %><br>
+    <%= f.datetime_select :end_date_time %>
+  </div>
+  <div class="field">
+    <%= f.label :receipt_no %><br>
+    <%= f.number_field :receipt_no %>
+  </div>
+  <div class="field">
+    <%= f.label :cashier_id %><br>
+    <%= f.text_field :cashier_id %>
+  </div>
+  <div class="field">
+    <%= f.label :cashier_name %><br>
+    <%= f.text_field :cashier_name %>
+  </div>
+  <div class="field">
+    <%= f.label :media_id %><br>
+    <%= f.text_field :media_id %>
+  </div>
+  <div class="field">
+    <%= f.label :media_name %><br>
+    <%= f.text_field :media_name %>
+  </div>
+  <div class="field">
+    <%= f.label :total_amount %><br>
+    <%= f.text_field :total_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :total_discounted_amount %><br>
+    <%= f.text_field :total_discounted_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :total_nett_amount %><br>
+    <%= f.text_field :total_nett_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :total_vat_amount %><br>
+    <%= f.text_field :total_vat_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :total_discount %><br>
+    <%= f.text_field :total_discount %>
+  </div>
+  <div class="field">
+    <%= f.label :total_topup %><br>
+    <%= f.text_field :total_topup %>
+  </div>
+  <div class="field">
+    <%= f.label :total_paid_out %><br>
+    <%= f.text_field :total_paid_out %>
+  </div>
+  <div class="field">
+    <%= f.label :total_surcharge %><br>
+    <%= f.text_field :total_surcharge %>
+  </div>
+  <div class="field">
+    <%= f.label :amount_tendered %><br>
+    <%= f.text_field :amount_tendered %>
+  </div>
+  <div class="field">
+    <%= f.label :change_given %><br>
+    <%= f.text_field :change_given %>
+  </div>
+  <div class="field">
+    <%= f.label :no_sale %><br>
+    <%= f.check_box :no_sale %>
+  </div>
+  <div class="field">
+    <%= f.label :card_holder_id %><br>
+    <%= f.text_field :card_holder_id %>
+  </div>
+  <div class="field">
+    <%= f.label :card_number %><br>
+    <%= f.text_field :card_number %>
+  </div>
+  <div class="field">
+    <%= f.label :card_name %><br>
+    <%= f.text_field :card_name %>
+  </div>
+  <div class="field">
+    <%= f.label :amount_purse_1 %><br>
+    <%= f.text_field :amount_purse_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :discounted_amount_purse_1 %><br>
+    <%= f.text_field :discounted_amount_purse_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :nett_amount_purse_1 %><br>
+    <%= f.text_field :nett_amount_purse_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :discount_purse_1 %><br>
+    <%= f.text_field :discount_purse_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :surcharge_purse_1 %><br>
+    <%= f.text_field :surcharge_purse_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :vat_amount_purse_1 %><br>
+    <%= f.text_field :vat_amount_purse_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :start_balance_purse_1 %><br>
+    <%= f.text_field :start_balance_purse_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :end_balance_purse_1 %><br>
+    <%= f.text_field :end_balance_purse_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :amount_purse_2 %><br>
+    <%= f.text_field :amount_purse_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :discounted_amount_purse_2 %><br>
+    <%= f.text_field :discounted_amount_purse_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :nett_amount_purse_2 %><br>
+    <%= f.text_field :nett_amount_purse_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :discount_purse_2 %><br>
+    <%= f.text_field :discount_purse_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :surcharge_purse_2 %><br>
+    <%= f.text_field :surcharge_purse_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :vat_amount_purse_2 %><br>
+    <%= f.text_field :vat_amount_purse_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :start_balance_purse_2 %><br>
+    <%= f.text_field :start_balance_purse_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :end_balance_purse_2 %><br>
+    <%= f.text_field :end_balance_purse_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :amount_purse_3 %><br>
+    <%= f.text_field :amount_purse_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :discounted_amount_purse_3 %><br>
+    <%= f.text_field :discounted_amount_purse_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :nett_amount_purse_3 %><br>
+    <%= f.text_field :nett_amount_purse_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :discount_purse_3 %><br>
+    <%= f.text_field :discount_purse_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :surcharge_purse_3 %><br>
+    <%= f.text_field :surcharge_purse_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :vat_amount_purse_3 %><br>
+    <%= f.text_field :vat_amount_purse_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :start_balance_3 %><br>
+    <%= f.text_field :start_balance_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :end_balance_3 %><br>
+    <%= f.text_field :end_balance_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :amount_purse_4 %><br>
+    <%= f.text_field :amount_purse_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :discounted_amount_purse_4 %><br>
+    <%= f.text_field :discounted_amount_purse_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :nett_amount_purse_4 %><br>
+    <%= f.text_field :nett_amount_purse_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :discount_purse_4 %><br>
+    <%= f.text_field :discount_purse_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :surcharge_purse_4 %><br>
+    <%= f.text_field :surcharge_purse_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :vat_amount_purse_4 %><br>
+    <%= f.text_field :vat_amount_purse_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :start_balance_4 %><br>
+    <%= f.text_field :start_balance_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :end_balance_4 %><br>
+    <%= f.text_field :end_balance_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :amount_purse_5 %><br>
+    <%= f.text_field :amount_purse_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :discounted_amount_purse_5 %><br>
+    <%= f.text_field :discounted_amount_purse_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :nett_amount_purse_5 %><br>
+    <%= f.text_field :nett_amount_purse_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :discount_purse_5 %><br>
+    <%= f.text_field :discount_purse_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :surcharge_purse_5 %><br>
+    <%= f.text_field :surcharge_purse_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :vat_amount_purse_5 %><br>
+    <%= f.text_field :vat_amount_purse_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :start_balance_5 %><br>
+    <%= f.text_field :start_balance_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :end_balance_5 %><br>
+    <%= f.text_field :end_balance_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :did_not_make_it %><br>
+    <%= f.check_box :did_not_make_it %>
+  </div>
+  <div class="field">
+    <%= f.label :finalised %><br>
+    <%= f.check_box :finalised %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

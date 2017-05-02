@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Function Buttons</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Function</th>
+      <th>Code</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @function_buttons.each do |function_button| %>
+      <tr>
+        <td><%= function_button.name %></td>
+        <td><%= function_button.function %></td>
+        <td><%= function_button.code %></td>
+        <td><%= link_to 'Show', function_button %></td>
+        <td><%= link_to 'Edit', edit_function_button_path(function_button) %></td>
+        <td><%= link_to 'Destroy', function_button, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Function button', new_function_button_path %>

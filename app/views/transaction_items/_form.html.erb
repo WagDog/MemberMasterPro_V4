@@ -1,0 +1,125 @@
+<%= form_for(@transaction_item) do |f| %>
+  <% if @transaction_item.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction_item.errors.count, "error") %> prohibited this transaction_item from being saved:</h2>
+
+      <ul>
+      <% @transaction_item.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :transaction_id %><br>
+    <%= f.text_field :transaction_id %>
+  </div>
+  <div class="field">
+    <%= f.label :cashier_id %><br>
+    <%= f.text_field :cashier_id %>
+  </div>
+  <div class="field">
+    <%= f.label :plu_id %><br>
+    <%= f.text_field :plu_id %>
+  </div>
+  <div class="field">
+    <%= f.label :plu_name %><br>
+    <%= f.text_field :plu_name %>
+  </div>
+  <div class="field">
+    <%= f.label :plu_factor %><br>
+    <%= f.text_field :plu_factor %>
+  </div>
+  <div class="field">
+    <%= f.label :plu_factor_entered %><br>
+    <%= f.text_field :plu_factor_entered %>
+  </div>
+  <div class="field">
+    <%= f.label :plu_price %><br>
+    <%= f.text_field :plu_price %>
+  </div>
+  <div class="field">
+    <%= f.label :plu_price_level %><br>
+    <%= f.number_field :plu_price_level %>
+  </div>
+  <div class="field">
+    <%= f.label :plu_group_id %><br>
+    <%= f.number_field :plu_group_id %>
+  </div>
+  <div class="field">
+    <%= f.label :plu_price_level_1 %><br>
+    <%= f.text_field :plu_price_level_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :plu_cost %><br>
+    <%= f.text_field :plu_cost %>
+  </div>
+  <div class="field">
+    <%= f.label :vat_id %><br>
+    <%= f.text_field :vat_id %>
+  </div>
+  <div class="field">
+    <%= f.label :void %><br>
+    <%= f.check_box :void %>
+  </div>
+  <div class="field">
+    <%= f.label :sale_date_time %><br>
+    <%= f.datetime_select :sale_date_time %>
+  </div>
+  <div class="field">
+    <%= f.label :rp_sort_group_id %><br>
+    <%= f.text_field :rp_sort_group_id %>
+  </div>
+  <div class="field">
+    <%= f.label :kp_printed %><br>
+    <%= f.check_box :kp_printed %>
+  </div>
+  <div class="field">
+    <%= f.label :condiment %><br>
+    <%= f.check_box :condiment %>
+  </div>
+  <div class="field">
+    <%= f.label :purse_no %><br>
+    <%= f.number_field :purse_no %>
+  </div>
+  <div class="field">
+    <%= f.label :line_amount %><br>
+    <%= f.text_field :line_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :discounted_amount %><br>
+    <%= f.text_field :discounted_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :single_discounted_amount %><br>
+    <%= f.text_field :single_discounted_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :nett_amount %><br>
+    <%= f.text_field :nett_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :discount %><br>
+    <%= f.text_field :discount %>
+  </div>
+  <div class="field">
+    <%= f.label :surcharge_amount %><br>
+    <%= f.text_field :surcharge_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :vat_amount %><br>
+    <%= f.text_field :vat_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :single_vat_amount %><br>
+    <%= f.text_field :single_vat_amount %>
+  </div>
+  <div class="field">
+    <%= f.label :add_surcharge %><br>
+    <%= f.check_box :add_surcharge %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

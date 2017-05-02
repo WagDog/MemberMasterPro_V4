@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Use site:</strong>
+  <%= @card_system.use_site_id %>
+</p>
+
+<p>
+  <strong>Site:</strong>
+  <%= @card_system.site_id %>
+</p>
+
+<p>
+  <strong>Use issue number:</strong>
+  <%= @card_system.use_issue_number %>
+</p>
+
+<p>
+  <strong>Default time start:</strong>
+  <%= @card_system.default_time_start %>
+</p>
+
+<p>
+  <strong>Default time end:</strong>
+  <%= @card_system.default_time_end %>
+</p>
+
+<p>
+  <strong>Use stock control:</strong>
+  <%= @card_system.use_stock_control %>
+</p>
+
+<p>
+  <strong>Use time attendance:</strong>
+  <%= @card_system.use_time_attendance %>
+</p>
+
+<%= link_to 'Edit', edit_card_system_path(@card_system) %> |
+<%= link_to 'Back', card_systems_path %>

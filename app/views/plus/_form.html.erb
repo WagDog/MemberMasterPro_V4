@@ -1,0 +1,121 @@
+<%= form_for(@plu) do |f| %>
+  <% if @plu.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@plu.errors.count, "error") %> prohibited this plu from being saved:</h2>
+
+      <ul>
+      <% @plu.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :price_1 %><br>
+    <%= f.text_field :price_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :price_2 %><br>
+    <%= f.text_field :price_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :price_3 %><br>
+    <%= f.text_field :price_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :price_4 %><br>
+    <%= f.text_field :price_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :price_5 %><br>
+    <%= f.text_field :price_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :price_6 %><br>
+    <%= f.text_field :price_6 %>
+  </div>
+  <div class="field">
+    <%= f.label :group_id %><br>
+    <%= f.text_field :group_id %>
+  </div>
+  <div class="field">
+    <%= f.label :plu_cost %><br>
+    <%= f.text_field :plu_cost %>
+  </div>
+  <div class="field">
+    <%= f.label :vat_id %><br>
+    <%= f.text_field :vat_id %>
+  </div>
+  <div class="field">
+    <%= f.label :stock_mode %><br>
+    <%= f.number_field :stock_mode %>
+  </div>
+  <div class="field">
+    <%= f.label :rp_sort_group %><br>
+    <%= f.number_field :rp_sort_group %>
+  </div>
+  <div class="field">
+    <%= f.label :purse_no %><br>
+    <%= f.number_field :purse_no %>
+  </div>
+  <div class="field">
+    <%= f.label :kp_printer %><br>
+    <%= f.number_field :kp_printer %>
+  </div>
+  <div class="field">
+    <%= f.label :barcode %><br>
+    <%= f.text_field :barcode %>
+  </div>
+  <div class="field">
+    <%= f.label :price_type %><br>
+    <%= f.number_field :price_type %>
+  </div>
+  <div class="field">
+    <%= f.label :condiment %><br>
+    <%= f.check_box :condiment %>
+  </div>
+  <div class="field">
+    <%= f.label :modifiers %><br>
+    <%= f.text_field :modifiers %>
+  </div>
+  <div class="field">
+    <%= f.label :popup_window_1 %><br>
+    <%= f.number_field :popup_window_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :popup_window_2 %><br>
+    <%= f.number_field :popup_window_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :popup_window_3 %><br>
+    <%= f.number_field :popup_window_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :popup_window_4 %><br>
+    <%= f.number_field :popup_window_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :popup_window_5 %><br>
+    <%= f.number_field :popup_window_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :back_colour %><br>
+    <%= f.number_field :back_colour %>
+  </div>
+  <div class="field">
+    <%= f.label :font_colour %><br>
+    <%= f.number_field :font_colour %>
+  </div>
+  <div class="field">
+    <%= f.label :is_active %><br>
+    <%= f.check_box :is_active %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

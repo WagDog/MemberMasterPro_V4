@@ -1,0 +1,139 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Transaction:</strong>
+  <%= @transaction_item.transaction %>
+</p>
+
+<p>
+  <strong>Cashier:</strong>
+  <%= @transaction_item.cashier %>
+</p>
+
+<p>
+  <strong>Plu:</strong>
+  <%= @transaction_item.plu %>
+</p>
+
+<p>
+  <strong>Plu name:</strong>
+  <%= @transaction_item.plu_name %>
+</p>
+
+<p>
+  <strong>Plu factor:</strong>
+  <%= @transaction_item.plu_factor %>
+</p>
+
+<p>
+  <strong>Plu factor entered:</strong>
+  <%= @transaction_item.plu_factor_entered %>
+</p>
+
+<p>
+  <strong>Plu price:</strong>
+  <%= @transaction_item.plu_price %>
+</p>
+
+<p>
+  <strong>Plu price level:</strong>
+  <%= @transaction_item.plu_price_level %>
+</p>
+
+<p>
+  <strong>Plu group:</strong>
+  <%= @transaction_item.plu_group_id %>
+</p>
+
+<p>
+  <strong>Plu price level 1:</strong>
+  <%= @transaction_item.plu_price_level_1 %>
+</p>
+
+<p>
+  <strong>Plu cost:</strong>
+  <%= @transaction_item.plu_cost %>
+</p>
+
+<p>
+  <strong>Vat:</strong>
+  <%= @transaction_item.vat %>
+</p>
+
+<p>
+  <strong>Void:</strong>
+  <%= @transaction_item.void %>
+</p>
+
+<p>
+  <strong>Sale date time:</strong>
+  <%= @transaction_item.sale_date_time %>
+</p>
+
+<p>
+  <strong>Rp sort group:</strong>
+  <%= @transaction_item.rp_sort_group %>
+</p>
+
+<p>
+  <strong>Kp printed:</strong>
+  <%= @transaction_item.kp_printed %>
+</p>
+
+<p>
+  <strong>Condiment:</strong>
+  <%= @transaction_item.condiment %>
+</p>
+
+<p>
+  <strong>Purse no:</strong>
+  <%= @transaction_item.purse_no %>
+</p>
+
+<p>
+  <strong>Line amount:</strong>
+  <%= @transaction_item.line_amount %>
+</p>
+
+<p>
+  <strong>Discounted amount:</strong>
+  <%= @transaction_item.discounted_amount %>
+</p>
+
+<p>
+  <strong>Single discounted amount:</strong>
+  <%= @transaction_item.single_discounted_amount %>
+</p>
+
+<p>
+  <strong>Nett amount:</strong>
+  <%= @transaction_item.nett_amount %>
+</p>
+
+<p>
+  <strong>Discount:</strong>
+  <%= @transaction_item.discount %>
+</p>
+
+<p>
+  <strong>Surcharge amount:</strong>
+  <%= @transaction_item.surcharge_amount %>
+</p>
+
+<p>
+  <strong>Vat amount:</strong>
+  <%= @transaction_item.vat_amount %>
+</p>
+
+<p>
+  <strong>Single vat amount:</strong>
+  <%= @transaction_item.single_vat_amount %>
+</p>
+
+<p>
+  <strong>Add surcharge:</strong>
+  <%= @transaction_item.add_surcharge %>
+</p>
+
+<%= link_to 'Edit', edit_transaction_item_path(@transaction_item) %> |
+<%= link_to 'Back', transaction_items_path %>

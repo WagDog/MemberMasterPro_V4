@@ -1,0 +1,65 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Tills</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Last z transaction</th>
+      <th>Last z report counter</th>
+      <th>Locked</th>
+      <th>Change due</th>
+      <th>Change data</th>
+      <th>New journal on startup</th>
+      <th>Allow topup purse 1</th>
+      <th>Allow topup purse 2</th>
+      <th>Allow topup purse 3</th>
+      <th>Allow topup purse 4</th>
+      <th>Allow topup purse 5</th>
+      <th>Purse 1 name</th>
+      <th>Purse 2 name</th>
+      <th>Purse 3 name</th>
+      <th>Purse 4 name</th>
+      <th>Purse 5 name</th>
+      <th>Auto surcharge</th>
+      <th>Version</th>
+      <th>Compulsory media declaration</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tills.each do |till| %>
+      <tr>
+        <td><%= till.name %></td>
+        <td><%= till.last_z_transaction %></td>
+        <td><%= till.last_z_report_counter %></td>
+        <td><%= till.locked %></td>
+        <td><%= till.change_due %></td>
+        <td><%= till.change_data %></td>
+        <td><%= till.new_journal_on_startup %></td>
+        <td><%= till.allow_topup_purse_1 %></td>
+        <td><%= till.allow_topup_purse_2 %></td>
+        <td><%= till.allow_topup_purse_3 %></td>
+        <td><%= till.allow_topup_purse_4 %></td>
+        <td><%= till.allow_topup_purse_5 %></td>
+        <td><%= till.purse_1_name %></td>
+        <td><%= till.purse_2_name %></td>
+        <td><%= till.purse_3_name %></td>
+        <td><%= till.purse_4_name %></td>
+        <td><%= till.purse_5_name %></td>
+        <td><%= till.auto_surcharge %></td>
+        <td><%= till.version %></td>
+        <td><%= till.compulsory_media_declaration %></td>
+        <td><%= link_to 'Show', till %></td>
+        <td><%= link_to 'Edit', edit_till_path(till) %></td>
+        <td><%= link_to 'Destroy', till, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Till', new_till_path %>

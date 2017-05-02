@@ -1,0 +1,81 @@
+<%= form_for(@card_holder) do |f| %>
+  <% if @card_holder.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@card_holder.errors.count, "error") %> prohibited this card_holder from being saved:</h2>
+
+      <ul>
+      <% @card_holder.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :member_id %><br>
+    <%= f.text_field :member_id %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :initials %><br>
+    <%= f.text_field :initials %>
+  </div>
+  <div class="field">
+    <%= f.label :surname %><br>
+    <%= f.text_field :surname %>
+  </div>
+  <div class="field">
+    <%= f.label :card_number %><br>
+    <%= f.text_field :card_number %>
+  </div>
+  <div class="field">
+    <%= f.label :issue_number %><br>
+    <%= f.number_field :issue_number %>
+  </div>
+  <div class="field">
+    <%= f.label :card_profile_id %><br>
+    <%= f.text_field :card_profile_id %>
+  </div>
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.number_field :status %>
+  </div>
+  <div class="field">
+    <%= f.label :valid_in_date_range %><br>
+    <%= f.check_box :valid_in_date_range %>
+  </div>
+  <div class="field">
+    <%= f.label :balance_1 %><br>
+    <%= f.text_field :balance_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :balance_2 %><br>
+    <%= f.text_field :balance_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :balance_3 %><br>
+    <%= f.text_field :balance_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :balance_4 %><br>
+    <%= f.text_field :balance_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :balance_5 %><br>
+    <%= f.text_field :balance_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :birth_date %><br>
+    <%= f.datetime_select :birth_date %>
+  </div>
+  <div class="field">
+    <%= f.label :category %><br>
+    <%= f.text_field :category %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

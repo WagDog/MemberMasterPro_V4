@@ -1,0 +1,64 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @cashier.name %>
+</p>
+
+<p>
+  <strong>Key code:</strong>
+  <%= @cashier.key_code %>
+</p>
+
+<p>
+  <strong>Functions 1:</strong>
+  <%= @cashier.functions_1 %>
+</p>
+
+<p>
+  <strong>Functions 2:</strong>
+  <%= @cashier.functions_2 %>
+</p>
+
+<p>
+  <strong>Functions 3:</strong>
+  <%= @cashier.functions_3 %>
+</p>
+
+<p>
+  <strong>Pin:</strong>
+  <%= @cashier.pin %>
+</p>
+
+<p>
+  <strong>Needs sign in:</strong>
+  <%= @cashier.needs_sign_in %>
+</p>
+
+<p>
+  <strong>Regular wage:</strong>
+  <%= @cashier.regular_wage %>
+</p>
+
+<p>
+  <strong>Overtime wage 1:</strong>
+  <%= @cashier.overtime_wage_1 %>
+</p>
+
+<p>
+  <strong>Overtime wage 2:</strong>
+  <%= @cashier.overtime_wage_2 %>
+</p>
+
+<p>
+  <strong>Max day seconds:</strong>
+  <%= @cashier.max_day_seconds %>
+</p>
+
+<p>
+  <strong>Max day overtime 1 seconds:</strong>
+  <%= @cashier.max_day_overtime_1_seconds %>
+</p>
+
+<%= link_to 'Edit', edit_cashier_path(@cashier) %> |
+<%= link_to 'Back', cashiers_path %>

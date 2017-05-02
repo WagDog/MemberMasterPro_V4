@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Card Systems</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Use site</th>
+      <th>Site</th>
+      <th>Use issue number</th>
+      <th>Default time start</th>
+      <th>Default time end</th>
+      <th>Use stock control</th>
+      <th>Use time attendance</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @card_systems.each do |card_system| %>
+      <tr>
+        <td><%= card_system.use_site_id %></td>
+        <td><%= card_system.site_id %></td>
+        <td><%= card_system.use_issue_number %></td>
+        <td><%= card_system.default_time_start %></td>
+        <td><%= card_system.default_time_end %></td>
+        <td><%= card_system.use_stock_control %></td>
+        <td><%= card_system.use_time_attendance %></td>
+        <td><%= link_to 'Show', card_system %></td>
+        <td><%= link_to 'Edit', edit_card_system_path(card_system) %></td>
+        <td><%= link_to 'Destroy', card_system, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Card system', new_card_system_path %>

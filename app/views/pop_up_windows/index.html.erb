@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Pop Up Windows</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Plu id list</th>
+      <th>Show price</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pop_up_windows.each do |pop_up_window| %>
+      <tr>
+        <td><%= pop_up_window.name %></td>
+        <td><%= pop_up_window.plu_id_list %></td>
+        <td><%= pop_up_window.show_price %></td>
+        <td><%= link_to 'Show', pop_up_window %></td>
+        <td><%= link_to 'Edit', edit_pop_up_window_path(pop_up_window) %></td>
+        <td><%= link_to 'Destroy', pop_up_window, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pop up window', new_pop_up_window_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Date received:</strong>
+  <%= @kp_print.date_received %>
+</p>
+
+<p>
+  <strong>Date processed:</strong>
+  <%= @kp_print.date_processed %>
+</p>
+
+<p>
+  <strong>Printer number:</strong>
+  <%= @kp_print.printer_number %>
+</p>
+
+<p>
+  <strong>Processed:</strong>
+  <%= @kp_print.processed %>
+</p>
+
+<p>
+  <strong>Data:</strong>
+  <%= @kp_print.data %>
+</p>
+
+<%= link_to 'Edit', edit_kp_print_path(@kp_print) %> |
+<%= link_to 'Back', kp_prints_path %>

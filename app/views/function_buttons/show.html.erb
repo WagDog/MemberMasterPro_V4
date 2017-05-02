@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @function_button.name %>
+</p>
+
+<p>
+  <strong>Function:</strong>
+  <%= @function_button.function %>
+</p>
+
+<p>
+  <strong>Code:</strong>
+  <%= @function_button.code %>
+</p>
+
+<%= link_to 'Edit', edit_function_button_path(@function_button) %> |
+<%= link_to 'Back', function_buttons_path %>

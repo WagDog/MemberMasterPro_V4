@@ -1,0 +1,65 @@
+<%= form_for(@cashier) do |f| %>
+  <% if @cashier.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@cashier.errors.count, "error") %> prohibited this cashier from being saved:</h2>
+
+      <ul>
+      <% @cashier.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :key_code %><br>
+    <%= f.text_field :key_code %>
+  </div>
+  <div class="field">
+    <%= f.label :functions_1 %><br>
+    <%= f.text_field :functions_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :functions_2 %><br>
+    <%= f.text_field :functions_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :functions_3 %><br>
+    <%= f.text_field :functions_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :pin %><br>
+    <%= f.text_field :pin %>
+  </div>
+  <div class="field">
+    <%= f.label :needs_sign_in %><br>
+    <%= f.check_box :needs_sign_in %>
+  </div>
+  <div class="field">
+    <%= f.label :regular_wage %><br>
+    <%= f.text_field :regular_wage %>
+  </div>
+  <div class="field">
+    <%= f.label :overtime_wage_1 %><br>
+    <%= f.text_field :overtime_wage_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :overtime_wage_2 %><br>
+    <%= f.text_field :overtime_wage_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :max_day_seconds %><br>
+    <%= f.number_field :max_day_seconds %>
+  </div>
+  <div class="field">
+    <%= f.label :max_day_overtime_1_seconds %><br>
+    <%= f.number_field :max_day_overtime_1_seconds %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

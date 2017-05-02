@@ -1,4 +1,62 @@
 Rails.application.routes.draw do
+  resources :vats
+
+  resources :transaction_items
+
+  resources :transactions
+
+  resources :tills
+
+  resources :telephone_numbers
+
+  resources :telephone_types
+
+  resources :selection_windows
+
+  resources :rp_sort_groups
+
+  resources :pop_up_windows
+
+  resources :modifiers
+
+  resources :member_categories
+
+  resources :media
+
+  resources :macros
+
+  resources :kp_prints
+
+  resources :info_texts
+
+  resources :function_buttons
+
+  resources :addresses
+
+  resources :email_addresses
+
+  resources :members
+
+  resources :cashiers
+
+  resources :card_systems
+
+  resources :card_revenues
+
+  resources :card_holders
+
+  resources :card_discount_matrices
+
+  resources :card_profiles
+
+  resources :plus
+
+  resources :groups
+
+  resources :card_discounts
+
+  resources :users
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

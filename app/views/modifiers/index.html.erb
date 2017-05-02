@@ -1,0 +1,75 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Modifiers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Function</th>
+      <th>Mechanism</th>
+      <th>Percentage</th>
+      <th>Plus minus</th>
+      <th>Change from</th>
+      <th>Change to</th>
+      <th>Plu offset</th>
+      <th>Time from 1</th>
+      <th>Time to 1</th>
+      <th>Time from 2</th>
+      <th>Time to 2</th>
+      <th>Time from 3</th>
+      <th>Time to 3</th>
+      <th>Time from 4</th>
+      <th>Time to 4</th>
+      <th>Time from 5</th>
+      <th>Time to 5</th>
+      <th>Monday</th>
+      <th>Tuesday</th>
+      <th>Wednesday</th>
+      <th>Thursday</th>
+      <th>Friday</th>
+      <th>Saturday</th>
+      <th>Sunday</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @modifiers.each do |modifier| %>
+      <tr>
+        <td><%= modifier.name %></td>
+        <td><%= modifier.function %></td>
+        <td><%= modifier.mechanism %></td>
+        <td><%= modifier.percentage %></td>
+        <td><%= modifier.plus_minus %></td>
+        <td><%= modifier.change_from %></td>
+        <td><%= modifier.change_to %></td>
+        <td><%= modifier.plu_offset %></td>
+        <td><%= modifier.time_from_1 %></td>
+        <td><%= modifier.time_to_1 %></td>
+        <td><%= modifier.time_from_2 %></td>
+        <td><%= modifier.time_to_2 %></td>
+        <td><%= modifier.time_from_3 %></td>
+        <td><%= modifier.time_to_3 %></td>
+        <td><%= modifier.time_from_4 %></td>
+        <td><%= modifier.time_to_4 %></td>
+        <td><%= modifier.time_from_5 %></td>
+        <td><%= modifier.time_to_5 %></td>
+        <td><%= modifier.monday %></td>
+        <td><%= modifier.tuesday %></td>
+        <td><%= modifier.wednesday %></td>
+        <td><%= modifier.thursday %></td>
+        <td><%= modifier.friday %></td>
+        <td><%= modifier.saturday %></td>
+        <td><%= modifier.sunday %></td>
+        <td><%= link_to 'Show', modifier %></td>
+        <td><%= link_to 'Edit', edit_modifier_path(modifier) %></td>
+        <td><%= link_to 'Destroy', modifier, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Modifier', new_modifier_path %>

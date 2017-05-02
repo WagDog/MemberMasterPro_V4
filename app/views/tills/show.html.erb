@@ -1,0 +1,104 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @till.name %>
+</p>
+
+<p>
+  <strong>Last z transaction:</strong>
+  <%= @till.last_z_transaction %>
+</p>
+
+<p>
+  <strong>Last z report counter:</strong>
+  <%= @till.last_z_report_counter %>
+</p>
+
+<p>
+  <strong>Locked:</strong>
+  <%= @till.locked %>
+</p>
+
+<p>
+  <strong>Change due:</strong>
+  <%= @till.change_due %>
+</p>
+
+<p>
+  <strong>Change data:</strong>
+  <%= @till.change_data %>
+</p>
+
+<p>
+  <strong>New journal on startup:</strong>
+  <%= @till.new_journal_on_startup %>
+</p>
+
+<p>
+  <strong>Allow topup purse 1:</strong>
+  <%= @till.allow_topup_purse_1 %>
+</p>
+
+<p>
+  <strong>Allow topup purse 2:</strong>
+  <%= @till.allow_topup_purse_2 %>
+</p>
+
+<p>
+  <strong>Allow topup purse 3:</strong>
+  <%= @till.allow_topup_purse_3 %>
+</p>
+
+<p>
+  <strong>Allow topup purse 4:</strong>
+  <%= @till.allow_topup_purse_4 %>
+</p>
+
+<p>
+  <strong>Allow topup purse 5:</strong>
+  <%= @till.allow_topup_purse_5 %>
+</p>
+
+<p>
+  <strong>Purse 1 name:</strong>
+  <%= @till.purse_1_name %>
+</p>
+
+<p>
+  <strong>Purse 2 name:</strong>
+  <%= @till.purse_2_name %>
+</p>
+
+<p>
+  <strong>Purse 3 name:</strong>
+  <%= @till.purse_3_name %>
+</p>
+
+<p>
+  <strong>Purse 4 name:</strong>
+  <%= @till.purse_4_name %>
+</p>
+
+<p>
+  <strong>Purse 5 name:</strong>
+  <%= @till.purse_5_name %>
+</p>
+
+<p>
+  <strong>Auto surcharge:</strong>
+  <%= @till.auto_surcharge %>
+</p>
+
+<p>
+  <strong>Version:</strong>
+  <%= @till.version %>
+</p>
+
+<p>
+  <strong>Compulsory media declaration:</strong>
+  <%= @till.compulsory_media_declaration %>
+</p>
+
+<%= link_to 'Edit', edit_till_path(@till) %> |
+<%= link_to 'Back', tills_path %>

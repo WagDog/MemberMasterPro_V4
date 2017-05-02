@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Card Discounts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Discount type</th>
+      <th>Amount</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @card_discounts.each do |card_discount| %>
+      <tr>
+        <td><%= card_discount.name %></td>
+        <td><%= card_discount.description %></td>
+        <td><%= card_discount.discount_type %></td>
+        <td><%= card_discount.amount %></td>
+        <td><%= link_to 'Show', card_discount %></td>
+        <td><%= link_to 'Edit', edit_card_discount_path(card_discount) %></td>
+        <td><%= link_to 'Destroy', card_discount, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Card discount', new_card_discount_path %>

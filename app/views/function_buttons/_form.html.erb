@@ -1,0 +1,29 @@
+<%= form_for(@function_button) do |f| %>
+  <% if @function_button.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@function_button.errors.count, "error") %> prohibited this function_button from being saved:</h2>
+
+      <ul>
+      <% @function_button.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :function %><br>
+    <%= f.number_field :function %>
+  </div>
+  <div class="field">
+    <%= f.label :code %><br>
+    <%= f.number_field :code %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

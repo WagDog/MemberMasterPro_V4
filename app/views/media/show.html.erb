@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @medium.name %>
+</p>
+
+<p>
+  <strong>Open drawer:</strong>
+  <%= @medium.open_drawer %>
+</p>
+
+<p>
+  <strong>Use chip pin:</strong>
+  <%= @medium.use_chip_pin %>
+</p>
+
+<p>
+  <strong>Media surcharge:</strong>
+  <%= @medium.media_surcharge %>
+</p>
+
+<%= link_to 'Edit', edit_medium_path(@medium) %> |
+<%= link_to 'Back', media_path %>

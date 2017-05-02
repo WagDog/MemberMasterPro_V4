@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Selection Windows</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Plu id list</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @selection_windows.each do |selection_window| %>
+      <tr>
+        <td><%= selection_window.name %></td>
+        <td><%= selection_window.plu_id_list %></td>
+        <td><%= link_to 'Show', selection_window %></td>
+        <td><%= link_to 'Edit', edit_selection_window_path(selection_window) %></td>
+        <td><%= link_to 'Destroy', selection_window, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Selection window', new_selection_window_path %>

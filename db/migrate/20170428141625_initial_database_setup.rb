@@ -54,9 +54,7 @@ class InitialDatabaseSetup < ActiveRecord::Migration
     end
     add_foreign_key :plus, :groups
     add_foreign_key :plus, :vat
-    add_foreign_key :plus, :rp_sort_groups
-
-
+    add_foreign_key :plus, :rp_sort_group
 
     create_table :card_profiles, force: :cascade do |t|
       t.string   :name,                         limit: 30,  default: '',        null: false
@@ -195,8 +193,8 @@ class InitialDatabaseSetup < ActiveRecord::Migration
 
     create_table :function_buttons, force: :cascade do |t|
       t.string   :name,                         limit: 30,  default: '',        null: false
-      t.boolean  :function,                     limit: 1,   default: false,     null: false
-      t.boolean  :code,                         limit: 1,   default: false,     null: false
+      t.integer  :function,                     limit: 4,   default: false,     null: false
+      t.integer  :code,                         limit: 4,   default: false,     null: false
       t.timestamps                                                              null: false
     end
 
@@ -220,7 +218,7 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.datetime :date_received,                default: '1900-01-01 00:00:00', null: false
       t.datetime :date_processed,               default: '1900-01-01 00:00:00', null: false
       t.integer  :printer_number,               limit: 4,   default: 0,         null: false
-      t.integer  :processed,                    limit: 1,   default: 0,         null: false
+      t.boolean  :processed,                    limit: 1,   default: 0,         null: false
       t.binary   :data,                         limit: 4294967295,              null: false
       t.timestamps                                                              null: false
     end
@@ -235,7 +233,7 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.string   :name,                         limit: 30,  default: '',        null: false
       t.boolean  :open_drawer,                  limit: 1,   default: false,     null: false
       t.boolean  :use_chip_pin,                 limit: 1,   default: false,     null: false
-      t.decimal  :media_surcharge,              limit: 53,  default: 0,         null: false
+      t.decimal  :media_surcharge,                          default: 0,         null: false
       t.timestamps                                                              null: false
     end
 
@@ -282,6 +280,7 @@ class InitialDatabaseSetup < ActiveRecord::Migration
 
     create_table :rp_sort_groups, force: :cascade do |t|
       t.string   :name,                         limit: 30,  default: '',        null: false
+      t.integer  :sequence,                     limit: 4,   default: 0,         null: false
       t.timestamps                                                              null: false
     end
 
@@ -349,10 +348,10 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.decimal  :amount_tendered,                          default: 0,         null: false
       t.decimal  :change_given,                             default: 0,         null: false
       t.boolean  :no_sale,                      limit: 1,   default: false,     null: false
-      t.references  :card_holder,                index: true
+      t.references  :card_holder,               index: true
       t.string   :card_number,                  limit: 30,  default: '',        null: false
       t.string   :card_name,                    limit: 30,  default: '',        null: false
-      t.integer  :amount_purse_1,               limit: 4,   default: 0,         null: false
+      t.decimal  :amount_purse_1,                           default: 0,         null: false
       t.decimal  :discounted_amount_purse_1,                default: 0,         null: false
       t.decimal  :nett_amount_purse_1,                      default: 0,         null: false
       t.decimal  :discount_purse_1,                         default: 0,         null: false

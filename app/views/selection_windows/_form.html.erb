@@ -1,0 +1,25 @@
+<%= form_for(@selection_window) do |f| %>
+  <% if @selection_window.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@selection_window.errors.count, "error") %> prohibited this selection_window from being saved:</h2>
+
+      <ul>
+      <% @selection_window.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :plu_id_list %><br>
+    <%= f.text_field :plu_id_list %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

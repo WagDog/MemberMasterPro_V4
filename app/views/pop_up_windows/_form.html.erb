@@ -1,0 +1,29 @@
+<%= form_for(@pop_up_window) do |f| %>
+  <% if @pop_up_window.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@pop_up_window.errors.count, "error") %> prohibited this pop_up_window from being saved:</h2>
+
+      <ul>
+      <% @pop_up_window.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :plu_id_list %><br>
+    <%= f.text_field :plu_id_list %>
+  </div>
+  <div class="field">
+    <%= f.label :show_price %><br>
+    <%= f.check_box :show_price %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

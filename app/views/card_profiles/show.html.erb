@@ -1,0 +1,84 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @card_profile.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @card_profile.description %>
+</p>
+
+<p>
+  <strong>Valid in date range:</strong>
+  <%= @card_profile.valid_in_date_range %>
+</p>
+
+<p>
+  <strong>Date range start:</strong>
+  <%= @card_profile.date_range_start %>
+</p>
+
+<p>
+  <strong>Date range end:</strong>
+  <%= @card_profile.date_range_end %>
+</p>
+
+<p>
+  <strong>Credit limit purse 1:</strong>
+  <%= @card_profile.credit_limit_purse_1 %>
+</p>
+
+<p>
+  <strong>Credit limit purse 2:</strong>
+  <%= @card_profile.credit_limit_purse_2 %>
+</p>
+
+<p>
+  <strong>Credit limit purse 3:</strong>
+  <%= @card_profile.credit_limit_purse_3 %>
+</p>
+
+<p>
+  <strong>Credit limit purse 4:</strong>
+  <%= @card_profile.credit_limit_purse_4 %>
+</p>
+
+<p>
+  <strong>Credit limit purse 5:</strong>
+  <%= @card_profile.credit_limit_purse_5 %>
+</p>
+
+<p>
+  <strong>Discount on overdrawn 1:</strong>
+  <%= @card_profile.discount_on_overdrawn_1 %>
+</p>
+
+<p>
+  <strong>Discount on overdrawn 2:</strong>
+  <%= @card_profile.discount_on_overdrawn_2 %>
+</p>
+
+<p>
+  <strong>Discount on overdrawn 3:</strong>
+  <%= @card_profile.discount_on_overdrawn_3 %>
+</p>
+
+<p>
+  <strong>Discount on overdrawn 4:</strong>
+  <%= @card_profile.discount_on_overdrawn_4 %>
+</p>
+
+<p>
+  <strong>Discount on overdrawn 5:</strong>
+  <%= @card_profile.discount_on_overdrawn_5 %>
+</p>
+
+<p>
+  <strong>Pay by cash:</strong>
+  <%= @card_profile.pay_by_cash %>
+</p>
+
+<%= link_to 'Edit', edit_card_profile_path(@card_profile) %> |
+<%= link_to 'Back', card_profiles_path %>

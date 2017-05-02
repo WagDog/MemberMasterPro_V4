@@ -1,0 +1,57 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Card Profiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Valid in date range</th>
+      <th>Date range start</th>
+      <th>Date range end</th>
+      <th>Credit limit purse 1</th>
+      <th>Credit limit purse 2</th>
+      <th>Credit limit purse 3</th>
+      <th>Credit limit purse 4</th>
+      <th>Credit limit purse 5</th>
+      <th>Discount on overdrawn 1</th>
+      <th>Discount on overdrawn 2</th>
+      <th>Discount on overdrawn 3</th>
+      <th>Discount on overdrawn 4</th>
+      <th>Discount on overdrawn 5</th>
+      <th>Pay by cash</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @card_profiles.each do |card_profile| %>
+      <tr>
+        <td><%= card_profile.name %></td>
+        <td><%= card_profile.description %></td>
+        <td><%= card_profile.valid_in_date_range %></td>
+        <td><%= card_profile.date_range_start %></td>
+        <td><%= card_profile.date_range_end %></td>
+        <td><%= card_profile.credit_limit_purse_1 %></td>
+        <td><%= card_profile.credit_limit_purse_2 %></td>
+        <td><%= card_profile.credit_limit_purse_3 %></td>
+        <td><%= card_profile.credit_limit_purse_4 %></td>
+        <td><%= card_profile.credit_limit_purse_5 %></td>
+        <td><%= card_profile.discount_on_overdrawn_1 %></td>
+        <td><%= card_profile.discount_on_overdrawn_2 %></td>
+        <td><%= card_profile.discount_on_overdrawn_3 %></td>
+        <td><%= card_profile.discount_on_overdrawn_4 %></td>
+        <td><%= card_profile.discount_on_overdrawn_5 %></td>
+        <td><%= card_profile.pay_by_cash %></td>
+        <td><%= link_to 'Show', card_profile %></td>
+        <td><%= link_to 'Edit', edit_card_profile_path(card_profile) %></td>
+        <td><%= link_to 'Destroy', card_profile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Card profile', new_card_profile_path %>

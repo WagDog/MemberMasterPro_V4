@@ -1,0 +1,25 @@
+<%= form_for(@macro) do |f| %>
+  <% if @macro.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@macro.errors.count, "error") %> prohibited this macro from being saved:</h2>
+
+      <ul>
+      <% @macro.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :function_keys %><br>
+    <%= f.text_field :function_keys %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

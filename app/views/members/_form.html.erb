@@ -1,0 +1,97 @@
+<%= form_for(@member) do |f| %>
+  <% if @member.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
+
+      <ul>
+      <% @member.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :code %><br>
+    <%= f.text_field :code %>
+  </div>
+  <div class="field">
+    <%= f.label :prefix %><br>
+    <%= f.text_field :prefix %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :initials %><br>
+    <%= f.text_field :initials %>
+  </div>
+  <div class="field">
+    <%= f.label :forename %><br>
+    <%= f.text_field :forename %>
+  </div>
+  <div class="field">
+    <%= f.label :surname %><br>
+    <%= f.text_field :surname %>
+  </div>
+  <div class="field">
+    <%= f.label :suffix %><br>
+    <%= f.text_field :suffix %>
+  </div>
+  <div class="field">
+    <%= f.label :address_id %><br>
+    <%= f.text_field :address_id %>
+  </div>
+  <div class="field">
+    <%= f.label :telephone_number_id %><br>
+    <%= f.text_field :telephone_number_id %>
+  </div>
+  <div class="field">
+    <%= f.label :email_address_id %><br>
+    <%= f.text_field :email_address_id %>
+  </div>
+  <div class="field">
+    <%= f.label :member_category_id %><br>
+    <%= f.text_field :member_category_id %>
+  </div>
+  <div class="field">
+    <%= f.label :formal_salutation %><br>
+    <%= f.text_field :formal_salutation %>
+  </div>
+  <div class="field">
+    <%= f.label :informal_salutation %><br>
+    <%= f.text_field :informal_salutation %>
+  </div>
+  <div class="field">
+    <%= f.label :male %><br>
+    <%= f.check_box :male %>
+  </div>
+  <div class="field">
+    <%= f.label :master %><br>
+    <%= f.check_box :master %>
+  </div>
+  <div class="field">
+    <%= f.label :direct_debit %><br>
+    <%= f.check_box :direct_debit %>
+  </div>
+  <div class="field">
+    <%= f.label :birth_date %><br>
+    <%= f.datetime_select :birth_date %>
+  </div>
+  <div class="field">
+    <%= f.label :join_date %><br>
+    <%= f.datetime_select :join_date %>
+  </div>
+  <div class="field">
+    <%= f.label :left_date %><br>
+    <%= f.datetime_select :left_date %>
+  </div>
+  <div class="field">
+    <%= f.label :is_active %><br>
+    <%= f.check_box :is_active %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

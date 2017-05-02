@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Card Revenues</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Groups</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @card_revenues.each do |card_revenue| %>
+      <tr>
+        <td><%= card_revenue.name %></td>
+        <td><%= card_revenue.groups %></td>
+        <td><%= link_to 'Show', card_revenue %></td>
+        <td><%= link_to 'Edit', edit_card_revenue_path(card_revenue) %></td>
+        <td><%= link_to 'Destroy', card_revenue, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Card revenue', new_card_revenue_path %>

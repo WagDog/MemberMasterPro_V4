@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Info Texts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Till</th>
+      <th>Text</th>
+      <th>Bold</th>
+      <th>Underline</th>
+      <th>Double width</th>
+      <th>Double height</th>
+      <th>Quadruple</th>
+      <th>Center aligned</th>
+      <th>Right aligned</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @info_texts.each do |info_text| %>
+      <tr>
+        <td><%= info_text.name %></td>
+        <td><%= info_text.till %></td>
+        <td><%= info_text.text %></td>
+        <td><%= info_text.bold %></td>
+        <td><%= info_text.underline %></td>
+        <td><%= info_text.double_width %></td>
+        <td><%= info_text.double_height %></td>
+        <td><%= info_text.quadruple %></td>
+        <td><%= info_text.center_aligned %></td>
+        <td><%= info_text.right_aligned %></td>
+        <td><%= link_to 'Show', info_text %></td>
+        <td><%= link_to 'Edit', edit_info_text_path(info_text) %></td>
+        <td><%= link_to 'Destroy', info_text, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Info text', new_info_text_path %>

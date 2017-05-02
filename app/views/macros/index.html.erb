@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Macros</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Function keys</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @macros.each do |macro| %>
+      <tr>
+        <td><%= macro.name %></td>
+        <td><%= macro.function_keys %></td>
+        <td><%= link_to 'Show', macro %></td>
+        <td><%= link_to 'Edit', edit_macro_path(macro) %></td>
+        <td><%= link_to 'Destroy', macro, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Macro', new_macro_path %>

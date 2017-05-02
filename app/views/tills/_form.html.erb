@@ -1,0 +1,97 @@
+<%= form_for(@till) do |f| %>
+  <% if @till.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@till.errors.count, "error") %> prohibited this till from being saved:</h2>
+
+      <ul>
+      <% @till.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :last_z_transaction %><br>
+    <%= f.number_field :last_z_transaction %>
+  </div>
+  <div class="field">
+    <%= f.label :last_z_report_counter %><br>
+    <%= f.number_field :last_z_report_counter %>
+  </div>
+  <div class="field">
+    <%= f.label :locked %><br>
+    <%= f.check_box :locked %>
+  </div>
+  <div class="field">
+    <%= f.label :change_due %><br>
+    <%= f.check_box :change_due %>
+  </div>
+  <div class="field">
+    <%= f.label :change_data %><br>
+    <%= f.text_area :change_data %>
+  </div>
+  <div class="field">
+    <%= f.label :new_journal_on_startup %><br>
+    <%= f.check_box :new_journal_on_startup %>
+  </div>
+  <div class="field">
+    <%= f.label :allow_topup_purse_1 %><br>
+    <%= f.check_box :allow_topup_purse_1 %>
+  </div>
+  <div class="field">
+    <%= f.label :allow_topup_purse_2 %><br>
+    <%= f.check_box :allow_topup_purse_2 %>
+  </div>
+  <div class="field">
+    <%= f.label :allow_topup_purse_3 %><br>
+    <%= f.check_box :allow_topup_purse_3 %>
+  </div>
+  <div class="field">
+    <%= f.label :allow_topup_purse_4 %><br>
+    <%= f.check_box :allow_topup_purse_4 %>
+  </div>
+  <div class="field">
+    <%= f.label :allow_topup_purse_5 %><br>
+    <%= f.check_box :allow_topup_purse_5 %>
+  </div>
+  <div class="field">
+    <%= f.label :purse_1_name %><br>
+    <%= f.text_field :purse_1_name %>
+  </div>
+  <div class="field">
+    <%= f.label :purse_2_name %><br>
+    <%= f.text_field :purse_2_name %>
+  </div>
+  <div class="field">
+    <%= f.label :purse_3_name %><br>
+    <%= f.text_field :purse_3_name %>
+  </div>
+  <div class="field">
+    <%= f.label :purse_4_name %><br>
+    <%= f.text_field :purse_4_name %>
+  </div>
+  <div class="field">
+    <%= f.label :purse_5_name %><br>
+    <%= f.text_field :purse_5_name %>
+  </div>
+  <div class="field">
+    <%= f.label :auto_surcharge %><br>
+    <%= f.check_box :auto_surcharge %>
+  </div>
+  <div class="field">
+    <%= f.label :version %><br>
+    <%= f.text_field :version %>
+  </div>
+  <div class="field">
+    <%= f.label :compulsory_media_declaration %><br>
+    <%= f.check_box :compulsory_media_declaration %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

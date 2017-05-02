@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Rp Sort Groups</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Sequence</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @rp_sort_groups.each do |rp_sort_group| %>
+      <tr>
+        <td><%= rp_sort_group.name %></td>
+        <td><%= rp_sort_group.sequence %></td>
+        <td><%= link_to 'Show', rp_sort_group %></td>
+        <td><%= link_to 'Edit', edit_rp_sort_group_path(rp_sort_group) %></td>
+        <td><%= link_to 'Destroy', rp_sort_group, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Rp sort group', new_rp_sort_group_path %>

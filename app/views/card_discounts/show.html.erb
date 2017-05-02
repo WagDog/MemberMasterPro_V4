@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @card_discount.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @card_discount.description %>
+</p>
+
+<p>
+  <strong>Discount type:</strong>
+  <%= @card_discount.discount_type %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @card_discount.amount %>
+</p>
+
+<%= link_to 'Edit', edit_card_discount_path(@card_discount) %> |
+<%= link_to 'Back', card_discounts_path %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @selection_window.name %>
+</p>
+
+<p>
+  <strong>Plu id list:</strong>
+  <%= @selection_window.plu_id_list %>
+</p>
+
+<%= link_to 'Edit', edit_selection_window_path(@selection_window) %> |
+<%= link_to 'Back', selection_windows_path %>

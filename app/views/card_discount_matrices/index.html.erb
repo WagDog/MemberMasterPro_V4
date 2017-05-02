@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Card Discount Matrices</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Group</th>
+      <th>Plu</th>
+      <th>Card profiles</th>
+      <th>Card discounts</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @card_discount_matrices.each do |card_discount_matrix| %>
+      <tr>
+        <td><%= card_discount_matrix.group %></td>
+        <td><%= card_discount_matrix.plu %></td>
+        <td><%= card_discount_matrix.card_profiles %></td>
+        <td><%= card_discount_matrix.card_discounts %></td>
+        <td><%= link_to 'Show', card_discount_matrix %></td>
+        <td><%= link_to 'Edit', edit_card_discount_matrix_path(card_discount_matrix) %></td>
+        <td><%= link_to 'Destroy', card_discount_matrix, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Card discount matrix', new_card_discount_matrix_path %>
