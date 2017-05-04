@@ -1,0 +1,19 @@
+<% if 1 == 0 %>
+    <% # Block commented out, but left in to show how to do a responsive image %>
+    <% # Note the path to the image exclude the 'images' folder %>
+    <div class='center hero-unit'>
+      <img src='/assets/banner.png' class='img-responsive' alt='Responsive image'>
+    </div>
+<% end %>
+
+
+<div class='center hero-unit'>
+  <h1>MemberMasterPro</h1>
+  <% if signed_in? %>
+      <h2>You are currently logged in as <%= @user.name %></h2>
+      <%= link_to 'Sign out!', signout_path, method: 'delete', class: 'btn btn-lg btn-primary'%>
+  <% else %>
+      <h2>Please sign in below.</h2>
+      <%= link_to 'Sign in now!', signin_path, class: 'btn btn-lg btn-primary'%>
+  <% end %>
+</div>

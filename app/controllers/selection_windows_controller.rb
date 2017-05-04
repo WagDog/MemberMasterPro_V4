@@ -69,6 +69,6 @@ class SelectionWindowsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def selection_window_params
-      params.require(:selection_window).permit(:name, :plu_id_list)
+      params.require(:selection_window).permit(:name, :plu_id)
     end
 end

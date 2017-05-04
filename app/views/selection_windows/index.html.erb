@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Plu id list</th>
+      <th>Plu</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,7 +15,7 @@
     <% @selection_windows.each do |selection_window| %>
       <tr>
         <td><%= selection_window.name %></td>
-        <td><%= selection_window.plu_id_list %></td>
+        <td><%= selection_window.plu %></td>
         <td><%= link_to 'Show', selection_window %></td>
         <td><%= link_to 'Edit', edit_selection_window_path(selection_window) %></td>
         <td><%= link_to 'Destroy', selection_window, method: :delete, data: { confirm: 'Are you sure?' } %></td>

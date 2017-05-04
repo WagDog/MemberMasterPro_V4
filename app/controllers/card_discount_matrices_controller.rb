@@ -69,6 +69,6 @@ class CardDiscountMatricesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_discount_matrix_params
-      params.require(:card_discount_matrix).permit(:group_id, :plu_id, :card_profiles_id, :card_discounts_id)
+      params.require(:card_discount_matrix).permit(:group_id, :plu_id, :card_profile_id, :card_discount_id)
     end
 end

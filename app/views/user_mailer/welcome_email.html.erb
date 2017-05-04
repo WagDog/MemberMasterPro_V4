@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h2>Welcome <%= @user.name %> to MemberMasterPro.</h2>
+<p>
+  You have successfully signed up as a user.
+  Your username is: <%= @user.email %>.<br>
+  Your initial temporary password is 123456<br>
+  Once logged in, please make sure you change this password using the menu option Account->Change Details
+</p>
+<p>
+  To login to the site, just follow this link: <%= @url %>.
+</p>
+</body>
+</html>

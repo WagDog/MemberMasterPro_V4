@@ -17,15 +17,11 @@
   </div>
   <div class="field">
     <%= f.label :location_id %><br>
-    <%= f.number_field :location_id %>
+    <%= f.text_field :location_id %>
   </div>
   <div class="field">
     <%= f.label :till_id %><br>
     <%= f.text_field :till_id %>
-  </div>
-  <div class="field">
-    <%= f.label :tab_id %><br>
-    <%= f.number_field :tab_id %>
   </div>
   <div class="field">
     <%= f.label :start_date_time %><br>
@@ -36,8 +32,8 @@
     <%= f.datetime_select :end_date_time %>
   </div>
   <div class="field">
-    <%= f.label :receipt_no %><br>
-    <%= f.number_field :receipt_no %>
+    <%= f.label :receipt_number %><br>
+    <%= f.number_field :receipt_number %>
   </div>
   <div class="field">
     <%= f.label :cashier_id %><br>
@@ -48,12 +44,12 @@
     <%= f.text_field :cashier_name %>
   </div>
   <div class="field">
-    <%= f.label :media_id %><br>
-    <%= f.text_field :media_id %>
+    <%= f.label :medium_id %><br>
+    <%= f.text_field :medium_id %>
   </div>
   <div class="field">
-    <%= f.label :media_name %><br>
-    <%= f.text_field :media_name %>
+    <%= f.label :medium_name %><br>
+    <%= f.text_field :medium_name %>
   </div>
   <div class="field">
     <%= f.label :total_amount %><br>

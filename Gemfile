@@ -7,6 +7,8 @@ gem 'rails', '4.2.0'
 gem 'mysql2', '~> 0.3.18'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
+# Use Bootstrap for responsive website
+gem 'bootstrap-sass'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
@@ -24,7 +26,13 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'bcrypt', '~> 3.1.7'
+
+# Use the Mailjet gem for emails
+gem 'mailjet'
+
+# Use the password generator 'Random_Password_Generator'
+gem 'random_password_generator', '~> 1.0'
 
 # Use Unicorn as the app server
 # gem 'unicorn'
@@ -41,7 +49,17 @@ group :development, :test do
 
   # Forced to use version below for Bundler to allow the install of gems
   gem 'nokogiri', '~> 1.6.8.rc2'
-end
 
+  # Add the test gem
+  gem 'rspec-rails'
+
+  # Add the annotate gem for adding comments to Models described at position 6641
+  gem 'annotate'
+end
+group :test do
+  gem 'capybara'
+  gem 'spork'
+  gem 'factory_girl_rails'
+end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

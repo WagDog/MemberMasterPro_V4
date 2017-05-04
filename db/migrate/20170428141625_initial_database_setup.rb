@@ -12,14 +12,62 @@ class InitialDatabaseSetup < ActiveRecord::Migration
     create_table :card_discounts, force: :cascade do |t|
       t.string   :name,                         limit: 30, default: '',         null: false
       t.string   :description,                  default: '',                    null: false
-      t.integer  :discount_type,                limit: 4, default: 0,           null: false
+      t.integer  :discount_type,                limit: 4, default: 0,           null: false # Discount type is 0 for percentage Discount, 1 for Fixed amount
       t.decimal  :amount,                       default: 0,                     null: false
+      t.timestamps                                                              null: false
+    end
+
+    create_table :card_revenues, force: :cascade do |t|
+      t.string   :name,                         limit: 30,  default: '',        null: false
       t.timestamps                                                              null: false
     end
 
     create_table :groups, force: :cascade do |t|
       t.string   :name,                         limit: 30, default: '',         null: false
+      t.references :card_revenue,               index: true
       t.decimal  :surcharge_percent,            default: 0,                     null: false
+      t.timestamps                                                              null: false
+    end
+    add_foreign_key :groups, :card_revenues
+
+    create_table :vats, force: :cascade do |t|
+      t.string   :name,                         limit: 30,  default: '',        null: false
+      t.decimal  :value,                                    default: 0,         null: false
+      t.timestamps                                                              null: false
+    end
+
+    create_table :rp_sort_groups, force: :cascade do |t|
+      t.string   :name,                         limit: 30,  default: '',        null: false
+      t.integer  :sequence,                     limit: 4,   default: 0,         null: false
+      t.timestamps                                                              null: false
+    end
+
+    create_table :modifiers, force: :cascade do |t|
+      t.string   :name,                         limit: 30,  default: '',        null: false
+      t.integer  :function,                     limit: 4,   default: 0,         null: false
+      t.integer  :mechanism,                    limit: 4,   default: 0,         null: false
+      t.decimal  :percentage,                               default: 0,         null: false
+      t.integer  :plus_minus,                   limit: 4,   default: 0,         null: false
+      t.integer  :change_from,                  limit: 4,   default: 0,         null: false
+      t.integer  :change_to,                    limit: 4,   default: 0,         null: false
+      t.integer  :plu_offset,                   limit: 4,   default: 0,         null: false
+      t.datetime :time_from_1,                  default: '1900-01-01 00:00:00', null: false
+      t.datetime :time_to_1,                    default: '1900-01-01 00:00:00', null: false
+      t.datetime :time_from_2,                  default: '1900-01-01 00:00:00', null: false
+      t.datetime :time_to_2,                    default: '1900-01-01 00:00:00', null: false
+      t.datetime :time_from_3,                  default: '1900-01-01 00:00:00', null: false
+      t.datetime :time_to_3,                    default: '1900-01-01 00:00:000', null: false
+      t.datetime :time_from_4,                  default: '1900-01-01 00:00:00', null: false
+      t.datetime :time_to_4,                    default: '1900-01-01 00:00:00', null: false
+      t.datetime :time_from_5,                  default: '1900-01-01 00:00:00', null: false
+      t.datetime :time_to_5,                    default: '1900-01-01 00:00:00', null: false
+      t.boolean  :monday,                       limit: 1,   default: false,     null: false
+      t.boolean  :tuesday,                      limit: 1,   default: false,     null: false
+      t.boolean  :wednesday,                    limit: 1,   default: false,     null: false
+      t.boolean  :thursday,                     limit: 1,   default: false,     null: false
+      t.boolean  :friday,                       limit: 1,   default: false,     null: false
+      t.boolean  :saturday,                     limit: 1,   default: false,     null: false
+      t.boolean  :sunday,                       limit: 1,   default: false,     null: false
       t.timestamps                                                              null: false
     end
 
@@ -41,7 +89,7 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.string   :barcode,                      limit: 50,  default: '',        null: false
       t.integer  :price_type,                   limit: 4,   default: 0,         null: false
       t.boolean  :condiment,                    limit: 1,   default: false,     null: false
-      t.string   :modifiers,                    default: '',                    null: false
+      t.references :modifier,                   index: true
       t.integer  :popup_window_1,               limit: 4,   default: 0,         null: false
       t.integer  :popup_window_2,               limit: 4,   default: 0,         null: false
       t.integer  :popup_window_3,               limit: 4,   default: 0,         null: false
@@ -53,8 +101,9 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.timestamps                                                              null: false
     end
     add_foreign_key :plus, :groups
-    add_foreign_key :plus, :vat
-    add_foreign_key :plus, :rp_sort_group
+    add_foreign_key :plus, :vats
+    add_foreign_key :plus, :rp_sort_groups
+    add_foreign_key :plus, :modifiers
 
     create_table :card_profiles, force: :cascade do |t|
       t.string   :name,                         limit: 30,  default: '',        null: false
@@ -79,44 +128,14 @@ class InitialDatabaseSetup < ActiveRecord::Migration
     create_table :card_discount_matrices, force: :cascade do |t|
       t.references  :group,                     index: true
       t.references  :plu,                       index: true
-      t.references  :card_profiles,             index: true
-      t.references  :card_discounts,            index: true
+      t.references  :card_profile,              index: true
+      t.references  :card_discount,             index: true
       t.timestamps                                                              null: false
     end
-
     add_foreign_key :card_discount_matrices, :groups
     add_foreign_key :card_discount_matrices, :plus
     add_foreign_key :card_discount_matrices, :card_profiles
     add_foreign_key :card_discount_matrices, :card_discounts
-
-
-    create_table :card_holders, force: :cascade do |t|
-      t.references :member,                     index: true
-      t.string   :title,                        limit: 10,  default: '',        null: false
-      t.string   :initials,                     limit: 10,  default: '',        null: false
-      t.string   :surname,                      limit: 30,  default: '',        null: false
-      t.string   :card_number,                  limit: 30,  default: '',        null: false
-      t.integer  :issue_number,                 limit: 4,   default: 0,         null: false
-      t.references :card_profile,               index: true
-      t.integer  :status,                       limit: 4,   default: 0,         null: false
-      t.boolean  :valid_in_date_range,          limit: 1,   default: false,     null: false
-      t.decimal  :balance_1,                    default: 0,                     null: false
-      t.decimal  :balance_2,                    default: 0,                     null: false
-      t.decimal  :balance_3,                    default: 0,                     null: false
-      t.decimal  :balance_4,                    default: 0,                     null: false
-      t.decimal  :balance_5,                    default: 0,                     null: false
-      t.datetime :birth_date,                   default: '1900-01-01 00:00:00', null: false
-      t.string   :category,                     limit: 30,  default: '',        null: false
-      t.timestamps                                                              null: false
-    end
-
-    add_foreign_key :card_holders, :card_profiles
-
-    create_table :card_revenues, force: :cascade do |t|
-      t.string   :name,                         limit: 30,  default: '',        null: false
-      t.string   :groups,                                   default: '',        null: false
-      t.timestamps                                                              null: false
-    end
 
     create_table :card_systems, force: :cascade do |t|
       t.boolean  :use_site_id,                  limit: 1,   default: false,     null: false
@@ -145,6 +164,38 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.timestamps                                                              null: false
     end
 
+    create_table :email_addresses, force: :cascade do |t|
+      t.string   :email,                        limit: 100, default: '',        null: false
+      t.boolean  :is_default,                   limit: 1,   default: false,     null: false
+      t.timestamps                                                              null: false
+    end
+
+    create_table :addresses, force: :cascade do |t|
+      t.string   :address_1,                    limit: 30,  default: '',        null: false
+      t.string   :address_2,                    limit: 30,  default: '',        null: false
+      t.string   :address_3,                    limit: 30,  default: '',        null: false
+      t.string   :address_4,                    limit: 30,  default: '',        null: false
+      t.string   :post_code,                    limit: 30,  default: '',        null: false
+      t.timestamps                                                              null: false
+    end
+
+    create_table :member_categories, force: :cascade do |t|
+      t.string   :name,                         limit: 30,  default: '',        null: false
+      t.timestamps                                                              null: false
+    end
+
+    create_table :telephone_types, force: :cascade do |t|
+      t.string   :name,                          limit: 45,  default: '',       null: false
+      t.timestamps                                                              null: false
+    end
+
+    create_table :telephone_numbers, force: :cascade do |t|
+      t.references :telephone_type,             limit: 4,   default: 1,         null: false
+      t.string   :number,                       limit: 45,  default: '',        null: false
+      t.timestamps                                                              null: false
+    end
+    add_foreign_key :telephone_numbers, :telephone_types
+
     create_table :members, force: :cascade do |t|
       t.string   :code,                         limit: 4,   default: '',        null: false
       t.string   :prefix,                       limit: 10,  default: '',        null: false
@@ -168,136 +219,38 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.boolean  :is_active,                    limit: 1,   default: true,      null: false
       t.timestamps                                                              null: false
     end
-
     add_foreign_key :members, :addresses
     add_foreign_key :members, :telephone_numbers
     add_foreign_key :members, :email_addresses
     add_foreign_key :members, :member_categories
-    
-    create_table :email_addresses, force: :cascade do |t|
-      t.string   :email,                        limit: 100, default: '',        null: false
-      t.boolean  :is_default,                   limit: 1,   default: false,     null: false
+
+    create_table :card_holders, force: :cascade do |t|
+      t.references :member,                     index: true
+      t.string   :title,                        limit: 10,  default: '',        null: false
+      t.string   :initials,                     limit: 10,  default: '',        null: false
+      t.string   :forename,                     limit: 30,  default: '',        null: false
+      t.string   :surname,                      limit: 30,  default: '',        null: false
+      t.string   :card_number,                  limit: 30,  default: '',        null: false
+      t.integer  :issue_number,                 limit: 4,   default: 0,         null: false
+      t.references :card_profile,               index: true
+      t.integer  :status,                       limit: 4,   default: 0,         null: false
+      t.boolean  :valid_in_date_range,          limit: 1,   default: false,     null: false
+      t.decimal  :balance_1,                    default: 0,                     null: false
+      t.decimal  :balance_2,                    default: 0,                     null: false
+      t.decimal  :balance_3,                    default: 0,                     null: false
+      t.decimal  :balance_4,                    default: 0,                     null: false
+      t.decimal  :balance_5,                    default: 0,                     null: false
+      t.datetime :birth_date,                   default: '1900-01-01 00:00:00', null: false
+      t.string   :category,                     limit: 30,  default: '',        null: false
       t.timestamps                                                              null: false
     end
-
-    add_foreign_key :email_addresses, :members
-
-    create_table :addresses, force: :cascade do |t|
-      t.string   :address_1,                    limit: 30,  default: '',        null: false
-      t.string   :address_2,                    limit: 30,  default: '',        null: false
-      t.string   :address_3,                    limit: 30,  default: '',        null: false
-      t.string   :address_4,                    limit: 30,  default: '',        null: false
-      t.string   :post_code,                    limit: 30,  default: '',        null: false
-      t.timestamps                                                              null: false
-    end
+    add_foreign_key :card_holders, :members
+    add_foreign_key :card_holders, :card_profiles
 
     create_table :function_buttons, force: :cascade do |t|
       t.string   :name,                         limit: 30,  default: '',        null: false
       t.integer  :function,                     limit: 4,   default: false,     null: false
       t.integer  :code,                         limit: 4,   default: false,     null: false
-      t.timestamps                                                              null: false
-    end
-
-    create_table :info_texts, force: :cascade do |t|
-      t.string   :name,                         limit: 30,  default: '',        null: false
-      t.references  :till,                      index: true
-      t.string   :text,                         limit: 255, default: '',        null: false
-      t.boolean  :bold,                         limit: 1,   default: false,     null: false
-      t.boolean  :underline,                    limit: 1,   default: false,     null: false
-      t.boolean  :double_width,                 limit: 1,   default: false,     null: false
-      t.boolean  :double_height,                limit: 1,   default: false,     null: false
-      t.boolean  :quadruple,                    limit: 1,   default: false,     null: false
-      t.boolean  :center_aligned,               limit: 1,   default: false,     null: false
-      t.boolean  :right_aligned,                limit: 1,   default: false,     null: false
-      t.timestamps                                                              null: false
-    end
-
-    add_foreign_key :info_texts, :tills
-
-    create_table :kp_prints, force: :cascade do |t|
-      t.datetime :date_received,                default: '1900-01-01 00:00:00', null: false
-      t.datetime :date_processed,               default: '1900-01-01 00:00:00', null: false
-      t.integer  :printer_number,               limit: 4,   default: 0,         null: false
-      t.boolean  :processed,                    limit: 1,   default: 0,         null: false
-      t.binary   :data,                         limit: 4294967295,              null: false
-      t.timestamps                                                              null: false
-    end
-
-    create_table :macros, force: :cascade do |t|
-      t.string   :name,                         limit: 30,  default: '',        null: false
-      t.string   :function_keys,                limit: 255, default: '',        null: false
-      t.timestamps                                                              null: false
-    end
-
-    create_table :medias, force: :cascade do |t|
-      t.string   :name,                         limit: 30,  default: '',        null: false
-      t.boolean  :open_drawer,                  limit: 1,   default: false,     null: false
-      t.boolean  :use_chip_pin,                 limit: 1,   default: false,     null: false
-      t.decimal  :media_surcharge,                          default: 0,         null: false
-      t.timestamps                                                              null: false
-    end
-
-    create_table :member_categories, force: :cascade do |t|
-      t.string   :name,                         limit: 30,  default: '',        null: false
-      t.timestamps                                                              null: false
-    end
-    
-    create_table :modifiers, force: :cascade do |t|
-      t.string   :name,                         limit: 30,  default: '',        null: false
-      t.boolean  :function,                     limit: 1,   default: false,     null: false
-      t.boolean  :mechanism,                    limit: 1,   default: false,     null: false
-      t.decimal  :percentage,                               default: 0,         null: false
-      t.integer  :plus_minus,                   limit: 4,   default: 0,         null: false
-      t.integer  :change_from,                  limit: 4,   default: 0,         null: false
-      t.integer  :change_to,                    limit: 4,   default: 0,         null: false
-      t.integer  :plu_offset,                   limit: 4,   default: 0,         null: false
-      t.datetime :time_from_1,                  default: '1900-01-01 00:00:00', null: false
-      t.datetime :time_to_1,                    default: '1900-01-01 00:00:00', null: false
-      t.datetime :time_from_2,                  default: '1900-01-01 00:00:00', null: false
-      t.datetime :time_to_2,                    default: '1900-01-01 00:00:00', null: false
-      t.datetime :time_from_3,                  default: '1900-01-01 00:00:00', null: false
-      t.datetime :time_to_3,                    default: '1900-01-01 00:00:000', null: false
-      t.datetime :time_from_4,                  default: '1900-01-01 00:00:00', null: false
-      t.datetime :time_to_4,                    default: '1900-01-01 00:00:00', null: false
-      t.datetime :time_from_5,                  default: '1900-01-01 00:00:00', null: false
-      t.datetime :time_to_5,                    default: '1900-01-01 00:00:00', null: false
-      t.boolean  :monday,                       limit: 1,   default: false,     null: false
-      t.boolean  :tuesday,                      limit: 1,   default: false,     null: false
-      t.boolean  :wednesday,                    limit: 1,   default: false,     null: false
-      t.boolean  :thursday,                     limit: 1,   default: false,     null: false
-      t.boolean  :friday,                       limit: 1,   default: false,     null: false
-      t.boolean  :saturday,                     limit: 1,   default: false,     null: false
-      t.boolean  :sunday,                       limit: 1,   default: false,     null: false
-      t.timestamps                                                              null: false
-    end
-
-    create_table :pop_up_windows, force: :cascade do |t|
-      t.string   :name,                         limit: 30,  default: '',        null: false
-      t.string   :plu_id_list,                              default: '',        null: false
-      t.boolean  :show_price,                   limit: 1,   default: true,      null: false
-      t.timestamps                                                              null: false
-    end
-
-    create_table :rp_sort_groups, force: :cascade do |t|
-      t.string   :name,                         limit: 30,  default: '',        null: false
-      t.integer  :sequence,                     limit: 4,   default: 0,         null: false
-      t.timestamps                                                              null: false
-    end
-
-    create_table :selection_windows, force: :cascade do |t|
-      t.string   :name,                         limit: 30,  default: '',        null: false
-      t.string   :plu_id_list,                              default: '',        null: false
-      t.timestamps                                                              null: false
-    end
-
-    create_table :telephone_types, force: :cascade do |t|
-      t.string   :name,                          limit: 45,  default: '',       null: false
-      t.timestamps                                                              null: false
-    end
-
-    create_table :telephone_numbers, force: :cascade do |t|
-      t.references  :telephone_type,            limit: 4,   default: 1,         null: false
-      t.string   :telephone_number,             limit: 45,  default: '',        null: false
       t.timestamps                                                              null: false
     end
 
@@ -325,18 +278,82 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.timestamps                                                              null: false
     end
 
+    create_table :info_texts, force: :cascade do |t|
+      t.string   :name,                         limit: 30,  default: '',        null: false
+      t.references :till,                       index: true
+      t.boolean  :is_header,                    limit: 1,   default: true,      null: false
+      t.string   :text,                         limit: 255, default: '',        null: false
+      t.boolean  :bold,                         limit: 1,   default: false,     null: false
+      t.boolean  :underline,                    limit: 1,   default: false,     null: false
+      t.boolean  :double_width,                 limit: 1,   default: false,     null: false
+      t.boolean  :double_height,                limit: 1,   default: false,     null: false
+      t.boolean  :quadruple,                    limit: 1,   default: false,     null: false
+      t.boolean  :center_aligned,               limit: 1,   default: false,     null: false
+      t.boolean  :right_aligned,                limit: 1,   default: false,     null: false
+      t.timestamps                                                              null: false
+    end
+    add_foreign_key :info_texts, :tills
+
+    create_table :kp_prints, force: :cascade do |t|
+      t.references :till,                       index: true
+      t.datetime :date_received,                default: '1900-01-01 00:00:00', null: false
+      t.datetime :date_processed,               default: '1900-01-01 00:00:00', null: false
+      t.integer  :printer_number,               limit: 4,   default: 0,         null: false
+      t.boolean  :processed,                    limit: 1,   default: 0,         null: false
+      t.binary   :data,                         limit: 4294967295,              null: false
+      t.timestamps                                                              null: false
+    end
+
+    create_table :macros, force: :cascade do |t|
+      t.string   :name,                         limit: 30,  default: '',        null: false
+      t.string   :function_keys,                limit: 255, default: '',        null: false
+      t.timestamps                                                              null: false
+    end
+
+    create_table :media, force: :cascade do |t|
+      t.string   :name,                         limit: 30,  default: '',        null: false
+      t.boolean  :open_drawer,                  limit: 1,   default: false,     null: false
+      t.boolean  :use_chip_pin,                 limit: 1,   default: false,     null: false
+      t.decimal  :medium_surcharge,                         default: 0,         null: false
+      t.timestamps                                                              null: false
+    end
+
+    create_table :pop_up_windows, force: :cascade do |t|
+      t.string   :name,                         limit: 30,  default: '',        null: false
+      t.references :plu,                        index: true
+      t.boolean  :show_price,                   limit: 1,   default: true,      null: false
+      t.timestamps                                                              null: false
+    end
+    add_foreign_key :pop_up_windows, :plus
+
+    create_table :selection_windows, force: :cascade do |t|
+      t.string   :name,                         limit: 30,  default: '',        null: false
+      t.references :plu,                        index: true
+      t.timestamps                                                              null: false
+    end
+    add_foreign_key :selection_windows, :plus
+
+    create_table :sites do |t|
+      t.string :name,                           limit: 30,  default: '',        null: false
+      t.timestamps                                                              null: false
+    end
+
+    create_table :locations do |t|
+      t.string :name,                           limit: 30,  default: '',        null: false
+      t.timestamps                                                              null: false
+    end
+
     create_table :transactions, force: :cascade do |t|
-      t.string   :site_id,                      limit: 36,  default: '',        null: false
-      t.integer  :location_id,                  limit: 4,   default: 0,         null: false
-      t.references  :till,                      index: true
-      t.integer  :tab_id,                       limit: 4,   default: 0,         null: false
+      t.references :site,                       index: true
+      t.references :location,                   index: true
+      t.references :till,                       index: true
       t.datetime :start_date_time,              default: '1900-01-01 00:00:00', null: false
       t.datetime :end_date_time,                default: '1900-01-01 00:00:00', null: false
-      t.integer  :receipt_no,                   limit: 4,   default: 0,         null: false
-      t.references  :cashier,                   index: true
+      t.integer  :receipt_number,               limit: 4,   default: 0,         null: false
+      t.references :cashier,                    index: true
       t.string   :cashier_name,                 limit: 30,  default: '',        null: false
-      t.references  :media,                     index: true
-      t.string   :media_name,                   limit: 30,  default: '',        null: false
+      t.references :medium,                     index: true
+      t.string   :medium_name,                  limit: 30,  default: '',        null: false
       t.decimal  :total_amount,                             default: 0,         null: false
       t.decimal  :total_discounted_amount,                  default: 0,         null: false
       t.decimal  :total_nett_amount,                        default: 0,         null: false
@@ -348,7 +365,7 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.decimal  :amount_tendered,                          default: 0,         null: false
       t.decimal  :change_given,                             default: 0,         null: false
       t.boolean  :no_sale,                      limit: 1,   default: false,     null: false
-      t.references  :card_holder,               index: true
+      t.references :card_holder,                index: true
       t.string   :card_number,                  limit: 30,  default: '',        null: false
       t.string   :card_name,                    limit: 30,  default: '',        null: false
       t.decimal  :amount_purse_1,                           default: 0,         null: false
@@ -395,17 +412,17 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.boolean  :finalised,                    limit: 1,   default: false,     null: false
       t.timestamps                                                              null: false
     end
-
+    add_foreign_key :transactions, :sites
+    add_foreign_key :transactions, :locations
     add_foreign_key :transactions, :tills
     add_foreign_key :transactions, :cashiers
-    add_foreign_key :transactions, :medias
+    add_foreign_key :transactions, :media
     add_foreign_key :transactions, :card_holders
 
-
     create_table :transaction_items, force: :cascade do |t|
-      t.references  :transaction,               index: true
-      t.references  :cashier,                   index: true
-      t.references  :plu,                       index: true
+      t.references :transaction,                index: true
+      t.references :cashier,                    index: true
+      t.references :plu,                        index: true
       t.string   :plu_name,                     limit: 30,  default: '',        null: false
       t.decimal  :plu_factor,                   limit: 4,   default: 0,         null: false
       t.decimal  :plu_factor_entered,           limit: 4,   default: 0,         null: false
@@ -414,10 +431,10 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.integer  :plu_group_id,                 limit: 4,   default: 0,         null: false
       t.decimal  :plu_price_level_1,            limit: 4,   default: 0,         null: false
       t.decimal  :plu_cost,                     limit: 4,   default: 0,         null: false
-      t.references  :vat,                       index: true
+      t.references :vat,                        index: true
       t.boolean  :void,                         limit: 1,   default: false,     null: false
       t.datetime :sale_date_time,               default: '1900-01-01 00:00:00', null: false
-      t.references  :rp_sort_group,             index: true
+      t.references :rp_sort_group,              index: true
       t.boolean  :kp_printed,                   limit: 1,   default: false,     null: false
       t.boolean  :condiment,                    limit: 1,   default: false,     null: false
       t.integer  :purse_no,                     limit: 4,   default: 0,         null: false
@@ -432,18 +449,13 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.boolean  :add_surcharge,                limit: 1,   default: false,     null: false
       t.timestamps                                                              null: false
     end
-
     add_foreign_key :transaction_items, :transactions
     add_foreign_key :transaction_items, :cashiers
     add_foreign_key :transaction_items, :plus
     add_foreign_key :transaction_items, :vats
+    add_foreign_key :transaction_items, :rp_sort_groups
 
 
-    create_table :vats, force: :cascade do |t|
-      t.string   :name,                         limit: 30,  default: '',        null: false
-      t.decimal  :value,                                    default: 0,         null: false
-      t.timestamps                                                              null: false
-    end
-    
+
   end
 end

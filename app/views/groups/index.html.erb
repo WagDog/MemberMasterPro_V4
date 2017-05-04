@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Card revenue</th>
       <th>Surcharge percent</th>
       <th colspan="3"></th>
     </tr>
@@ -15,6 +16,7 @@
     <% @groups.each do |group| %>
       <tr>
         <td><%= group.name %></td>
+        <td><%= group.card_revenue %></td>
         <td><%= group.surcharge_percent %></td>
         <td><%= link_to 'Show', group %></td>
         <td><%= link_to 'Edit', edit_group_path(group) %></td>

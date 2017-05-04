@@ -69,6 +69,6 @@ class PlusController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def plu_params
-      params.require(:plu).permit(:name, :price_1, :price_2, :price_3, :price_4, :price_5, :price_6, :group_id, :plu_cost, :vat_id, :stock_mode, :rp_sort_group, :purse_no, :kp_printer, :barcode, :price_type, :condiment, :modifiers, :popup_window_1, :popup_window_2, :popup_window_3, :popup_window_4, :popup_window_5, :back_colour, :font_colour, :is_active)
+      params.require(:plu).permit(:name, :price_1, :price_2, :price_3, :price_4, :price_5, :price_6, :group_id, :plu_cost, :vat_id, :stock_mode, :rp_sort_group_id, :purse_no, :kp_printer, :barcode, :price_type, :condiment, :modifier_id, :popup_window_1, :popup_window_2, :popup_window_3, :popup_window_4, :popup_window_5, :back_colour, :font_colour, :is_active)
     end
 end

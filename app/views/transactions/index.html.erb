@@ -8,14 +8,13 @@
       <th>Site</th>
       <th>Location</th>
       <th>Till</th>
-      <th>Tab</th>
       <th>Start date time</th>
       <th>End date time</th>
-      <th>Receipt no</th>
+      <th>Receipt number</th>
       <th>Cashier</th>
       <th>Cashier name</th>
-      <th>Media</th>
-      <th>Media name</th>
+      <th>Medium</th>
+      <th>Medium name</th>
       <th>Total amount</th>
       <th>Total discounted amount</th>
       <th>Total nett amount</th>
@@ -79,17 +78,16 @@
   <tbody>
     <% @transactions.each do |transaction| %>
       <tr>
-        <td><%= transaction.site_id %></td>
-        <td><%= transaction.location_id %></td>
+        <td><%= transaction.site %></td>
+        <td><%= transaction.location %></td>
         <td><%= transaction.till %></td>
-        <td><%= transaction.tab_id %></td>
         <td><%= transaction.start_date_time %></td>
         <td><%= transaction.end_date_time %></td>
-        <td><%= transaction.receipt_no %></td>
+        <td><%= transaction.receipt_number %></td>
         <td><%= transaction.cashier %></td>
         <td><%= transaction.cashier_name %></td>
-        <td><%= transaction.media %></td>
-        <td><%= transaction.media_name %></td>
+        <td><%= transaction.medium %></td>
+        <td><%= transaction.medium_name %></td>
         <td><%= transaction.total_amount %></td>
         <td><%= transaction.total_discounted_amount %></td>
         <td><%= transaction.total_nett_amount %></td>

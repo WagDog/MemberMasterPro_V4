@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Till</th>
       <th>Date received</th>
       <th>Date processed</th>
       <th>Printer number</th>
@@ -17,6 +18,7 @@
   <tbody>
     <% @kp_prints.each do |kp_print| %>
       <tr>
+        <td><%= kp_print.till %></td>
         <td><%= kp_print.date_received %></td>
         <td><%= kp_print.date_processed %></td>
         <td><%= kp_print.printer_number %></td>

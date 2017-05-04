@@ -69,6 +69,6 @@ class CardRevenuesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def card_revenue_params
-      params.require(:card_revenue).permit(:name, :groups)
+      params.require(:card_revenue).permit(:name)
     end
 end

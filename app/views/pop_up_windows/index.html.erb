@@ -6,7 +6,7 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Plu id list</th>
+      <th>Plu</th>
       <th>Show price</th>
       <th colspan="3"></th>
     </tr>
@@ -16,7 +16,7 @@
     <% @pop_up_windows.each do |pop_up_window| %>
       <tr>
         <td><%= pop_up_window.name %></td>
-        <td><%= pop_up_window.plu_id_list %></td>
+        <td><%= pop_up_window.plu %></td>
         <td><%= pop_up_window.show_price %></td>
         <td><%= link_to 'Show', pop_up_window %></td>
         <td><%= link_to 'Edit', edit_pop_up_window_path(pop_up_window) %></td>

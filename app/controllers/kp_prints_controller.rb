@@ -69,6 +69,6 @@ class KpPrintsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def kp_print_params
-      params.require(:kp_print).permit(:date_received, :date_processed, :printer_number, :processed, :data)
+      params.require(:kp_print).permit(:till_id, :date_received, :date_processed, :printer_number, :processed, :data)
     end
 end

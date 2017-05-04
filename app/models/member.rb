@@ -3,4 +3,5 @@ class Member < ActiveRecord::Base
   belongs_to :telephone_number
   belongs_to :email_address
   belongs_to :member_category
+  has_one :card_holder
 end

@@ -69,6 +69,6 @@ class PopUpWindowsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pop_up_window_params
-      params.require(:pop_up_window).permit(:name, :plu_id_list, :show_price)
+      params.require(:pop_up_window).permit(:name, :plu_id, :show_price)
     end
 end

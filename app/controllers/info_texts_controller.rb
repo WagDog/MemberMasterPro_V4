@@ -69,6 +69,6 @@ class InfoTextsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def info_text_params
-      params.require(:info_text).permit(:name, :till_id, :text, :bold, :underline, :double_width, :double_height, :quadruple, :center_aligned, :right_aligned)
+      params.require(:info_text).permit(:name, :till_id, :is_header, :text, :bold, :underline, :double_width, :double_height, :quadruple, :center_aligned, :right_aligned)
     end
 end
