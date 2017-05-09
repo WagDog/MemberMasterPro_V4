@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :member_notes
+
   resources :mailers
   resources :static_pages
   resources :sessions, only:[:new, :create, :destroy]

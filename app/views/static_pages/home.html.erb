@@ -2,18 +2,36 @@
     <% # Block commented out, but left in to show how to do a responsive image %>
     <% # Note the path to the image exclude the 'images' folder %>
     <div class='center hero-unit'>
-      <img src='/assets/banner.png' class='img-responsive' alt='Responsive image'>
+      <img src='/assets/landscape' class='img-responsive' alt='Responsive image'>
     </div>
 <% end %>
 
 
 <div class='center hero-unit'>
-  <h1>MemberMasterPro</h1>
+
   <% if signed_in? %>
       <h2>You are currently logged in as <%= @user.name %></h2>
-      <%= link_to 'Sign out!', signout_path, method: 'delete', class: 'btn btn-lg btn-primary'%>
-  <% else %>
-      <h2>Please sign in below.</h2>
-      <%= link_to 'Sign in now!', signin_path, class: 'btn btn-lg btn-primary'%>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">Number of Members</div>
+              <div class="panel-body"><%= chart_member_count %></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">Card Balances</div>
+              <div class="panel-body"><%= chart_card_balances %></div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="panel panel-default">
+              <div class="panel-heading">Products in Groups</div>
+              <div class="panel-body"><%= chart_products_in_groups %></div>
+            </div>
+          </div>
+        </div>
+      </div>
   <% end %>
 </div>

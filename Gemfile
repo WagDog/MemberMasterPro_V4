@@ -34,6 +34,9 @@ gem 'mailjet'
 # Use the password generator 'Random_Password_Generator'
 gem 'random_password_generator', '~> 1.0'
 
+# Use the Chartkick gem for pie charts etc
+gem 'chartkick', '~> 2.2', '>= 2.2.3'
+
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -44,9 +47,6 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
 
-  # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
-
   # Forced to use version below for Bundler to allow the install of gems
   gem 'nokogiri', '~> 1.6.8.rc2'
 
@@ -56,6 +56,12 @@ group :development, :test do
   # Add the annotate gem for adding comments to Models described at position 6641
   gem 'annotate'
 end
+
+group :development do
+  # Access an IRB console on exception pages or by using <%= console %> in views
+  gem 'web-console', '~> 2.0'
+end
+
 group :test do
   gem 'capybara'
   gem 'spork'

@@ -224,6 +224,14 @@ class InitialDatabaseSetup < ActiveRecord::Migration
     add_foreign_key :members, :email_addresses
     add_foreign_key :members, :member_categories
 
+    create_table :member_notes, force:  :cascade do|t|
+      t.references :member,                     index: true
+      t.string   :title,                        limit: 30,  default: '',        null: false
+      t.text     :note,                         limit: 65535,                   null: false
+      t.timestamps                                                              null: false
+    end
+    add_foreign_key :member_notes, :members
+
     create_table :card_holders, force: :cascade do |t|
       t.references :member,                     index: true
       t.string   :title,                        limit: 10,  default: '',        null: false

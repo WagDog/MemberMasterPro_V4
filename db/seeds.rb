@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Add a user
-  User.create({email: 'paulwagstaff66@gmail.com', name:'Paul Wagstaff', isAdministrator: true, password_digest:'', remember_token:''})
+  User.create({email: 'paulwagstaff66@gmail.com', name:'Paul Wagstaff', isAdministrator: true, password_digest:'$2a$04$mAJN71UJfcN/BvsKX5hufOjk8UIMJ8PGbyqwTS7jg3el0W1N/kEiK', remember_token:'f1wxmFe4-b_OvZ8MLABRsw'})
 
 # Add an Address
   Address.create({address_1:'1 Some Street',address_2:'Blogwood',address_3:'Stockport',address_4:'Cheshire',post_code:'SK6 1AA'})
@@ -68,6 +68,9 @@
 # Add a Member
   Member.create({code:'PWAG', title:'Mr', initials:'P', forename:'Paul', surname:'Wagstaff',address_id:1, telephone_number_id:1, email_address_id:1, member_category_id:1,
                  formal_salutation:'Dear Mr Wagstaff', informal_salutation:'Hi Paul', birth_date:'1966-03-02 00:00:00', join_date:'2017-01-01 00:00:00'})
+
+# Add a couple of member notes
+  MemberNote.create([{member_id: 1, title:'First Note',note:'Hello, this is the first note'},{member_id: 1, title:'Second Note',note:'Hello, this is the second note'}])
 
 # Add a Card Holder
   CardHolder.create({member_id:1, title:'Mr', initials:'P', forename:'Paul', surname:'Wagstaff', card_number:'9999888881234', card_profile_id:1, category:'Full Member'})
