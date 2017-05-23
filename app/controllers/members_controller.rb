@@ -15,6 +15,7 @@ class MembersController < ApplicationController
   # GET /members/new
   def new
     @member = Member.new
+    @address_types = AddressType.all
   end
 
   # GET /members/1/edit
@@ -65,10 +66,19 @@ class MembersController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_member
       @member = Member.find(params[:id])
+      @member_category = @member.member_category
+      @address =  Address.find_by_member_id(@member)
+      @address_types = AddressType.all
+      @email_address = EmailAddress.find_by_member_id(@member)
+      @telephone_number = TelephoneNumber.find_by_member_id(@member)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      params.require(:member).permit(:code, :prefix, :title, :initials, :forename, :surname, :suffix, :address_id, :telephone_number_id, :email_address_id, :member_category_id, :formal_salutation, :informal_salutation, :male, :master, :direct_debit, :birth_date, :join_date, :left_date, :is_active)
+      params.require(:member).permit(:code, :prefix, :title, :initials, :forename, :surname, :suffix, :member_category_id,
+                                     :formal_salutation, :informal_salutation, :male, :master, :direct_debit, :birth_date,
+                                     :join_date, :left_date, :is_active,
+                                     addresses_attributes: [:id, :address_type_id, :address_1, :address_2, :address_3, :address_4, :post_code],
+                                     telephone_numbers_attributes: [:id, :telephone_type_id, :number])
     end
 end

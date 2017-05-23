@@ -1,5 +1,3 @@
-<!-- This is called a 'Partial' and must be named with a leading underscore -->
-<!-- Partials are called like this:- render 'layouts/footer' -->
 <nav class='navbar navbar-inverse navbar-fixed-top'>
   <div class='container-fluid'>
     <div class='navbar-header'>
@@ -8,11 +6,14 @@
         <span class='icon-bar'></span>
         <span class='icon-bar'></span>
       </button>
-      <%= link_to 'MemberMasterPro', '/users', class: 'navbar-brand'%>
+      <%= link_to 'MemberMasterPro', root_path, class: 'navbar-brand'%>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class='navbar-nav navbar-right'>
         <li><a class='navbar-brand' href='/'><span class='glyphicon glyphicon-home'></span> Home</a></li>
+        <li><a class='navbar-brand' href='/membership'><span class='glyphicon glyphicon-th'></span> Membership</a></li>
+        <li><a class='navbar-brand' href='/epos'><span class='glyphicon glyphicon-signal'></span> Epos</a></li>
+        <li><a class='navbar-brand' href='/reports'><span class='glyphicon glyphicon-list-alt'></span> Reports</a></li>
         <% if signed_in? %>
             <li id='fat-menu' class='dropdown'><a href ='#' class='dropdown-toggle navbar-brand' data-toggle='dropdown' role='button' aria-haspopup='true' aria-expanded='false'><span class='glyphicon glyphicon-user'></span> Account<b class='caret'></b></a>
               <ul class='dropdown-menu'>

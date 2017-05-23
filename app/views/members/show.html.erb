@@ -1,104 +1,70 @@
-<p id="notice"><%= notice %></p>
+<div class='center hero-unit'>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Details</div>
+            <div class="panel-body" align="left">
+              <h4>Prefix: <small><%= @member.prefix%></small></h4>
+              <h4>Title: <small><%= @member.title%></small></h4>
+              <h4>Initials: <small><%= @member.initials%></small></h4>
+              <h4>Forename: <small><%= @member.forename%></small></h4>
+              <h4>Surname: <small><%= @member.surname%></small></h4>
+              <h4>Suffix: <small><%= @member.suffix%></small></h4>
+            </div>
+          </div>
+        </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Address Details</div>
+          <div class="panel-body" align="left">
+            <ul class="nav nav-tabs">
+              <% b = false %>
+              <% @address_types.each do |at| %>
+                <li class="<%= ("active") unless b %>"><a href="#<%=at.id%>"  data-toggle="tab"><%= at.name%></a></li>
+                <% b = true %>
+               <% end %>
+            </ul>
+            <div class="tab-content">
+              <% b = false %>
+              <% @address_types.each do |at| %>
+                <div class="tab-pane <%= ("active") unless b %>" id=<%=at.id%>>
+                    <% a = @member.addresses.find_by(address_type_id:at.id)%>
+                    <% if a.nil? %>
+                      No Address
+                    <% else %>
+                        <h4>Address 1: <small><%= a.address_1%></small></h4>
+                        <h4>Address 2: <small><%= a.address_2%></small></h4>
+                        <h4>Address 3: <small><%= a.address_3%></small></h4>
+                        <h4>Address 4: <small><%= a.address_4%></small></h4>
+                        <h4>Post Code: <small><%= a.post_code%></small></h4>
+                    <% end %>
+                </div>
+                <% b = true %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Contact Details</div>
+          <div class="panel-body" align="left">
+            <% if @member.telephone_numbers.count > 0 %>
+                <% telNos = @member.telephone_numbers %>
+                <% telNos.each do |t| %>
+                    <h4>Telephone: <small><%= "#{t.number} (#{t.telephone_type.name})"%> </small></h4>
+                <% end %>
+            <% end %>
 
-<p>
-  <strong>Code:</strong>
-  <%= @member.code %>
-</p>
-
-<p>
-  <strong>Prefix:</strong>
-  <%= @member.prefix %>
-</p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @member.title %>
-</p>
-
-<p>
-  <strong>Initials:</strong>
-  <%= @member.initials %>
-</p>
-
-<p>
-  <strong>Forename:</strong>
-  <%= @member.forename %>
-</p>
-
-<p>
-  <strong>Surname:</strong>
-  <%= @member.surname %>
-</p>
-
-<p>
-  <strong>Suffix:</strong>
-  <%= @member.suffix %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= @member.address %>
-</p>
-
-<p>
-  <strong>Telephone number:</strong>
-  <%= @member.telephone_number %>
-</p>
-
-<p>
-  <strong>Email address:</strong>
-  <%= @member.email_address %>
-</p>
-
-<p>
-  <strong>Member category:</strong>
-  <%= @member.member_category %>
-</p>
-
-<p>
-  <strong>Formal salutation:</strong>
-  <%= @member.formal_salutation %>
-</p>
-
-<p>
-  <strong>Informal salutation:</strong>
-  <%= @member.informal_salutation %>
-</p>
-
-<p>
-  <strong>Male:</strong>
-  <%= @member.male %>
-</p>
-
-<p>
-  <strong>Master:</strong>
-  <%= @member.master %>
-</p>
-
-<p>
-  <strong>Direct debit:</strong>
-  <%= @member.direct_debit %>
-</p>
-
-<p>
-  <strong>Birth date:</strong>
-  <%= @member.birth_date %>
-</p>
-
-<p>
-  <strong>Join date:</strong>
-  <%= @member.join_date %>
-</p>
-
-<p>
-  <strong>Left date:</strong>
-  <%= @member.left_date %>
-</p>
-
-<p>
-  <strong>Is active:</strong>
-  <%= @member.is_active %>
-</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_member_path(@member) %> |
 <%= link_to 'Back', members_path %>

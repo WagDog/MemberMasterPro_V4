@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Address type</th>
       <th>Address 1</th>
       <th>Address 2</th>
       <th>Address 3</th>
@@ -17,6 +18,7 @@
   <tbody>
     <% @addresses.each do |address| %>
       <tr>
+        <td><%= address.address_type %></td>
         <td><%= address.address_1 %></td>
         <td><%= address.address_2 %></td>
         <td><%= address.address_3 %></td>

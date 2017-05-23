@@ -1,97 +1,90 @@
-<%= form_for(@member) do |f| %>
-  <% if @member.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@member.errors.count, "error") %> prohibited this member from being saved:</h2>
+<%= form_for(@member) do | f |%>
+  <div class='center hero-unit'>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">Details</div>
+            <div class="panel-body" align="left">
+              <%= f.label :prefix%><%=f.text_field :prefix %>
+              <%= f.label :title%><%=f.text_field :title %>
+              <%= f.label :initials%><%=f.text_field :initials %>
+              <%= f.label :forename%><%=f.text_field :forename %>
+              <%= f.label :surname%><%=f.text_field :surname %>
+              <%= f.label :suffix%><%=f.text_field :suffix %>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">Address Details</div>
+            <div class="panel-body" align="left">
+              <ul class="nav nav-tabs">
+                <% b = false %>
+                <% @address_types.each do |at| %>
+                    <li class="<%= ("active") unless b %>"><a href="#<%=at.id%>"  data-toggle="tab"><%= at.name%></a></li>
+                    <% b = true %>
+                <% end %>
+              </ul>
+              <div class="tab-content">
+                <% b = false %>
+                <% @address_types.each do |at| %>
+                    <div class="tab-pane <%= ("active") unless b %>" id=<%=at.id%>>
+                      <% bMissing = true %>
+                      <%= f.fields_for :addresses do |ff|%>
+                        <% if ff.object.address_type_id == at.id %>
+                          <% bMissing = false %>
+                          <%= ff.label :address_1%><%=ff.text_field :address_1%>
+                          <%= ff.label :address_2%><%=ff.text_field :address_2%>
+                          <%= ff.label :address_3%><%=ff.text_field :address_3%>
+                          <%= ff.label :address_4%><%=ff.text_field :address_4%>
+                          <%= ff.label :post_code%><%=ff.text_field :post_code%>
+                        <% end %>
+                      <% end %>
+                      <% if bMissing %>
+                          <% new_object = f.object.class.reflect_on_association(:addresses).klass.new %>
+                          <%= f.fields_for(:addresses, new_object) do |ff| %>
+                           <%= ff.hidden_field :address_type_id, {value:at.id} %>
+                           <%= ff.label :address_1%><%=ff.text_field :address_1%>
+                           <%= ff.label :address_2%><%=ff.text_field :address_2%>
+                           <%= ff.label :address_3%><%=ff.text_field :address_3%>
+                           <%= ff.label :address_4%><%=ff.text_field :address_4%>
+                           <%= ff.label :post_code%><%=ff.text_field :post_code%>
+                          <% end %>
+                      <% end %>
+                    </div>
+                    <% b = true %>
+                <% end %>
 
-      <ul>
-      <% @member.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">Contact Details</div>
+            <div class="panel-body" align="left">
+              <%= f.fields_for :telephone_numbers do |ff|%>
+                <%= ff.label :number%><%=ff.text_field :number%>
+              <% end %>
+              <% new_object = f.object.class.reflect_on_association(:telephone_numbers).klass.new %>
+              <%= f.fields_for(:telephone_numbers, new_object) do |ff| %>
+                  <%= ff.hidden_field :telephone_type_id, {value:1} %>
+                  <%= ff.label :number%><%=ff.text_field :number%>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :code %><br>
-    <%= f.text_field :code %>
   </div>
-  <div class="field">
-    <%= f.label :prefix %><br>
-    <%= f.text_field :prefix %>
-  </div>
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :initials %><br>
-    <%= f.text_field :initials %>
-  </div>
-  <div class="field">
-    <%= f.label :forename %><br>
-    <%= f.text_field :forename %>
-  </div>
-  <div class="field">
-    <%= f.label :surname %><br>
-    <%= f.text_field :surname %>
-  </div>
-  <div class="field">
-    <%= f.label :suffix %><br>
-    <%= f.text_field :suffix %>
-  </div>
-  <div class="field">
-    <%= f.label :address_id %><br>
-    <%= f.text_field :address_id %>
-  </div>
-  <div class="field">
-    <%= f.label :telephone_number_id %><br>
-    <%= f.text_field :telephone_number_id %>
-  </div>
-  <div class="field">
-    <%= f.label :email_address_id %><br>
-    <%= f.text_field :email_address_id %>
-  </div>
-  <div class="field">
-    <%= f.label :member_category_id %><br>
-    <%= f.text_field :member_category_id %>
-  </div>
-  <div class="field">
-    <%= f.label :formal_salutation %><br>
-    <%= f.text_field :formal_salutation %>
-  </div>
-  <div class="field">
-    <%= f.label :informal_salutation %><br>
-    <%= f.text_field :informal_salutation %>
-  </div>
-  <div class="field">
-    <%= f.label :male %><br>
-    <%= f.check_box :male %>
-  </div>
-  <div class="field">
-    <%= f.label :master %><br>
-    <%= f.check_box :master %>
-  </div>
-  <div class="field">
-    <%= f.label :direct_debit %><br>
-    <%= f.check_box :direct_debit %>
-  </div>
-  <div class="field">
-    <%= f.label :birth_date %><br>
-    <%= f.datetime_select :birth_date %>
-  </div>
-  <div class="field">
-    <%= f.label :join_date %><br>
-    <%= f.datetime_select :join_date %>
-  </div>
-  <div class="field">
-    <%= f.label :left_date %><br>
-    <%= f.datetime_select :left_date %>
-  </div>
-  <div class="field">
-    <%= f.label :is_active %><br>
-    <%= f.check_box :is_active %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <div class='col-md-4 col-md-offset-4'><%= f.submit 'Create member', class: 'btn btn-lg btn-primary'%></div>
 <% end %>
+
+
+
+
+

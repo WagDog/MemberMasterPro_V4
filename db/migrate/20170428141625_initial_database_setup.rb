@@ -164,37 +164,10 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.timestamps                                                              null: false
     end
 
-    create_table :email_addresses, force: :cascade do |t|
-      t.string   :email,                        limit: 100, default: '',        null: false
-      t.boolean  :is_default,                   limit: 1,   default: false,     null: false
-      t.timestamps                                                              null: false
-    end
-
-    create_table :addresses, force: :cascade do |t|
-      t.string   :address_1,                    limit: 30,  default: '',        null: false
-      t.string   :address_2,                    limit: 30,  default: '',        null: false
-      t.string   :address_3,                    limit: 30,  default: '',        null: false
-      t.string   :address_4,                    limit: 30,  default: '',        null: false
-      t.string   :post_code,                    limit: 30,  default: '',        null: false
-      t.timestamps                                                              null: false
-    end
-
     create_table :member_categories, force: :cascade do |t|
       t.string   :name,                         limit: 30,  default: '',        null: false
       t.timestamps                                                              null: false
     end
-
-    create_table :telephone_types, force: :cascade do |t|
-      t.string   :name,                          limit: 45,  default: '',       null: false
-      t.timestamps                                                              null: false
-    end
-
-    create_table :telephone_numbers, force: :cascade do |t|
-      t.references :telephone_type,             limit: 4,   default: 1,         null: false
-      t.string   :number,                       limit: 45,  default: '',        null: false
-      t.timestamps                                                              null: false
-    end
-    add_foreign_key :telephone_numbers, :telephone_types
 
     create_table :members, force: :cascade do |t|
       t.string   :code,                         limit: 4,   default: '',        null: false
@@ -204,9 +177,6 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.string   :forename,                     limit: 30,  default: '',        null: false
       t.string   :surname,                      limit: 30,  default: '',        null: false
       t.string   :suffix,                       limit: 10,  default: '',        null: false
-      t.references  :address,                   index: true
-      t.references :telephone_number,           index: true
-      t.references :email_address,              index: true
       t.references :member_category,            index: true
       t.string   :formal_salutation,            limit: 45,  default: '',        null: false
       t.string   :informal_salutation,          limit: 45,  default: '',        null: false
@@ -219,10 +189,48 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.boolean  :is_active,                    limit: 1,   default: true,      null: false
       t.timestamps                                                              null: false
     end
-    add_foreign_key :members, :addresses
-    add_foreign_key :members, :telephone_numbers
-    add_foreign_key :members, :email_addresses
     add_foreign_key :members, :member_categories
+
+    create_table :email_addresses, force: :cascade do |t|
+      t.references :member,                     index: true
+      t.string   :email,                        limit: 100, default: '',        null: false
+      t.boolean  :is_default,                   limit: 1,   default: false,     null: false
+      t.timestamps                                                              null: false
+    end
+    add_foreign_key :email_addresses, :members
+
+    create_table :address_types, force: :cascade do |t|
+      t.string   :name,                         limit: 30,  default: '',        null: false
+      t.timestamps                                                              null: false
+    end
+
+    create_table :addresses, force: :cascade do |t|
+      t.references :member,                     index: true
+      t.references :address_type,               index: true
+      t.string   :address_1,                    limit: 30,  default: '',        null: false
+      t.string   :address_2,                    limit: 30,  default: '',        null: false
+      t.string   :address_3,                    limit: 30,  default: '',        null: false
+      t.string   :address_4,                    limit: 30,  default: '',        null: false
+      t.string   :post_code,                    limit: 30,  default: '',        null: false
+      t.timestamps                                                              null: false
+    end
+    add_foreign_key :addresses, :members
+    add_foreign_key :addresses, :address_types
+
+
+    create_table :telephone_types, force: :cascade do |t|
+      t.string   :name,                         limit: 45,  default: '',       null: false
+      t.timestamps                                                              null: false
+    end
+
+    create_table :telephone_numbers, force: :cascade do |t|
+      t.references :member,                     index: true
+      t.references :telephone_type,             index: true
+      t.string   :number,                       limit: 45,  default: '',        null: false
+      t.timestamps                                                              null: false
+    end
+    add_foreign_key :telephone_numbers, :members
+    add_foreign_key :telephone_numbers, :telephone_types
 
     create_table :member_notes, force:  :cascade do|t|
       t.references :member,                     index: true
