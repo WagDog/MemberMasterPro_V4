@@ -7,6 +7,8 @@ class Member < ActiveRecord::Base
   has_one :card_holder
   has_many :member_notes
 
+  validates(:suffix, presence: true)
+
   accepts_nested_attributes_for :addresses, reject_if: proc { |attributes| attributes['address_1'].blank? }, allow_destroy: true
   accepts_nested_attributes_for :telephone_numbers, reject_if: proc { |attributes| attributes['number'].blank? }, allow_destroy: true
 end

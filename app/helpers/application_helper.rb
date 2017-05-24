@@ -7,5 +7,10 @@ module ApplicationHelper
     else
       "#{base_title} | #{page_title}"
     end
-    end
+  end
+
+  def show_error_messages(formmodel)
+    @model = formmodel
+    render 'layouts/model_error_messages'
+  end
 end

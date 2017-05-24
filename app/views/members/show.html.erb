@@ -21,14 +21,14 @@
             <ul class="nav nav-tabs">
               <% b = false %>
               <% @address_types.each do |at| %>
-                <li class="<%= ("active") unless b %>"><a href="#<%=at.id%>"  data-toggle="tab"><%= at.name%></a></li>
+                <li class="<%= ('active') unless b %>"><a href="#<%=at.id%>"  data-toggle="tab"><%= at.name%></a></li>
                 <% b = true %>
                <% end %>
             </ul>
             <div class="tab-content">
               <% b = false %>
               <% @address_types.each do |at| %>
-                <div class="tab-pane <%= ("active") unless b %>" id=<%=at.id%>>
+                <div class="tab-pane <%= ('active') unless b %>" id=<%=at.id%>>
                     <% a = @member.addresses.find_by(address_type_id:at.id)%>
                     <% if a.nil? %>
                       No Address
@@ -53,12 +53,19 @@
           <div class="panel-heading">Contact Details</div>
           <div class="panel-body" align="left">
             <% if @member.telephone_numbers.count > 0 %>
-                <% telNos = @member.telephone_numbers %>
-                <% telNos.each do |t| %>
-                    <h4>Telephone: <small><%= "#{t.number} (#{t.telephone_type.name})"%> </small></h4>
+                <% _telnos = @member.telephone_numbers %>
+                <% _telnos.each do |t| %>
+                    <h4><%= "#{t.telephone_type.name} Number"%>: <small><%= "#{t.number}"%> </small></h4>
                 <% end %>
             <% end %>
-
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">Member Details</div>
+          <div class="panel-body" align="left">
+            <h4>Category: <small><%= @member.member_category.name%></small></h4>
           </div>
         </div>
       </div>

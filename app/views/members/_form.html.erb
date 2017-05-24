@@ -1,4 +1,5 @@
 <%= form_for(@member) do | f |%>
+  <%= show_error_messages(@member)%>
   <div class='center hero-unit'>
     <div class="container-fluid">
       <div class="row">
@@ -22,18 +23,18 @@
               <ul class="nav nav-tabs">
                 <% b = false %>
                 <% @address_types.each do |at| %>
-                    <li class="<%= ("active") unless b %>"><a href="#<%=at.id%>"  data-toggle="tab"><%= at.name%></a></li>
+                    <li class="<%= ('active') unless b %>"><a href="#<%= at.id%>" data-toggle="tab"><%= at.name%></a></li>
                     <% b = true %>
                 <% end %>
               </ul>
               <div class="tab-content">
                 <% b = false %>
                 <% @address_types.each do |at| %>
-                    <div class="tab-pane <%= ("active") unless b %>" id=<%=at.id%>>
-                      <% bMissing = true %>
+                    <div class="tab-pane <%= ('active') unless b %>" id=<%= at.id%>>
+                      <% _bmissing = true %>
                       <%= f.fields_for :addresses do |ff|%>
                         <% if ff.object.address_type_id == at.id %>
-                          <% bMissing = false %>
+                          <% _bmissing = false %>
                           <%= ff.label :address_1%><%=ff.text_field :address_1%>
                           <%= ff.label :address_2%><%=ff.text_field :address_2%>
                           <%= ff.label :address_3%><%=ff.text_field :address_3%>
@@ -41,7 +42,7 @@
                           <%= ff.label :post_code%><%=ff.text_field :post_code%>
                         <% end %>
                       <% end %>
-                      <% if bMissing %>
+                      <% if _bmissing %>
                           <% new_object = f.object.class.reflect_on_association(:addresses).klass.new %>
                           <%= f.fields_for(:addresses, new_object) do |ff| %>
                            <%= ff.hidden_field :address_type_id, {value:at.id} %>
@@ -65,22 +66,28 @@
         <div class="col-md-6">
           <div class="panel panel-default">
             <div class="panel-heading">Contact Details</div>
-            <div class="panel-body" align="left">
-              <%= f.fields_for :telephone_numbers do |ff|%>
-                <%= ff.label :number%><%=ff.text_field :number%>
-              <% end %>
-              <% new_object = f.object.class.reflect_on_association(:telephone_numbers).klass.new %>
-              <%= f.fields_for(:telephone_numbers, new_object) do |ff| %>
-                  <%= ff.hidden_field :telephone_type_id, {value:1} %>
-                  <%= ff.label :number%><%=ff.text_field :number%>
-              <% end %>
-            </div>
+              <div class="panel-body" align="left">
+                <%= f.fields_for :telephone_numbers do |ff|%>
+                  <%= ff.label :number, "#{ff.object.telephone_type.name} Number" %><%= ff.text_field :number%>
+                <% end %>
+                <% new_object = f.object.class.reflect_on_association(:telephone_numbers).klass.new %>
+                <%= f.fields_for(:telephone_numbers, new_object) do |ff| %>
+                    <%= ff.hidden_field :telephone_type_id, {value:1} %>
+                    <%= ff.label :number%><%=ff.text_field :number%>
+                <% end %>
+              </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="panel panel-default">
+            <div class="panel-heading">Contact Details</div>
+              <div class="panel-body" align="left">
+                <%= f.label :member_category%><%= f.collection_select(:member_category_id, MemberCategory.all, :id, :name ) %></div>
+              </div>
           </div>
         </div>
       </div>
-
     </div>
-  </div>
   <div class='col-md-4 col-md-offset-4'><%= f.submit 'Create member', class: 'btn btn-lg btn-primary'%></div>
 <% end %>
 
