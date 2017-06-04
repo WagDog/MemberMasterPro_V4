@@ -75,6 +75,14 @@
                     <%= ff.hidden_field :telephone_type_id, {value:1} %>
                     <%= ff.label :number%><%=ff.text_field :number%>
                 <% end %>
+                <%= f.fields_for :email_addresses do |ff|%>
+                    <%= ff.label :email %><%= ff.text_field :email%>
+                <% end %>
+                <% new_object = f.object.class.reflect_on_association(:email_addresses).klass.new %>
+                <%= f.fields_for(:email_addresses, new_object) do |ff| %>
+                    <%= ff.hidden_field :is_default, {value:false} %>
+                    <%= ff.label :email%><%=ff.text_field :email%>
+                <% end %>
               </div>
           </div>
         </div>

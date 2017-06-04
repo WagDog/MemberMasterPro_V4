@@ -58,6 +58,12 @@
                     <h4><%= "#{t.telephone_type.name} Number"%>: <small><%= "#{t.number}"%> </small></h4>
                 <% end %>
             <% end %>
+            <% if @member.email_addresses.count > 0 %>
+                <% _emails = @member.email_addresses %>
+                <% _emails.each do |e| %>
+                    <h4>Email: <small><%= e.is_default ? "#{e.email} (Default)" : e.email %> </small></h4>
+                <% end %>
+            <% end %>
           </div>
         </div>
       </div>

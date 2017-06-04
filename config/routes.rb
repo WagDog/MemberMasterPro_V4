@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   resources :address_types
-
   resources :member_notes
-
   resources :mailers
   resources :static_pages
   resources :sessions, only:[:new, :create, :destroy]
@@ -38,11 +36,12 @@ Rails.application.routes.draw do
   resources :card_discounts
   resources :users
 
-  root 'static_pages#home'
+  root to: 'landing#index'
+  get '/home', to: 'static_pages#home'
   get '/help', to: 'static_pages#help'
   get '/signup', to: 'users#new'
   get '/signin', to: 'sessions#new'
-  delete '/signout', to: 'sessions#destroy' # Manual uses:- match 'signout', to: 'sessions#destroy' via: :delete (position 9558)
+  get '/signout', to: 'sessions#destroy' # Manual uses:- match 'signout', to: 'sessions#destroy' via: :delete (position 9558)
   get '/password_lost', to: 'users#password_lost'
   post 'password_reset', to: 'users#password_reset'
   get '/membership', to: 'static_pages#membership'

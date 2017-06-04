@@ -1,5 +1,6 @@
 class MembersController < ApplicationController
   before_action :set_member, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
 
   # GET /members
   # GET /members.json
@@ -64,6 +65,10 @@ class MembersController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
+  def set_user
+    @user = User.find(current_user.id)
+  end
+
     def set_member
       @member = Member.find(params[:id])
       @member_category = @member.member_category
@@ -79,6 +84,7 @@ class MembersController < ApplicationController
                                      :formal_salutation, :informal_salutation, :male, :master, :direct_debit, :birth_date,
                                      :join_date, :left_date, :is_active,
                                      addresses_attributes: [:id, :address_type_id, :address_1, :address_2, :address_3, :address_4, :post_code],
-                                     telephone_numbers_attributes: [:id, :telephone_type_id, :number])
+                                     telephone_numbers_attributes: [:id, :telephone_type_id, :number],
+                                     email_addresses_attributes: [:id, :email, :is_default])
     end
 end
