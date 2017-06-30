@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   # Use BCrypt for a secure password by using the following line:-
+=begin
   has_secure_password
 
   before_save {|user| user.email = email.downcase}  # Position 7434
@@ -11,6 +12,7 @@ class User < ActiveRecord::Base
   validates(:email, presence: true, format:{with: VALID_EMAIL_REGEX}, uniqueness:{case_sensitive: false}) #Position 7316 for validations
   validates(:password, presence: true, length:{minimum: 6})
   validates(:password_confirmation, presence: true)
+=end
 
   private
   def create_remember_token
