@@ -5,7 +5,7 @@ class MembersController < ApplicationController
   # GET /members
   # GET /members.json
   def index
-    @members = Member.all
+    @members = Member.where("surname like 'zzzzz'")
   end
 
   # GET /members/1
@@ -27,9 +27,21 @@ class MembersController < ApplicationController
   # POST /members.json
   def create
     @member = Member.new(member_params)
+    @member.code = @member.initials.byteslice(0,1) + @member.surname.byteslice(0,3)
+    @member.code.upcase!
+    if not @member.card_holder.nil?
+      @member.card_holder.title = @member.title
+      @member.card_holder.initials = @member.initials
+      @member.card_holder.forename = @member.forename
+      @member.card_holder.surname = @member.surname
+      @member.card_holder.category = @member.member_category.name
+    end
 
     respond_to do |format|
       if @member.save
+        # Add a member note of type system that a new record has been created
+        @member.member_notes.create(member_note_type_id:1, title:'Member created', note:"Member created by user #{@user.name}")
+
         format.html { flash[:success] = 'Member was successfully created.'; redirect_to @member }
         format.json { render :show, status: :created, location: @member }
       else
@@ -63,6 +75,11 @@ class MembersController < ApplicationController
     end
   end
 
+  def search
+    @members = Member.where("surname LIKE '%#{params[:q]}%' OR forename LIKE '%#{params[:q]}%'")
+    render 'members/index'
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
   def set_user
@@ -71,11 +88,7 @@ class MembersController < ApplicationController
 
     def set_member
       @member = Member.find(params[:id])
-      @member_category = @member.member_category
-      @address =  Address.find_by_member_id(@member)
       @address_types = AddressType.all
-      @email_address = EmailAddress.find_by_member_id(@member)
-      @telephone_number = TelephoneNumber.find_by_member_id(@member)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -85,6 +98,7 @@ class MembersController < ApplicationController
                                      :join_date, :left_date, :is_active,
                                      addresses_attributes: [:id, :address_type_id, :address_1, :address_2, :address_3, :address_4, :post_code],
                                      telephone_numbers_attributes: [:id, :telephone_type_id, :number],
-                                     email_addresses_attributes: [:id, :email, :is_default])
+                                     email_addresses_attributes: [:id, :email, :is_default],
+                                     card_holder_attributes: [:id, :card_number, :card_profile_id])
     end
 end

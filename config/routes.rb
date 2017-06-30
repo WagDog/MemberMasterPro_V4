@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :member_note_types
   resources :address_types
   resources :member_notes
   resources :mailers
@@ -24,6 +25,8 @@ Rails.application.routes.draw do
   resources :function_buttons
   resources :addresses
   resources :email_addresses
+
+  get '/members/search', to: 'members#search'
   resources :members
   resources :cashiers
   resources :card_systems

@@ -1,105 +1,330 @@
-<%= form_for(@member) do | f |%>
-  <%= show_error_messages(@member)%>
-  <div class='center hero-unit'>
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-md-6">
-          <div class="panel panel-default">
-            <div class="panel-heading">Details</div>
-            <div class="panel-body" align="left">
-              <%= f.label :prefix%><%=f.text_field :prefix %>
-              <%= f.label :title%><%=f.text_field :title %>
-              <%= f.label :initials%><%=f.text_field :initials %>
-              <%= f.label :forename%><%=f.text_field :forename %>
-              <%= f.label :surname%><%=f.text_field :surname %>
-              <%= f.label :suffix%><%=f.text_field :suffix %>
-            </div>
+<p id="notice"><%= notice %></p>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2><%= params[:action] == 'new' ? 'New' : 'Edit'%> member</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="/home">Home</a>
+      </li>
+      <li class="active">
+        <strong><%= params[:action] == 'new' ? 'New' : 'Edit'%> member</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
+  </div>
+</div>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox">
+        <div class="ibox-title">
+          <h5>Member Wizard</h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+              <li>
+                <a href="#">Config option 1</a>
+              </li>
+              <li>
+                <a href="#">Config option 2</a>
+              </li>
+            </ul>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
           </div>
         </div>
-        <div class="col-md-6">
-          <div class="panel panel-default">
-            <div class="panel-heading">Address Details</div>
-            <div class="panel-body" align="left">
-              <ul class="nav nav-tabs">
-                <% b = false %>
-                <% @address_types.each do |at| %>
-                    <li class="<%= ('active') unless b %>"><a href="#<%= at.id%>" data-toggle="tab"><%= at.name%></a></li>
-                    <% b = true %>
-                <% end %>
-              </ul>
-              <div class="tab-content">
-                <% b = false %>
-                <% @address_types.each do |at| %>
-                    <div class="tab-pane <%= ('active') unless b %>" id=<%= at.id%>>
-                      <% _bmissing = true %>
-                      <%= f.fields_for :addresses do |ff|%>
-                        <% if ff.object.address_type_id == at.id %>
-                          <% _bmissing = false %>
-                          <%= ff.label :address_1%><%=ff.text_field :address_1%>
-                          <%= ff.label :address_2%><%=ff.text_field :address_2%>
-                          <%= ff.label :address_3%><%=ff.text_field :address_3%>
-                          <%= ff.label :address_4%><%=ff.text_field :address_4%>
-                          <%= ff.label :post_code%><%=ff.text_field :post_code%>
-                        <% end %>
-                      <% end %>
-                      <% if _bmissing %>
-                          <% new_object = f.object.class.reflect_on_association(:addresses).klass.new %>
-                          <%= f.fields_for(:addresses, new_object) do |ff| %>
-                           <%= ff.hidden_field :address_type_id, {value:at.id} %>
-                           <%= ff.label :address_1%><%=ff.text_field :address_1%>
-                           <%= ff.label :address_2%><%=ff.text_field :address_2%>
-                           <%= ff.label :address_3%><%=ff.text_field :address_3%>
-                           <%= ff.label :address_4%><%=ff.text_field :address_4%>
-                           <%= ff.label :post_code%><%=ff.text_field :post_code%>
-                          <% end %>
+        <div class="ibox-content">
+          <h2>
+            <%= params[:action] == 'new' ? 'Create' : 'Edit existing'%> member
+          </h2>
+          <p>
+            Please fill in all the required fields (*)
+          </p>
+
+          <%= form_for(@member, html:{class:'wizard-big'}) do |f| %>
+              <h1>Name</h1>
+              <fieldset>
+                <h2>Name Details</h2>
+                <div class="row">
+                  <div class="col-lg-8">
+                    <div class="form-group">
+                      <%= f.label :prefix%><%= f.text_field :prefix, class:'form-control'%>
+                    </div>
+                    <div class="form-group">
+                      <label>Title *</label>
+                      <%= f.text_field :title, class:'form-control required'%>
+                    </div>
+                    <div class="form-group">
+                      <label>Initials *</label>
+                      <%= f.text_field :initials, class:'form-control required'%>
+                    </div>
+                    <div class="form-group">
+                      <label>Forename *</label>
+                      <%= f.text_field :forename, class:'form-control required'%>
+                    </div>
+                    <div class="form-group">
+                      <label>Surname *</label>
+                      <%= f.text_field :surname, class:'form-control required'%>
+                    </div>
+                    <div class="form-group">
+                      <%= f.label :suffix%><%= f.text_field :suffix, class:'form-control'%>
+                    </div>
+                    <div class="form-group">
+                      <label>Member Category *</label>
+                      <%= f.collection_select(:member_category_id, MemberCategory.all, :id, :name, {}, {class:'form-control required'}) %>
+                    </div>
+                  </div>
+                  <div class="col-lg-4">
+                    <div class="text-center">
+                      <div style="margin-top: 20px">
+                        <i class="fa fa-sign-in" style="font-size: 180px;color: #e5e5e5 "></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </fieldset>
+
+              <h1>Contact Details</h1>
+              <fieldset>
+                <h2>Other Details</h2>
+                <div class="row">
+                  <% _telephoneHome = @member.telephone_numbers.find_by(telephone_type_id: 1) %>
+                  <% _telephoneHome = f.object.class.reflect_on_association(:telephone_numbers).klass.new unless not _telephoneHome.nil?%>
+                  <% _telephoneBusiness = @member.telephone_numbers.find_by(telephone_type_id: 2) %>
+                  <% _telephoneBusiness = f.object.class.reflect_on_association(:telephone_numbers).klass.new unless not _telephoneBusiness.nil? %>
+                  <% _telephoneMobile = @member.telephone_numbers.find_by(telephone_type_id: 3) %>
+                  <% _telephoneMobile = f.object.class.reflect_on_association(:telephone_numbers).klass.new unless not _telephoneMobile.nil? %>
+                  <% _emailAddress = @member.email_addresses.first %>
+                  <% _emailAddress = f.object.class.reflect_on_association(:email_addresses).klass.new unless not _emailAddress.nil? %>
+                  <% _cardHolder = @member.card_holder %>
+                  <% _cardHolder = f.object.class.reflect_on_association(:card_holder).klass.new unless not _cardHolder.nil? %>
+
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <%= f.fields_for :telephone_numbers, _telephoneHome do |fh|%>
+                          <%= fh.hidden_field :telephone_type_id, {value:1} %>
+                          <label>Home Telephone</label>
+                          <%= fh.text_field :number, class:'form-control'%>
                       <% end %>
                     </div>
-                    <% b = true %>
-                <% end %>
+                    <div class="form-group">
+                      <%= f.fields_for :telephone_numbers, _telephoneBusiness do |fb|%>
+                          <%= fb.hidden_field :telephone_type_id, {value:2} %>
+                          <label>Business Telephone</label>
+                          <%= fb.text_field :number, class:'form-control'%>
+                      <% end %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.fields_for :telephone_numbers, _telephoneMobile do |fm|%>
+                          <%= fm.hidden_field :telephone_type_id, {value:3} %>
+                          <label>Mobile Telephone</label>
+                          <%= fm.text_field :number, class:'form-control'%>
+                      <% end %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.fields_for :email_addresses, _emailAddress do |fe|%>
+                          <label>Email Address</label>
+                          <%= fe.text_field :email, class:'form-control email'%>
+                      <% end %>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="form-group">
+                      <%= f.fields_for :card_holder, _cardHolder do |fc|%>
+                          <label>Card Number</label>
+                          <%= fc.text_field :card_number, class:'form-control'%>
+                      <% end %>
+                    </div>
+                    <div class="form-group">
+                      <%= f.fields_for :card_holder, _cardHolder do |fc|%>
+                          <label>Card Profile</label>
+                          <%= fc.collection_select(:card_profile_id, CardProfile.all, :id, :name, {}, {class:'form-control required'}) %>
+                      <% end %>
+                    </div>
+                    <div class="form-group">
+                      <label>Male?</label>
+                      <%= f.check_box :male, class:'form-control'%>
+                    </div>
+                    <div class="form-group">
+                      <label>Formal Salutation</label>
+                      <%= f.text_field :formal_salutation, class:'form-control'%>
+                    </div>
+                    <div class="form-group">
+                      <label>Informal Salutation</label>
+                      <%= f.text_field :informal_salutation, class:'form-control'%>
+                    </div>
+                  </div>
+                </div>
+              </fieldset>
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="panel panel-default">
-            <div class="panel-heading">Contact Details</div>
-              <div class="panel-body" align="left">
-                <%= f.fields_for :telephone_numbers do |ff|%>
-                  <%= ff.label :number, "#{ff.object.telephone_type.name} Number" %><%= ff.text_field :number%>
-                <% end %>
-                <% new_object = f.object.class.reflect_on_association(:telephone_numbers).klass.new %>
-                <%= f.fields_for(:telephone_numbers, new_object) do |ff| %>
-                    <%= ff.hidden_field :telephone_type_id, {value:1} %>
-                    <%= ff.label :number%><%=ff.text_field :number%>
-                <% end %>
-                <%= f.fields_for :email_addresses do |ff|%>
-                    <%= ff.label :email %><%= ff.text_field :email%>
-                <% end %>
-                <% new_object = f.object.class.reflect_on_association(:email_addresses).klass.new %>
-                <%= f.fields_for(:email_addresses, new_object) do |ff| %>
-                    <%= ff.hidden_field :is_default, {value:false} %>
-                    <%= ff.label :email%><%=ff.text_field :email%>
-                <% end %>
-              </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="panel panel-default">
-            <div class="panel-heading">Contact Details</div>
-              <div class="panel-body" align="left">
-                <%= f.label :member_category%><%= f.collection_select(:member_category_id, MemberCategory.all, :id, :name ) %></div>
-              </div>
-          </div>
+              <h1>Home Address</h1>
+              <fieldset>
+                <h2>Home Address Information</h2>
+                <div class="row">
+                  <% _address = @member.addresses.find_by(address_type_id: 1) %>
+                  <% _address = f.object.class.reflect_on_association(:addresses).klass.new unless not _address.nil? %>
+                  <%= f.fields_for :addresses, _address do |ff|%>
+                      <%= ff.hidden_field :address_type_id, {value:1} %>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>House Number and Street *</label>
+                          <%= ff.text_field :address_1, class:'form-control required'%>
+                        </div>
+                        <div class="form-group">
+                          <label>Town</label>
+                          <%= ff.text_field :address_2, class:'form-control'%>
+                        </div>
+                        <div class="form-group">
+                          <label>Borough</label>
+                          <%= ff.text_field :address_3, class:'form-control'%>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>County</label>
+                          <%= ff.text_field :address_4, class:'form-control'%>
+                        </div>
+                        <div class="form-group">
+                          <label>Post Code</label>
+                          <%= ff.text_field :post_code, class:'form-control'%>
+                        </div>
+                      </div>
+                  <% end %>
+                </div>
+              </fieldset>
+
+              <h1>Business Address</h1>
+              <fieldset>
+                <h2>Business Address Information</h2>
+                <div class="row">
+                  <% _address = @member.addresses.find_by(address_type_id: 2) %>
+                  <% _address = f.object.class.reflect_on_association(:addresses).klass.new unless not _address.nil? %>
+                  <%= f.fields_for :addresses, _address do |ff|%>
+                      <%= ff.hidden_field :address_type_id, {value:2} %>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>Property Number and Street *</label>
+                          <%= ff.text_field :address_1, class:'form-control required'%>
+                        </div>
+                        <div class="form-group">
+                          <label>Town</label>
+                          <%= ff.text_field :address_2, class:'form-control'%>
+                        </div>
+                        <div class="form-group">
+                          <label>Borough</label>
+                          <%= ff.text_field :address_3, class:'form-control'%>
+                        </div>
+                      </div>
+                      <div class="col-lg-6">
+                        <div class="form-group">
+                          <label>County</label>
+                          <%= ff.text_field :address_4, class:'form-control'%>
+                        </div>
+                        <div class="form-group">
+                          <label>Post Code</label>
+                          <%= ff.text_field :post_code, class:'form-control'%>
+                        </div>
+                      </div>
+                  <% end %>
+                </div>
+              </fieldset>
+          <% end %>
         </div>
       </div>
     </div>
-  <div class='col-md-4 col-md-offset-4'><%= f.submit 'Create member', class: 'btn btn-lg btn-primary'%></div>
+  </div>
+</div>
+
+
+<% content_for :javascript do %>
+
+    <script type="text/javascript">
+
+
+        $(function() {
+
+            $("#wizard").steps();
+            $("<%= params[:action] == 'new' ? '#new_member' : "#edit_member_#{params[:id]}"%>").steps({
+                bodyTag: "fieldset",
+                onStepChanging: function (event, currentIndex, newIndex) {
+                    // Always allow going backward even if the current step contains invalid fields!
+                    if (currentIndex > newIndex) {
+                        return true;
+                    }
+
+                    /*
+                    // Forbid suppressing "Warning" step if the user is to young
+                    if (newIndex === 3 && Number($("#age").val()) < 18) {
+                        return false;
+                    }
+                    */
+
+                    var form = $(this);
+
+                    // Clean up if user went backward before
+                    if (currentIndex < newIndex) {
+                        // To remove error styles
+                        $(".body:eq(" + newIndex + ") label.error", form).remove();
+                        $(".body:eq(" + newIndex + ") .error", form).removeClass("error");
+                    }
+
+                    // Disable validation on fields that are disabled or hidden.
+                    form.validate().settings.ignore = ":disabled,:hidden";
+
+                    // Start validation; Prevent going forward if false
+                    return form.valid();
+                },
+                onStepChanged: function (event, currentIndex, priorIndex) {
+                    /*
+                    // Suppress (skip) "Warning" step if the user is old enough.
+                    if (currentIndex === 2 && Number($("#age").val()) >= 18) {
+                        $(this).steps("next");
+                    }
+
+                    // Suppress (skip) "Warning" step if the user is old enough and wants to the previous step.
+                    if (currentIndex === 2 && priorIndex === 3) {
+                        $(this).steps("previous");
+                    }
+                    */
+                },
+                onFinishing: function (event, currentIndex) {
+                    var form = $(this);
+
+                    // Disable validation on fields that are disabled.
+                    // At this point it's recommended to do an overall check (mean ignoring only disabled fields)
+                    form.validate().settings.ignore = ":disabled";
+
+                    // Start validation; Prevent form submission if false
+                    return form.valid();
+                },
+                onFinished: function (event, currentIndex) {
+                    var form = $(this);
+
+                    // Submit form input
+                    form.submit();
+                }
+            }).validate({
+                errorPlacement: function (error, element) {
+                    element.before(error);
+                },
+                rules: {
+                    confirm: {
+                        equalTo: "#password"
+                    }
+                }
+            });
+
+        });
+
+    </script>
+
 <% end %>
-
-
-
-
-
