@@ -3,8 +3,6 @@ source 'http://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
-# Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.3.18'
 # Use Bootstrap for responsive website
 gem 'bootstrap-sass', '~> 3.3.7'
 # Add the font-awesome gem
@@ -39,6 +37,8 @@ gem 'random_password_generator', '~> 1.0'
 # Use the Chartkick gem for pie charts etc
 gem 'chartkick', '~> 2.2', '>= 2.2.3'
 
+# Forced to use version below for Bundler to allow the install of gems
+gem 'nokogiri', '~> 1.6.8.rc2'
 # Use Unicorn as the app server
 # gem 'unicorn'
 
@@ -46,11 +46,11 @@ gem 'chartkick', '~> 2.2', '>= 2.2.3'
 # gem 'capistrano-rails', group: :development
 
 group :development, :test do
+# Use mysql as the database for Active Record
+  gem 'mysql2', '~> 0.3.18'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-
-  # Forced to use version below for Bundler to allow the install of gems
-  gem 'nokogiri', '~> 1.6.8.rc2'
 
   # Add the test gem
   gem 'rspec-rails'
@@ -68,6 +68,14 @@ group :test do
   gem 'capybara'
   gem 'spork'
   gem 'factory_girl_rails'
+end
+
+group :production do
+  # Include the gem for Postgre DB on Heroku
+  gem 'pg'
+
+  # Include the
+  gem 'rails_12factor'
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
