@@ -190,7 +190,7 @@ ActiveRecord::Schema.define(version: 20170428141625) do
     t.datetime "date_processed",                    default: '1900-01-01 00:00:00', null: false
     t.integer  "printer_number", limit: 4,          default: 0,                     null: false
     t.boolean  "processed",                         default: false,                 null: false
-    t.binary   "data",           limit: 4294967295,                                 null: false
+    t.text     "data",           limit: 65535,                                      null: false
     t.datetime "created_at",                                                        null: false
     t.datetime "updated_at",                                                        null: false
   end
