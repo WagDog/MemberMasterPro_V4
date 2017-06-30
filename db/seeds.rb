@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Add a user
-  User.create({email: 'paulwagstaff66@gmail.com', name:'Paul Wagstaff', isAdministrator: true, password_digest:'$2a$04$mAJN71UJfcN/BvsKX5hufOjk8UIMJ8PGbyqwTS7jg3el0W1N/kEiK', remember_token:'f1wxmFe4-b_OvZ8MLABRsw'})
+  User.create({email: 'paulwagstaff66@gmail.com', name:'Paul Wagstaff', isAdministrator: true, password_digest:'$2a$04$yGhzcZiocRSQ7QjRN.ihwurNgJEOCY7zfd1LPrxAXGb0jG7FSc7mC', remember_token:'f1wxmFe4-b_OvZ8MLABRsw'})
 
 # Add a Card Discount
   CardDiscount.create({name:'Member Discount', description:'Standard Member Discount', discount_type:0, amount:10})
@@ -51,33 +51,53 @@
   CardSystem.create({use_site_id:false})
 
 # Add a Member Category
-  MemberCategory.create({name:'Full Member'})
+  MemberCategory.create([{name:'Full Member'},
+                         {name:'Social Member'}])
 
 # Add a Member
-  Member.create({code:'PWAG', title:'Mr', initials:'P', forename:'Paul', surname:'Wagstaff', member_category_id:1,
-                 formal_salutation:'Dear Mr Wagstaff', informal_salutation:'Hi Paul', birth_date:'1966-03-02 00:00:00', join_date:'2017-01-01 00:00:00'})
+  Member.create([{code:'PWAG', title:'Mr', initials:'P', forename:'Paul', surname:'Wagstaff', member_category_id:1,
+                 formal_salutation:'Dear Mr Wagstaff', informal_salutation:'Hi Paul', birth_date:'1966-03-02 00:00:00', join_date:'2017-01-01 00:00:00'},
+                {code:'PWAG', title:'Mr', initials:'P', forename:'Peter', surname:'Wagstaff', member_category_id:1,
+                 formal_salutation:'Dear Mr Wagstaff', informal_salutation:'Hi Peter', birth_date:'1950-04-05 00:00:00', join_date:'2017-01-01 00:00:00'},
+                {code:'KJON', title:'Mr', initials:'K', forename:'Kevin', surname:'Jones', member_category_id:2,
+                 formal_salutation:'Dear Mr Jones', informal_salutation:'Hi Kevin', birth_date:'1963-09-10 00:00:00', join_date:'2017-01-01 00:00:00'}])
 
-# Create a Address Type
+# Create a Address Type. Required are Home and Business
   AddressType.create([{name:'Home'},{name:'Business'}])
 
 # Add an Address
   Address.create([{member_id: 1, address_type_id: 1, address_1:'1 Any Street',address_2:'New Town',address_3:'Bogsville',address_4:'Chesport',post_code:'SS4 4AA'},
-                  {member_id: 1, address_type_id: 2, address_1:'1 Company House',address_2:'Worksville',address_3:'Madchester',address_4:'Chesport',post_code:'M11 1AA'}])
+                  {member_id: 1, address_type_id: 2, address_1:'1 Company House',address_2:'Worksville',address_3:'Madchester',address_4:'Chesport',post_code:'M11 1AA'},
+                  {member_id: 2, address_type_id: 1, address_1:'1 Peters Street',address_2:'New Town City',address_3:'Blogsville',address_4:'Chesport',post_code:'SS4 4AA'},
+                  {member_id: 2, address_type_id: 2, address_1:'1 Retired House',address_2:'Restville',address_3:'Chester',address_4:'Chesport',post_code:'M11 1AA'},
+                  {member_id: 3, address_type_id: 1, address_1:'1 Kev Street',address_2:'Slumsville',address_3:'Workshy Town',address_4:'Chesport',post_code:'SS4 4AA'},
+                  {member_id: 3, address_type_id: 2, address_1:'1 Golf Club House',address_2:'Rumsville',address_3:'Cockfosters',address_4:'Chesport',post_code:'M11 1AA'}])
 
 # Add an Email Address
-  EmailAddress.create({member_id: 1, email:'paulwagstaff66@gmail.com', is_default:true})
+  EmailAddress.create([{member_id: 1, email:'paulwagstaff66@gmail.com', is_default:true},
+                       {member_id: 2, email:'peterwagstaffcardsandtoys.co.uk', is_default:true},
+                       {member_id: 3, email:'kevinjones@cardsnadtoys.co.uk', is_default:true}])
 
-# Add a couple of telephone number type
-  TelephoneType.create([{name:'Home Telephone'},{name:'Mobile'}])
+# Add a couple of telephone number type. Required are Home, Work and Mobile
+  TelephoneType.create([{name:'Home Phone'},{name:'Work Phone'},{name:'Mobile Phone'}])
 
 # Add a telephone number
-  TelephoneNumber.create({member_id: 1, telephone_type_id:1, number:'0161 222 3333'})
+  TelephoneNumber.create([{member_id: 1, telephone_type_id:1, number:'0161 222 3333'},
+                          {member_id: 2, telephone_type_id:1, number:'0161 333 4444'},
+                          {member_id: 3, telephone_type_id:2, number:'07754 999999'},])
+
+# Add a couple of member note types. Required are System and User
+  MemberNoteType.create([{name:'System'},{name:'User'}])
 
 # Add a couple of member notes
-  MemberNote.create([{member_id: 1, title:'First Note',note:'Hello, this is the first note'},{member_id: 1, title:'Second Note',note:'Hello, this is the second note'}])
+  MemberNote.create([{member_id: 1, member_note_type_id:2, title:'Pauls First Note',note:'Hello, this is the first note for Paul'},{member_id: 1, member_note_type_id:2, title:'Paul Second Note',note:'Hello, this is the second note for Paul'},
+                    {member_id: 2, member_note_type_id:2, title:'Peters First Note',note:'Hello, this is the first note for Peter'},{member_id: 2, member_note_type_id:2, title:'Peters Second Note',note:'Hello, this is the second note for Peter'},
+                    {member_id: 3, member_note_type_id:2, title:'Kevs First Note',note:'Hello, this is the first note for Kevin'},{member_id: 3, member_note_type_id:2, title:'Kevs Second Note',note:'Hello, this is the second note for Kevin'}])
 
 # Add a Card Holder
-  CardHolder.create({member_id: 1, title:'Mr', initials:'P', forename:'Paul', surname:'Wagstaff', card_number:'9999888881234', card_profile_id:1, category:'Full Member'})
+  CardHolder.create([{member_id: 1, title:'Mr', initials:'P', forename:'Paul', surname:'Wagstaff', card_number:'9999888881234', card_profile_id:1, category:'Full Member'},
+                     {member_id: 2, title:'Mr', initials:'P', forename:'Peter', surname:'Wagstaff', card_number:'9999888882345', card_profile_id:1, category:'Full Member'},
+                     {member_id: 3, title:'Mr', initials:'P', forename:'Kevin', surname:'Jones', card_number:'9999888883456', card_profile_id:1, category:'Social Member'},])
 
 # Add a till record
   Till.create({name:'Main Bar', change_data:'', version:'1.0.0'})

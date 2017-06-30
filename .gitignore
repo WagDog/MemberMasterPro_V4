@@ -14,5 +14,5 @@
 
 
 # Ignore the secrets.yml file
-/config/secrets.yml
-/config/database.yml
+#/config/secrets.yml
+#/config/database.yml
