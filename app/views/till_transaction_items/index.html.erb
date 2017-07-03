@@ -37,7 +37,7 @@
   </thead>
 
   <tbody>
-    <% @transaction_items.each do |transaction_item| %>
+    <% @till_transaction_items.each do |transaction_item| %>
       <tr>
         <td><%= transaction_item.transaction %></td>
         <td><%= transaction_item.cashier %></td>
@@ -67,8 +67,8 @@
         <td><%= transaction_item.single_vat_amount %></td>
         <td><%= transaction_item.add_surcharge %></td>
         <td><%= link_to 'Show', transaction_item %></td>
-        <td><%= link_to 'Edit', edit_transaction_item_path(transaction_item) %></td>
-        <td><%= link_to 'Destroy', transaction_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Edit', edit_till_transaction_item_path(transaction_item) %></td>
+        <td><%= link_to 'Destroy', till_transaction_item, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -76,4 +76,4 @@
 
 <br>
 
-<%= link_to 'New Transaction item', new_transaction_item_path %>
+<%= link_to 'New Transaction item', new_till_transaction_item_path %>

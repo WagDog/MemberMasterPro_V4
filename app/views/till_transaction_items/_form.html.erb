@@ -1,10 +1,10 @@
-<%= form_for(@transaction_item) do |f| %>
-  <% if @transaction_item.errors.any? %>
+<%= form_for(@till_transaction_item) do |f| %>
+  <% if @till_transaction_item.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@transaction_item.errors.count, "error") %> prohibited this transaction_item from being saved:</h2>
+      <h2><%= pluralize(@till_transaction_item.errors.count, "error") %> prohibited this transaction_item from being saved:</h2>
 
       <ul>
-      <% @transaction_item.errors.full_messages.each do |message| %>
+      <% @till_transaction_item.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -12,7 +12,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :transaction_id %><br>
+    <%= f.label :till_transaction_id %><br>
     <%= f.text_field :transaction_id %>
   </div>
   <div class="field">

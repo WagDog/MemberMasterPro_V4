@@ -8,8 +8,8 @@ Rails.application.routes.draw do
   resources :locations
   resources :sites
   resources :vats
-  resources :transaction_items
-  resources :transactions
+  resources :till_transaction_items
+  resources :till_transactions
   resources :tills
   resources :telephone_numbers
   resources :telephone_types

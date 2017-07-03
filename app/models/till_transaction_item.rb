@@ -1,5 +1,5 @@
-class TransactionItem < ActiveRecord::Base
-  belongs_to :transaction
+class TillTransactionItem < ActiveRecord::Base
+  belongs_to :till_transaction
   belongs_to :cashier
   belongs_to :plu
   belongs_to :vat

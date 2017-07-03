@@ -76,7 +76,7 @@
   </thead>
 
   <tbody>
-    <% @transactions.each do |transaction| %>
+    <% @till_transactions.each do |transaction| %>
       <tr>
         <td><%= transaction.site %></td>
         <td><%= transaction.location %></td>
@@ -144,9 +144,6 @@
         <td><%= transaction.end_balance_5 %></td>
         <td><%= transaction.did_not_make_it %></td>
         <td><%= transaction.finalised %></td>
-        <td><%= link_to 'Show', transaction %></td>
-        <td><%= link_to 'Edit', edit_transaction_path(transaction) %></td>
-        <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -154,4 +151,3 @@
 
 <br>
 
-<%= link_to 'New Transaction', new_transaction_path %>

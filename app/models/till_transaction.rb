@@ -1,4 +1,4 @@
-class Transaction < ActiveRecord::Base
+class TillTransaction < ActiveRecord::Base
   belongs_to :site
   belongs_to :location
   belongs_to :till
