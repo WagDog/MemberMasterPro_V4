@@ -858,7 +858,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "TimeStamp",                                                             null: false
   end
 
-  create_table "transaction_items", force: :cascade do |t|
+  create_table "till_transaction_items", force: :cascade do |t|
     t.datetime "created_at",                                                          null: false
     t.datetime "updated_at",                                                          null: false
     t.string   "guid",                     limit: 36, default: "",                    null: false
@@ -893,9 +893,9 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "TimeStamp",                                                           null: false
   end
 
-  add_index "transaction_items", ["trans_id"], name: "TRANSUID", using: :btree
+  add_index "till_transaction_items", ["trans_id"], name: "TRANSUID", using: :btree
 
-  create_table "transactions", force: :cascade do |t|
+  create_table "till_transactions", force: :cascade do |t|
     t.datetime "created_at",                                                           null: false
     t.datetime "updated_at",                                                           null: false
     t.string   "guid",                      limit: 36, default: "",                    null: false
@@ -969,7 +969,7 @@ ActiveRecord::Schema.define(version: 0) do
     t.datetime "TimeStamp",                                                            null: false
   end
 
-  add_index "transactions", ["card_holder_id"], name: "CARDUID", using: :btree
+  add_index "till_transactions", ["card_holder_id"], name: "CARDUID", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at",                             null: false

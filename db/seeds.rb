@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 # Add a user
-  User.create({email: 'paulwagstaff66@gmail.com', name:'Paul Wagstaff', isAdministrator: true, password_digest:'$2a$04$yGhzcZiocRSQ7QjRN.ihwurNgJEOCY7zfd1LPrxAXGb0jG7FSc7mC', remember_token:'f1wxmFe4-b_OvZ8MLABRsw'})
+  User.create({email: 'paulwagstaff66@gmail.com', name:'Paul Wagstaff', isAdministrator: true, password:'sheeba', password_confirmation:'sheeba'})
 
 # Add a Card Discount
   CardDiscount.create({name:'Member Discount', description:'Standard Member Discount', discount_type:0, amount:10})

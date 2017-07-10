@@ -232,13 +232,19 @@ class InitialDatabaseSetup < ActiveRecord::Migration
     add_foreign_key :telephone_numbers, :members
     add_foreign_key :telephone_numbers, :telephone_types
 
+    create_table :member_note_types do |t|
+      t.string :name,                           limit: 45,  default: '',       null: false
+      t.timestamps null: false
+    end
     create_table :member_notes, force:  :cascade do|t|
       t.references :member,                     index: true
+      t.references :member_note_type,           index: true
       t.string   :title,                        limit: 30,  default: '',        null: false
       t.text     :note,                         limit: 65535,                   null: false
       t.timestamps                                                              null: false
     end
     add_foreign_key :member_notes, :members
+    add_foreign_key :member_notes, :member_note_types
 
     create_table :card_holders, force: :cascade do |t|
       t.references :member,                     index: true
@@ -316,7 +322,7 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.datetime :date_processed,               default: '1900-01-01 00:00:00', null: false
       t.integer  :printer_number,               limit: 4,   default: 0,         null: false
       t.boolean  :processed,                    limit: 1,   default: 0,         null: false
-      t.binary   :data,                         limit: 4294967295,              null: false
+      t.text     :data,                         limit: 65535,                   null: false
       t.timestamps                                                              null: false
     end
 
@@ -359,7 +365,7 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.timestamps                                                              null: false
     end
 
-    create_table :transactions, force: :cascade do |t|
+    create_table :till_transactions, force: :cascade do |t|
       t.references :site,                       index: true
       t.references :location,                   index: true
       t.references :till,                       index: true
@@ -428,15 +434,15 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.boolean  :finalised,                    limit: 1,   default: false,     null: false
       t.timestamps                                                              null: false
     end
-    add_foreign_key :transactions, :sites
-    add_foreign_key :transactions, :locations
-    add_foreign_key :transactions, :tills
-    add_foreign_key :transactions, :cashiers
-    add_foreign_key :transactions, :media
-    add_foreign_key :transactions, :card_holders
+    add_foreign_key :till_transactions, :sites
+    add_foreign_key :till_transactions, :locations
+    add_foreign_key :till_transactions, :tills
+    add_foreign_key :till_transactions, :cashiers
+    add_foreign_key :till_transactions, :media
+    add_foreign_key :till_transactions, :card_holders
 
-    create_table :transaction_items, force: :cascade do |t|
-      t.references :transaction,                index: true
+    create_table :till_transaction_items, force: :cascade do |t|
+      t.references :till_transaction,           index: true
       t.references :cashier,                    index: true
       t.references :plu,                        index: true
       t.string   :plu_name,                     limit: 30,  default: '',        null: false
@@ -465,13 +471,11 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.boolean  :add_surcharge,                limit: 1,   default: false,     null: false
       t.timestamps                                                              null: false
     end
-    add_foreign_key :transaction_items, :transactions
-    add_foreign_key :transaction_items, :cashiers
-    add_foreign_key :transaction_items, :plus
-    add_foreign_key :transaction_items, :vats
-    add_foreign_key :transaction_items, :rp_sort_groups
-
-
+    add_foreign_key :till_transaction_items, :till_transactions
+    add_foreign_key :till_transaction_items, :cashiers
+    add_foreign_key :till_transaction_items, :plus
+    add_foreign_key :till_transaction_items, :vats
+    add_foreign_key :till_transaction_items, :rp_sort_groups
 
   end
 end

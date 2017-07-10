@@ -186,13 +186,13 @@ ActiveRecord::Schema.define(version: 20170428141625) do
 
   create_table "kp_prints", force: :cascade do |t|
     t.integer  "till_id",        limit: 4
-    t.datetime "date_received",                     default: '1900-01-01 00:00:00', null: false
-    t.datetime "date_processed",                    default: '1900-01-01 00:00:00', null: false
-    t.integer  "printer_number", limit: 4,          default: 0,                     null: false
-    t.boolean  "processed",                         default: false,                 null: false
-    t.text     "data",           limit: 65535,                                      null: false
-    t.datetime "created_at",                                                        null: false
-    t.datetime "updated_at",                                                        null: false
+    t.datetime "date_received",                default: '1900-01-01 00:00:00', null: false
+    t.datetime "date_processed",               default: '1900-01-01 00:00:00', null: false
+    t.integer  "printer_number", limit: 4,     default: 0,                     null: false
+    t.boolean  "processed",                    default: false,                 null: false
+    t.text     "data",           limit: 65535,                                 null: false
+    t.datetime "created_at",                                                   null: false
+    t.datetime "updated_at",                                                   null: false
   end
 
   add_index "kp_prints", ["till_id"], name: "index_kp_prints_on_till_id", using: :btree
@@ -382,33 +382,8 @@ ActiveRecord::Schema.define(version: 20170428141625) do
     t.datetime "updated_at",                         null: false
   end
 
-  create_table "tills", force: :cascade do |t|
-    t.string   "name",                         limit: 30,    default: "",    null: false
-    t.integer  "last_z_transaction",           limit: 4,     default: 0,     null: false
-    t.integer  "last_z_report_counter",        limit: 4,     default: 0,     null: false
-    t.boolean  "locked",                                     default: false, null: false
-    t.boolean  "change_due",                                 default: false, null: false
-    t.text     "change_data",                  limit: 65535,                 null: false
-    t.boolean  "new_journal_on_startup",                     default: false, null: false
-    t.boolean  "allow_topup_purse_1",                        default: true,  null: false
-    t.boolean  "allow_topup_purse_2",                        default: false, null: false
-    t.boolean  "allow_topup_purse_3",                        default: false, null: false
-    t.boolean  "allow_topup_purse_4",                        default: false, null: false
-    t.boolean  "allow_topup_purse_5",                        default: false, null: false
-    t.string   "purse_1_name",                 limit: 30,    default: "",    null: false
-    t.string   "purse_2_name",                 limit: 30,    default: "",    null: false
-    t.string   "purse_3_name",                 limit: 30,    default: "",    null: false
-    t.string   "purse_4_name",                 limit: 30,    default: "",    null: false
-    t.string   "purse_5_name",                 limit: 30,    default: "",    null: false
-    t.boolean  "auto_surcharge",                             default: false, null: false
-    t.string   "version",                      limit: 10,    default: "",    null: false
-    t.boolean  "compulsory_media_declaration",               default: false, null: false
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
-  end
-
-  create_table "transaction_items", force: :cascade do |t|
-    t.integer  "transaction_id",           limit: 4
+  create_table "till_transaction_items", force: :cascade do |t|
+    t.integer  "till_transaction_id",      limit: 4
     t.integer  "cashier_id",               limit: 4
     t.integer  "plu_id",                   limit: 4
     t.string   "plu_name",                 limit: 30,                default: "",                    null: false
@@ -439,13 +414,13 @@ ActiveRecord::Schema.define(version: 20170428141625) do
     t.datetime "updated_at",                                                                         null: false
   end
 
-  add_index "transaction_items", ["cashier_id"], name: "index_transaction_items_on_cashier_id", using: :btree
-  add_index "transaction_items", ["plu_id"], name: "index_transaction_items_on_plu_id", using: :btree
-  add_index "transaction_items", ["rp_sort_group_id"], name: "index_transaction_items_on_rp_sort_group_id", using: :btree
-  add_index "transaction_items", ["transaction_id"], name: "index_transaction_items_on_transaction_id", using: :btree
-  add_index "transaction_items", ["vat_id"], name: "index_transaction_items_on_vat_id", using: :btree
+  add_index "till_transaction_items", ["cashier_id"], name: "index_till_transaction_items_on_cashier_id", using: :btree
+  add_index "till_transaction_items", ["plu_id"], name: "index_till_transaction_items_on_plu_id", using: :btree
+  add_index "till_transaction_items", ["rp_sort_group_id"], name: "index_till_transaction_items_on_rp_sort_group_id", using: :btree
+  add_index "till_transaction_items", ["till_transaction_id"], name: "index_till_transaction_items_on_till_transaction_id", using: :btree
+  add_index "till_transaction_items", ["vat_id"], name: "index_till_transaction_items_on_vat_id", using: :btree
 
-  create_table "transactions", force: :cascade do |t|
+  create_table "till_transactions", force: :cascade do |t|
     t.integer  "site_id",                   limit: 4
     t.integer  "location_id",               limit: 4
     t.integer  "till_id",                   limit: 4
@@ -516,12 +491,37 @@ ActiveRecord::Schema.define(version: 20170428141625) do
     t.datetime "updated_at",                                                                          null: false
   end
 
-  add_index "transactions", ["card_holder_id"], name: "index_transactions_on_card_holder_id", using: :btree
-  add_index "transactions", ["cashier_id"], name: "index_transactions_on_cashier_id", using: :btree
-  add_index "transactions", ["location_id"], name: "index_transactions_on_location_id", using: :btree
-  add_index "transactions", ["medium_id"], name: "index_transactions_on_medium_id", using: :btree
-  add_index "transactions", ["site_id"], name: "index_transactions_on_site_id", using: :btree
-  add_index "transactions", ["till_id"], name: "index_transactions_on_till_id", using: :btree
+  add_index "till_transactions", ["card_holder_id"], name: "index_till_transactions_on_card_holder_id", using: :btree
+  add_index "till_transactions", ["cashier_id"], name: "index_till_transactions_on_cashier_id", using: :btree
+  add_index "till_transactions", ["location_id"], name: "index_till_transactions_on_location_id", using: :btree
+  add_index "till_transactions", ["medium_id"], name: "index_till_transactions_on_medium_id", using: :btree
+  add_index "till_transactions", ["site_id"], name: "index_till_transactions_on_site_id", using: :btree
+  add_index "till_transactions", ["till_id"], name: "index_till_transactions_on_till_id", using: :btree
+
+  create_table "tills", force: :cascade do |t|
+    t.string   "name",                         limit: 30,    default: "",    null: false
+    t.integer  "last_z_transaction",           limit: 4,     default: 0,     null: false
+    t.integer  "last_z_report_counter",        limit: 4,     default: 0,     null: false
+    t.boolean  "locked",                                     default: false, null: false
+    t.boolean  "change_due",                                 default: false, null: false
+    t.text     "change_data",                  limit: 65535,                 null: false
+    t.boolean  "new_journal_on_startup",                     default: false, null: false
+    t.boolean  "allow_topup_purse_1",                        default: true,  null: false
+    t.boolean  "allow_topup_purse_2",                        default: false, null: false
+    t.boolean  "allow_topup_purse_3",                        default: false, null: false
+    t.boolean  "allow_topup_purse_4",                        default: false, null: false
+    t.boolean  "allow_topup_purse_5",                        default: false, null: false
+    t.string   "purse_1_name",                 limit: 30,    default: "",    null: false
+    t.string   "purse_2_name",                 limit: 30,    default: "",    null: false
+    t.string   "purse_3_name",                 limit: 30,    default: "",    null: false
+    t.string   "purse_4_name",                 limit: 30,    default: "",    null: false
+    t.string   "purse_5_name",                 limit: 30,    default: "",    null: false
+    t.boolean  "auto_surcharge",                             default: false, null: false
+    t.string   "version",                      limit: 10,    default: "",    null: false
+    t.boolean  "compulsory_media_declaration",               default: false, null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",           limit: 100, default: "",    null: false
@@ -562,15 +562,15 @@ ActiveRecord::Schema.define(version: 20170428141625) do
   add_foreign_key "selection_windows", "plus"
   add_foreign_key "telephone_numbers", "members"
   add_foreign_key "telephone_numbers", "telephone_types"
-  add_foreign_key "transaction_items", "cashiers"
-  add_foreign_key "transaction_items", "plus"
-  add_foreign_key "transaction_items", "rp_sort_groups"
-  add_foreign_key "transaction_items", "transactions"
-  add_foreign_key "transaction_items", "vats"
-  add_foreign_key "transactions", "card_holders"
-  add_foreign_key "transactions", "cashiers"
-  add_foreign_key "transactions", "locations"
-  add_foreign_key "transactions", "media"
-  add_foreign_key "transactions", "sites"
-  add_foreign_key "transactions", "tills"
+  add_foreign_key "till_transaction_items", "cashiers"
+  add_foreign_key "till_transaction_items", "plus"
+  add_foreign_key "till_transaction_items", "rp_sort_groups"
+  add_foreign_key "till_transaction_items", "till_transactions"
+  add_foreign_key "till_transaction_items", "vats"
+  add_foreign_key "till_transactions", "card_holders"
+  add_foreign_key "till_transactions", "cashiers"
+  add_foreign_key "till_transactions", "locations"
+  add_foreign_key "till_transactions", "media"
+  add_foreign_key "till_transactions", "sites"
+  add_foreign_key "till_transactions", "tills"
 end
