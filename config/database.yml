@@ -48,5 +48,10 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-
- url: <%= ENV['JAWSDB_URL'] %>
+  adapter: mysql2
+  host: gk90usy5ik2otcvi.cbetxkdyhwsb.us-east-1.rds.amazonaws.com
+  database: ihakyabp9j13y7et
+  username: qfbn3bd7zuneotud
+  port: 3306
+  password: hh7xzod3u6eeilnw
+ #url: <%= ENV['JAWSDB_URL'] %>
