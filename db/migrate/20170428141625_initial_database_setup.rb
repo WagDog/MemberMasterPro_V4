@@ -1,5 +1,6 @@
 class InitialDatabaseSetup < ActiveRecord::Migration
   def change
+    User.connection.execute!('DROP TABLE IF EXISTS users;')
     create_table :users do |t|
       t.string :email,                          limit: 100, default: '',        null: false
       t.string :name,                           limit: 50, default: '',         null: false
@@ -8,6 +9,7 @@ class InitialDatabaseSetup < ActiveRecord::Migration
       t.string :remember_token
       t.timestamps                                                              null: false
     end
+
 
     create_table :card_discounts, force: :cascade do |t|
       t.string   :name,                         limit: 30, default: '',         null: false

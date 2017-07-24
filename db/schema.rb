@@ -10,43 +10,21 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
+#
+# Use rake db:reset to reset the database back to the original state and run the latest migration
+#
 
 ActiveRecord::Schema.define(version: 20170428141625) do
 
-  create_table "address_types", force: :cascade do |t|
-    t.string   "name",       limit: 30, default: "", null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+  create_table "users", force: :cascade do |t|
+    t.string   "email",           limit: 100, default: "",    null: false
+    t.string   "name",            limit: 50,  default: "",    null: false
+    t.boolean  "isAdministrator",             default: false, null: false
+    t.string   "password_digest", limit: 255
+    t.string   "remember_token",  limit: 255
+    t.datetime "created_at",                                  null: false
+    t.datetime "updated_at",                                  null: false
   end
-
-  create_table "addresses", force: :cascade do |t|
-    t.integer  "member_id",       limit: 4
-    t.integer  "address_type_id", limit: 4
-    t.string   "address_1",       limit: 30, default: "", null: false
-    t.string   "address_2",       limit: 30, default: "", null: false
-    t.string   "address_3",       limit: 30, default: "", null: false
-    t.string   "address_4",       limit: 30, default: "", null: false
-    t.string   "post_code",       limit: 30, default: "", null: false
-    t.datetime "created_at",                              null: false
-    t.datetime "updated_at",                              null: false
-  end
-
-  add_index "addresses", ["address_type_id"], name: "index_addresses_on_address_type_id", using: :btree
-  add_index "addresses", ["member_id"], name: "index_addresses_on_member_id", using: :btree
-
-  create_table "card_discount_matrices", force: :cascade do |t|
-    t.integer  "group_id",         limit: 4
-    t.integer  "plu_id",           limit: 4
-    t.integer  "card_profile_id",  limit: 4
-    t.integer  "card_discount_id", limit: 4
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-  end
-
-  add_index "card_discount_matrices", ["card_discount_id"], name: "index_card_discount_matrices_on_card_discount_id", using: :btree
-  add_index "card_discount_matrices", ["card_profile_id"], name: "index_card_discount_matrices_on_card_profile_id", using: :btree
-  add_index "card_discount_matrices", ["group_id"], name: "index_card_discount_matrices_on_group_id", using: :btree
-  add_index "card_discount_matrices", ["plu_id"], name: "index_card_discount_matrices_on_plu_id", using: :btree
 
   create_table "card_discounts", force: :cascade do |t|
     t.string   "name",          limit: 30,                 default: "", null: false
@@ -57,101 +35,8 @@ ActiveRecord::Schema.define(version: 20170428141625) do
     t.datetime "updated_at",                                            null: false
   end
 
-  create_table "card_holders", force: :cascade do |t|
-    t.integer  "member_id",           limit: 4
-    t.string   "title",               limit: 10,                default: "",                    null: false
-    t.string   "initials",            limit: 10,                default: "",                    null: false
-    t.string   "forename",            limit: 30,                default: "",                    null: false
-    t.string   "surname",             limit: 30,                default: "",                    null: false
-    t.string   "card_number",         limit: 30,                default: "",                    null: false
-    t.integer  "issue_number",        limit: 4,                 default: 0,                     null: false
-    t.integer  "card_profile_id",     limit: 4
-    t.integer  "status",              limit: 4,                 default: 0,                     null: false
-    t.boolean  "valid_in_date_range",                           default: false,                 null: false
-    t.decimal  "balance_1",                      precision: 10, default: 0,                     null: false
-    t.decimal  "balance_2",                      precision: 10, default: 0,                     null: false
-    t.decimal  "balance_3",                      precision: 10, default: 0,                     null: false
-    t.decimal  "balance_4",                      precision: 10, default: 0,                     null: false
-    t.decimal  "balance_5",                      precision: 10, default: 0,                     null: false
-    t.datetime "birth_date",                                    default: '1900-01-01 00:00:00', null: false
-    t.string   "category",            limit: 30,                default: "",                    null: false
-    t.datetime "created_at",                                                                    null: false
-    t.datetime "updated_at",                                                                    null: false
-  end
-
-  add_index "card_holders", ["card_profile_id"], name: "index_card_holders_on_card_profile_id", using: :btree
-  add_index "card_holders", ["member_id"], name: "index_card_holders_on_member_id", using: :btree
-
-  create_table "card_profiles", force: :cascade do |t|
-    t.string   "name",                    limit: 30,                 default: "",                    null: false
-    t.string   "description",             limit: 255,                default: "",                    null: false
-    t.boolean  "valid_in_date_range",                                default: false,                 null: false
-    t.datetime "date_range_start",                                   default: '1900-01-01 00:00:00', null: false
-    t.datetime "date_range_end",                                     default: '1900-01-01 00:00:00', null: false
-    t.decimal  "credit_limit_purse_1",                precision: 10, default: 0,                     null: false
-    t.decimal  "credit_limit_purse_2",                precision: 10, default: 0,                     null: false
-    t.decimal  "credit_limit_purse_3",                precision: 10, default: 0,                     null: false
-    t.decimal  "credit_limit_purse_4",                precision: 10, default: 0,                     null: false
-    t.decimal  "credit_limit_purse_5",                precision: 10, default: 0,                     null: false
-    t.boolean  "discount_on_overdrawn_1",                            default: false,                 null: false
-    t.boolean  "discount_on_overdrawn_2",                            default: false,                 null: false
-    t.boolean  "discount_on_overdrawn_3",                            default: false,                 null: false
-    t.boolean  "discount_on_overdrawn_4",                            default: false,                 null: false
-    t.boolean  "discount_on_overdrawn_5",                            default: false,                 null: false
-    t.boolean  "pay_by_cash",                                        default: false,                 null: false
-    t.datetime "created_at",                                                                         null: false
-    t.datetime "updated_at",                                                                         null: false
-  end
-
   create_table "card_revenues", force: :cascade do |t|
     t.string   "name",       limit: 30, default: "", null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-  end
-
-  create_table "card_systems", force: :cascade do |t|
-    t.boolean  "use_site_id",                    default: false,                 null: false
-    t.string   "site_id",             limit: 30, default: "",                    null: false
-    t.boolean  "use_issue_number",               default: false,                 null: false
-    t.datetime "default_time_start",             default: '1970-01-01 00:00:00', null: false
-    t.datetime "default_time_end",               default: '1970-01-01 00:00:00', null: false
-    t.boolean  "use_stock_control",              default: false,                 null: false
-    t.boolean  "use_time_attendance",            default: false,                 null: false
-    t.datetime "created_at",                                                     null: false
-    t.datetime "updated_at",                                                     null: false
-  end
-
-  create_table "cashiers", force: :cascade do |t|
-    t.string   "name",                       limit: 30,                 default: "",    null: false
-    t.string   "key_code",                   limit: 30,                 default: "",    null: false
-    t.string   "functions_1",                limit: 255,                default: "",    null: false
-    t.string   "functions_2",                limit: 255,                default: "",    null: false
-    t.string   "functions_3",                limit: 255,                default: "",    null: false
-    t.string   "pin",                        limit: 10,                 default: "",    null: false
-    t.boolean  "needs_sign_in",                                         default: false, null: false
-    t.decimal  "regular_wage",                           precision: 10, default: 0,     null: false
-    t.decimal  "overtime_wage_1",                        precision: 10, default: 0,     null: false
-    t.decimal  "overtime_wage_2",                        precision: 10, default: 0,     null: false
-    t.integer  "max_day_seconds",            limit: 4,                  default: 0,     null: false
-    t.integer  "max_day_overtime_1_seconds", limit: 4,                  default: 0,     null: false
-    t.datetime "created_at",                                                            null: false
-    t.datetime "updated_at",                                                            null: false
-  end
-
-  create_table "email_addresses", force: :cascade do |t|
-    t.integer  "member_id",  limit: 4
-    t.string   "email",      limit: 100, default: "",    null: false
-    t.boolean  "is_default",             default: false, null: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-  end
-
-  add_index "email_addresses", ["member_id"], name: "index_email_addresses_on_member_id", using: :btree
-
-  create_table "function_buttons", force: :cascade do |t|
-    t.string   "name",       limit: 30, default: "", null: false
-    t.integer  "function",   limit: 4,  default: 0,  null: false
-    t.integer  "code",       limit: 4,  default: 0,  null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
   end
@@ -166,106 +51,19 @@ ActiveRecord::Schema.define(version: 20170428141625) do
 
   add_index "groups", ["card_revenue_id"], name: "index_groups_on_card_revenue_id", using: :btree
 
-  create_table "info_texts", force: :cascade do |t|
-    t.string   "name",           limit: 30,  default: "",    null: false
-    t.integer  "till_id",        limit: 4
-    t.boolean  "is_header",                  default: true,  null: false
-    t.string   "text",           limit: 255, default: "",    null: false
-    t.boolean  "bold",                       default: false, null: false
-    t.boolean  "underline",                  default: false, null: false
-    t.boolean  "double_width",               default: false, null: false
-    t.boolean  "double_height",              default: false, null: false
-    t.boolean  "quadruple",                  default: false, null: false
-    t.boolean  "center_aligned",             default: false, null: false
-    t.boolean  "right_aligned",              default: false, null: false
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
+  create_table "vats", force: :cascade do |t|
+    t.string   "name",       limit: 30,                default: "", null: false
+    t.decimal  "value",                 precision: 10, default: 0,  null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
   end
 
-  add_index "info_texts", ["till_id"], name: "index_info_texts_on_till_id", using: :btree
-
-  create_table "kp_prints", force: :cascade do |t|
-    t.integer  "till_id",        limit: 4
-    t.datetime "date_received",                default: '1900-01-01 00:00:00', null: false
-    t.datetime "date_processed",               default: '1900-01-01 00:00:00', null: false
-    t.integer  "printer_number", limit: 4,     default: 0,                     null: false
-    t.boolean  "processed",                    default: false,                 null: false
-    t.text     "data",           limit: 65535,                                 null: false
-    t.datetime "created_at",                                                   null: false
-    t.datetime "updated_at",                                                   null: false
-  end
-
-  add_index "kp_prints", ["till_id"], name: "index_kp_prints_on_till_id", using: :btree
-
-  create_table "locations", force: :cascade do |t|
+  create_table "rp_sort_groups", force: :cascade do |t|
     t.string   "name",       limit: 30, default: "", null: false
+    t.integer  "sequence",   limit: 4,  default: 0,  null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
   end
-
-  create_table "macros", force: :cascade do |t|
-    t.string   "name",          limit: 30,  default: "", null: false
-    t.string   "function_keys", limit: 255, default: "", null: false
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-  end
-
-  create_table "media", force: :cascade do |t|
-    t.string   "name",             limit: 30,                default: "",    null: false
-    t.boolean  "open_drawer",                                default: false, null: false
-    t.boolean  "use_chip_pin",                               default: false, null: false
-    t.decimal  "medium_surcharge",            precision: 10, default: 0,     null: false
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
-  end
-
-  create_table "member_categories", force: :cascade do |t|
-    t.string   "name",       limit: 30, default: "", null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-  end
-
-  create_table "member_note_types", force: :cascade do |t|
-    t.string   "name",       limit: 45, default: "", null: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
-  end
-
-  create_table "member_notes", force: :cascade do |t|
-    t.integer  "member_id",           limit: 4
-    t.integer  "member_note_type_id", limit: 4
-    t.string   "title",               limit: 30,    default: "", null: false
-    t.text     "note",                limit: 65535,              null: false
-    t.datetime "created_at",                                     null: false
-    t.datetime "updated_at",                                     null: false
-  end
-
-  add_index "member_notes", ["member_id"], name: "index_member_notes_on_member_id", using: :btree
-  add_index "member_notes", ["member_note_type_id"], name: "index_member_notes_on_member_note_type_id", using: :btree
-
-  create_table "members", force: :cascade do |t|
-    t.string   "code",                limit: 4,  default: "",                    null: false
-    t.string   "prefix",              limit: 10, default: "",                    null: false
-    t.string   "title",               limit: 10, default: "",                    null: false
-    t.string   "initials",            limit: 10, default: "",                    null: false
-    t.string   "forename",            limit: 30, default: "",                    null: false
-    t.string   "surname",             limit: 30, default: "",                    null: false
-    t.string   "suffix",              limit: 10, default: "",                    null: false
-    t.integer  "member_category_id",  limit: 4
-    t.string   "formal_salutation",   limit: 45, default: "",                    null: false
-    t.string   "informal_salutation", limit: 45, default: "",                    null: false
-    t.boolean  "male",                           default: true,                  null: false
-    t.boolean  "master",                         default: true,                  null: false
-    t.boolean  "direct_debit",                   default: false,                 null: false
-    t.datetime "birth_date",                     default: '1900-01-01 00:00:00', null: false
-    t.datetime "join_date",                      default: '1900-01-01 00:00:00', null: false
-    t.datetime "left_date",                      default: '1900-01-01 00:00:00', null: false
-    t.boolean  "is_active",                      default: true,                  null: false
-    t.datetime "created_at",                                                     null: false
-    t.datetime "updated_at",                                                     null: false
-  end
-
-  add_index "members", ["member_category_id"], name: "index_members_on_member_category_id", using: :btree
 
   create_table "modifiers", force: :cascade do |t|
     t.string   "name",        limit: 30,                default: "",                    null: false
@@ -333,34 +131,133 @@ ActiveRecord::Schema.define(version: 20170428141625) do
   add_index "plus", ["rp_sort_group_id"], name: "index_plus_on_rp_sort_group_id", using: :btree
   add_index "plus", ["vat_id"], name: "index_plus_on_vat_id", using: :btree
 
-  create_table "pop_up_windows", force: :cascade do |t|
-    t.string   "name",       limit: 30, default: "",   null: false
-    t.integer  "plu_id",     limit: 4
-    t.boolean  "show_price",            default: true, null: false
-    t.datetime "created_at",                           null: false
-    t.datetime "updated_at",                           null: false
+  create_table "card_profiles", force: :cascade do |t|
+    t.string   "name",                    limit: 30,                 default: "",                    null: false
+    t.string   "description",             limit: 255,                default: "",                    null: false
+    t.boolean  "valid_in_date_range",                                default: false,                 null: false
+    t.datetime "date_range_start",                                   default: '1900-01-01 00:00:00', null: false
+    t.datetime "date_range_end",                                     default: '1900-01-01 00:00:00', null: false
+    t.decimal  "credit_limit_purse_1",                precision: 10, default: 0,                     null: false
+    t.decimal  "credit_limit_purse_2",                precision: 10, default: 0,                     null: false
+    t.decimal  "credit_limit_purse_3",                precision: 10, default: 0,                     null: false
+    t.decimal  "credit_limit_purse_4",                precision: 10, default: 0,                     null: false
+    t.decimal  "credit_limit_purse_5",                precision: 10, default: 0,                     null: false
+    t.boolean  "discount_on_overdrawn_1",                            default: false,                 null: false
+    t.boolean  "discount_on_overdrawn_2",                            default: false,                 null: false
+    t.boolean  "discount_on_overdrawn_3",                            default: false,                 null: false
+    t.boolean  "discount_on_overdrawn_4",                            default: false,                 null: false
+    t.boolean  "discount_on_overdrawn_5",                            default: false,                 null: false
+    t.boolean  "pay_by_cash",                                        default: false,                 null: false
+    t.datetime "created_at",                                                                         null: false
+    t.datetime "updated_at",                                                                         null: false
   end
 
-  add_index "pop_up_windows", ["plu_id"], name: "index_pop_up_windows_on_plu_id", using: :btree
+  create_table "card_discount_matrices", force: :cascade do |t|
+    t.integer  "group_id",         limit: 4
+    t.integer  "plu_id",           limit: 4
+    t.integer  "card_profile_id",  limit: 4
+    t.integer  "card_discount_id", limit: 4
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
-  create_table "rp_sort_groups", force: :cascade do |t|
+  add_index "card_discount_matrices", ["card_discount_id"], name: "index_card_discount_matrices_on_card_discount_id", using: :btree
+  add_index "card_discount_matrices", ["card_profile_id"], name: "index_card_discount_matrices_on_card_profile_id", using: :btree
+  add_index "card_discount_matrices", ["group_id"], name: "index_card_discount_matrices_on_group_id", using: :btree
+  add_index "card_discount_matrices", ["plu_id"], name: "index_card_discount_matrices_on_plu_id", using: :btree
+
+  create_table "card_systems", force: :cascade do |t|
+    t.boolean  "use_site_id",                    default: false,                 null: false
+    t.string   "site_id",             limit: 30, default: "",                    null: false
+    t.boolean  "use_issue_number",               default: false,                 null: false
+    t.datetime "default_time_start",             default: '1970-01-01 00:00:00', null: false
+    t.datetime "default_time_end",               default: '1970-01-01 00:00:00', null: false
+    t.boolean  "use_stock_control",              default: false,                 null: false
+    t.boolean  "use_time_attendance",            default: false,                 null: false
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+  end
+
+  create_table "cashiers", force: :cascade do |t|
+    t.string   "name",                       limit: 30,                 default: "",    null: false
+    t.string   "key_code",                   limit: 30,                 default: "",    null: false
+    t.string   "functions_1",                limit: 255,                default: "",    null: false
+    t.string   "functions_2",                limit: 255,                default: "",    null: false
+    t.string   "functions_3",                limit: 255,                default: "",    null: false
+    t.string   "pin",                        limit: 10,                 default: "",    null: false
+    t.boolean  "needs_sign_in",                                         default: false, null: false
+    t.decimal  "regular_wage",                           precision: 10, default: 0,     null: false
+    t.decimal  "overtime_wage_1",                        precision: 10, default: 0,     null: false
+    t.decimal  "overtime_wage_2",                        precision: 10, default: 0,     null: false
+    t.integer  "max_day_seconds",            limit: 4,                  default: 0,     null: false
+    t.integer  "max_day_overtime_1_seconds", limit: 4,                  default: 0,     null: false
+    t.datetime "created_at",                                                            null: false
+    t.datetime "updated_at",                                                            null: false
+  end
+
+  create_table "member_categories", force: :cascade do |t|
     t.string   "name",       limit: 30, default: "", null: false
-    t.integer  "sequence",   limit: 4,  default: 0,  null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
   end
 
-  create_table "selection_windows", force: :cascade do |t|
+  create_table "members", force: :cascade do |t|
+    t.string   "code",                limit: 4,  default: "",                    null: false
+    t.string   "prefix",              limit: 10, default: "",                    null: false
+    t.string   "title",               limit: 10, default: "",                    null: false
+    t.string   "initials",            limit: 10, default: "",                    null: false
+    t.string   "forename",            limit: 30, default: "",                    null: false
+    t.string   "surname",             limit: 30, default: "",                    null: false
+    t.string   "suffix",              limit: 10, default: "",                    null: false
+    t.integer  "member_category_id",  limit: 4
+    t.string   "formal_salutation",   limit: 45, default: "",                    null: false
+    t.string   "informal_salutation", limit: 45, default: "",                    null: false
+    t.boolean  "male",                           default: true,                  null: false
+    t.boolean  "master",                         default: true,                  null: false
+    t.boolean  "direct_debit",                   default: false,                 null: false
+    t.datetime "birth_date",                     default: '1900-01-01 00:00:00', null: false
+    t.datetime "join_date",                      default: '1900-01-01 00:00:00', null: false
+    t.datetime "left_date",                      default: '1900-01-01 00:00:00', null: false
+    t.boolean  "is_active",                      default: true,                  null: false
+    t.datetime "created_at",                                                     null: false
+    t.datetime "updated_at",                                                     null: false
+  end
+
+  add_index "members", ["member_category_id"], name: "index_members_on_member_category_id", using: :btree
+
+  create_table "email_addresses", force: :cascade do |t|
+    t.integer  "member_id",  limit: 4
+    t.string   "email",      limit: 100, default: "",    null: false
+    t.boolean  "is_default",             default: false, null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  add_index "email_addresses", ["member_id"], name: "index_email_addresses_on_member_id", using: :btree
+
+  create_table "address_types", force: :cascade do |t|
     t.string   "name",       limit: 30, default: "", null: false
-    t.integer  "plu_id",     limit: 4
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
   end
 
-  add_index "selection_windows", ["plu_id"], name: "index_selection_windows_on_plu_id", using: :btree
+  create_table "addresses", force: :cascade do |t|
+    t.integer  "member_id",       limit: 4
+    t.integer  "address_type_id", limit: 4
+    t.string   "address_1",       limit: 30, default: "", null: false
+    t.string   "address_2",       limit: 30, default: "", null: false
+    t.string   "address_3",       limit: 30, default: "", null: false
+    t.string   "address_4",       limit: 30, default: "", null: false
+    t.string   "post_code",       limit: 30, default: "", null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
+  end
 
-  create_table "sites", force: :cascade do |t|
-    t.string   "name",       limit: 30, default: "", null: false
+  add_index "addresses", ["address_type_id"], name: "index_addresses_on_address_type_id", using: :btree
+  add_index "addresses", ["member_id"], name: "index_addresses_on_member_id", using: :btree
+
+  create_table "telephone_types", force: :cascade do |t|
+    t.string   "name",       limit: 45, default: "", null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
   end
@@ -376,49 +273,159 @@ ActiveRecord::Schema.define(version: 20170428141625) do
   add_index "telephone_numbers", ["member_id"], name: "index_telephone_numbers_on_member_id", using: :btree
   add_index "telephone_numbers", ["telephone_type_id"], name: "index_telephone_numbers_on_telephone_type_id", using: :btree
 
-  create_table "telephone_types", force: :cascade do |t|
+  create_table "member_note_types", force: :cascade do |t|
     t.string   "name",       limit: 45, default: "", null: false
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
   end
 
-  create_table "till_transaction_items", force: :cascade do |t|
-    t.integer  "till_transaction_id",      limit: 4
-    t.integer  "cashier_id",               limit: 4
-    t.integer  "plu_id",                   limit: 4
-    t.string   "plu_name",                 limit: 30,                default: "",                    null: false
-    t.decimal  "plu_factor",                          precision: 10, default: 0,                     null: false
-    t.decimal  "plu_factor_entered",                  precision: 10, default: 0,                     null: false
-    t.decimal  "plu_price",                           precision: 10, default: 0,                     null: false
-    t.integer  "plu_price_level",          limit: 4,                 default: 0,                     null: false
-    t.integer  "plu_group_id",             limit: 4,                 default: 0,                     null: false
-    t.decimal  "plu_price_level_1",                   precision: 10, default: 0,                     null: false
-    t.decimal  "plu_cost",                            precision: 10, default: 0,                     null: false
-    t.integer  "vat_id",                   limit: 4
-    t.boolean  "void",                                               default: false,                 null: false
-    t.datetime "sale_date_time",                                     default: '1900-01-01 00:00:00', null: false
-    t.integer  "rp_sort_group_id",         limit: 4
-    t.boolean  "kp_printed",                                         default: false,                 null: false
-    t.boolean  "condiment",                                          default: false,                 null: false
-    t.integer  "purse_no",                 limit: 4,                 default: 0,                     null: false
-    t.decimal  "line_amount",                         precision: 10, default: 0,                     null: false
-    t.decimal  "discounted_amount",                   precision: 10, default: 0,                     null: false
-    t.decimal  "single_discounted_amount",            precision: 10, default: 0,                     null: false
-    t.decimal  "nett_amount",                         precision: 10, default: 0,                     null: false
-    t.decimal  "discount",                            precision: 10, default: 0,                     null: false
-    t.decimal  "surcharge_amount",                    precision: 10, default: 0,                     null: false
-    t.decimal  "vat_amount",                          precision: 10, default: 0,                     null: false
-    t.decimal  "single_vat_amount",                   precision: 10, default: 0,                     null: false
-    t.boolean  "add_surcharge",                                      default: false,                 null: false
-    t.datetime "created_at",                                                                         null: false
-    t.datetime "updated_at",                                                                         null: false
+  create_table "member_notes", force: :cascade do |t|
+    t.integer  "member_id",           limit: 4
+    t.integer  "member_note_type_id", limit: 4
+    t.string   "title",               limit: 30,    default: "", null: false
+    t.text     "note",                limit: 65535,              null: false
+    t.datetime "created_at",                                     null: false
+    t.datetime "updated_at",                                     null: false
   end
 
-  add_index "till_transaction_items", ["cashier_id"], name: "index_till_transaction_items_on_cashier_id", using: :btree
-  add_index "till_transaction_items", ["plu_id"], name: "index_till_transaction_items_on_plu_id", using: :btree
-  add_index "till_transaction_items", ["rp_sort_group_id"], name: "index_till_transaction_items_on_rp_sort_group_id", using: :btree
-  add_index "till_transaction_items", ["till_transaction_id"], name: "index_till_transaction_items_on_till_transaction_id", using: :btree
-  add_index "till_transaction_items", ["vat_id"], name: "index_till_transaction_items_on_vat_id", using: :btree
+  add_index "member_notes", ["member_id"], name: "index_member_notes_on_member_id", using: :btree
+  add_index "member_notes", ["member_note_type_id"], name: "index_member_notes_on_member_note_type_id", using: :btree
+
+  create_table "card_holders", force: :cascade do |t|
+    t.integer  "member_id",           limit: 4
+    t.string   "title",               limit: 10,                default: "",                    null: false
+    t.string   "initials",            limit: 10,                default: "",                    null: false
+    t.string   "forename",            limit: 30,                default: "",                    null: false
+    t.string   "surname",             limit: 30,                default: "",                    null: false
+    t.string   "card_number",         limit: 30,                default: "",                    null: false
+    t.integer  "issue_number",        limit: 4,                 default: 0,                     null: false
+    t.integer  "card_profile_id",     limit: 4
+    t.integer  "status",              limit: 4,                 default: 0,                     null: false
+    t.boolean  "valid_in_date_range",                           default: false,                 null: false
+    t.decimal  "balance_1",                      precision: 10, default: 0,                     null: false
+    t.decimal  "balance_2",                      precision: 10, default: 0,                     null: false
+    t.decimal  "balance_3",                      precision: 10, default: 0,                     null: false
+    t.decimal  "balance_4",                      precision: 10, default: 0,                     null: false
+    t.decimal  "balance_5",                      precision: 10, default: 0,                     null: false
+    t.datetime "birth_date",                                    default: '1900-01-01 00:00:00', null: false
+    t.string   "category",            limit: 30,                default: "",                    null: false
+    t.datetime "created_at",                                                                    null: false
+    t.datetime "updated_at",                                                                    null: false
+  end
+
+  add_index "card_holders", ["card_profile_id"], name: "index_card_holders_on_card_profile_id", using: :btree
+  add_index "card_holders", ["member_id"], name: "index_card_holders_on_member_id", using: :btree
+
+  create_table "function_buttons", force: :cascade do |t|
+    t.string   "name",       limit: 30, default: "", null: false
+    t.integer  "function",   limit: 4,  default: 0,  null: false
+    t.integer  "code",       limit: 4,  default: 0,  null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  create_table "tills", force: :cascade do |t|
+    t.string   "name",                         limit: 30,    default: "",    null: false
+    t.integer  "last_z_transaction",           limit: 4,     default: 0,     null: false
+    t.integer  "last_z_report_counter",        limit: 4,     default: 0,     null: false
+    t.boolean  "locked",                                     default: false, null: false
+    t.boolean  "change_due",                                 default: false, null: false
+    t.text     "change_data",                  limit: 65535,                 null: false
+    t.boolean  "new_journal_on_startup",                     default: false, null: false
+    t.boolean  "allow_topup_purse_1",                        default: true,  null: false
+    t.boolean  "allow_topup_purse_2",                        default: false, null: false
+    t.boolean  "allow_topup_purse_3",                        default: false, null: false
+    t.boolean  "allow_topup_purse_4",                        default: false, null: false
+    t.boolean  "allow_topup_purse_5",                        default: false, null: false
+    t.string   "purse_1_name",                 limit: 30,    default: "",    null: false
+    t.string   "purse_2_name",                 limit: 30,    default: "",    null: false
+    t.string   "purse_3_name",                 limit: 30,    default: "",    null: false
+    t.string   "purse_4_name",                 limit: 30,    default: "",    null: false
+    t.string   "purse_5_name",                 limit: 30,    default: "",    null: false
+    t.boolean  "auto_surcharge",                             default: false, null: false
+    t.string   "version",                      limit: 10,    default: "",    null: false
+    t.boolean  "compulsory_media_declaration",               default: false, null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
+  end
+
+  create_table "info_texts", force: :cascade do |t|
+    t.string   "name",           limit: 30,  default: "",    null: false
+    t.integer  "till_id",        limit: 4
+    t.boolean  "is_header",                  default: true,  null: false
+    t.string   "text",           limit: 255, default: "",    null: false
+    t.boolean  "bold",                       default: false, null: false
+    t.boolean  "underline",                  default: false, null: false
+    t.boolean  "double_width",               default: false, null: false
+    t.boolean  "double_height",              default: false, null: false
+    t.boolean  "quadruple",                  default: false, null: false
+    t.boolean  "center_aligned",             default: false, null: false
+    t.boolean  "right_aligned",              default: false, null: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+  end
+
+  add_index "info_texts", ["till_id"], name: "index_info_texts_on_till_id", using: :btree
+
+  create_table "kp_prints", force: :cascade do |t|
+    t.integer  "till_id",        limit: 4
+    t.datetime "date_received",                default: '1900-01-01 00:00:00', null: false
+    t.datetime "date_processed",               default: '1900-01-01 00:00:00', null: false
+    t.integer  "printer_number", limit: 4,     default: 0,                     null: false
+    t.boolean  "processed",                    default: false,                 null: false
+    t.text     "data",           limit: 65535,                                 null: false
+    t.datetime "created_at",                                                   null: false
+    t.datetime "updated_at",                                                   null: false
+  end
+
+  add_index "kp_prints", ["till_id"], name: "index_kp_prints_on_till_id", using: :btree
+
+  create_table "macros", force: :cascade do |t|
+    t.string   "name",          limit: 30,  default: "", null: false
+    t.string   "function_keys", limit: 255, default: "", null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+  end
+
+  create_table "media", force: :cascade do |t|
+    t.string   "name",             limit: 30,                default: "",    null: false
+    t.boolean  "open_drawer",                                default: false, null: false
+    t.boolean  "use_chip_pin",                               default: false, null: false
+    t.decimal  "medium_surcharge",            precision: 10, default: 0,     null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
+  end
+
+  create_table "pop_up_windows", force: :cascade do |t|
+    t.string   "name",       limit: 30, default: "",   null: false
+    t.integer  "plu_id",     limit: 4
+    t.boolean  "show_price",            default: true, null: false
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
+  end
+
+  add_index "pop_up_windows", ["plu_id"], name: "index_pop_up_windows_on_plu_id", using: :btree
+
+
+  create_table "selection_windows", force: :cascade do |t|
+    t.string   "name",       limit: 30, default: "", null: false
+    t.integer  "plu_id",     limit: 4
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "selection_windows", ["plu_id"], name: "index_selection_windows_on_plu_id", using: :btree
+
+  create_table "sites", force: :cascade do |t|
+    t.string   "name",       limit: 30, default: "", null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+  create_table "locations", force: :cascade do |t|
+    t.string   "name",       limit: 30, default: "", null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
 
   create_table "till_transactions", force: :cascade do |t|
     t.integer  "site_id",                   limit: 4
@@ -498,47 +505,43 @@ ActiveRecord::Schema.define(version: 20170428141625) do
   add_index "till_transactions", ["site_id"], name: "index_till_transactions_on_site_id", using: :btree
   add_index "till_transactions", ["till_id"], name: "index_till_transactions_on_till_id", using: :btree
 
-  create_table "tills", force: :cascade do |t|
-    t.string   "name",                         limit: 30,    default: "",    null: false
-    t.integer  "last_z_transaction",           limit: 4,     default: 0,     null: false
-    t.integer  "last_z_report_counter",        limit: 4,     default: 0,     null: false
-    t.boolean  "locked",                                     default: false, null: false
-    t.boolean  "change_due",                                 default: false, null: false
-    t.text     "change_data",                  limit: 65535,                 null: false
-    t.boolean  "new_journal_on_startup",                     default: false, null: false
-    t.boolean  "allow_topup_purse_1",                        default: true,  null: false
-    t.boolean  "allow_topup_purse_2",                        default: false, null: false
-    t.boolean  "allow_topup_purse_3",                        default: false, null: false
-    t.boolean  "allow_topup_purse_4",                        default: false, null: false
-    t.boolean  "allow_topup_purse_5",                        default: false, null: false
-    t.string   "purse_1_name",                 limit: 30,    default: "",    null: false
-    t.string   "purse_2_name",                 limit: 30,    default: "",    null: false
-    t.string   "purse_3_name",                 limit: 30,    default: "",    null: false
-    t.string   "purse_4_name",                 limit: 30,    default: "",    null: false
-    t.string   "purse_5_name",                 limit: 30,    default: "",    null: false
-    t.boolean  "auto_surcharge",                             default: false, null: false
-    t.string   "version",                      limit: 10,    default: "",    null: false
-    t.boolean  "compulsory_media_declaration",               default: false, null: false
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
+  create_table "till_transaction_items", force: :cascade do |t|
+    t.integer  "till_transaction_id",      limit: 4
+    t.integer  "cashier_id",               limit: 4
+    t.integer  "plu_id",                   limit: 4
+    t.string   "plu_name",                 limit: 30,                default: "",                    null: false
+    t.decimal  "plu_factor",                          precision: 10, default: 0,                     null: false
+    t.decimal  "plu_factor_entered",                  precision: 10, default: 0,                     null: false
+    t.decimal  "plu_price",                           precision: 10, default: 0,                     null: false
+    t.integer  "plu_price_level",          limit: 4,                 default: 0,                     null: false
+    t.integer  "plu_group_id",             limit: 4,                 default: 0,                     null: false
+    t.decimal  "plu_price_level_1",                   precision: 10, default: 0,                     null: false
+    t.decimal  "plu_cost",                            precision: 10, default: 0,                     null: false
+    t.integer  "vat_id",                   limit: 4
+    t.boolean  "void",                                               default: false,                 null: false
+    t.datetime "sale_date_time",                                     default: '1900-01-01 00:00:00', null: false
+    t.integer  "rp_sort_group_id",         limit: 4
+    t.boolean  "kp_printed",                                         default: false,                 null: false
+    t.boolean  "condiment",                                          default: false,                 null: false
+    t.integer  "purse_no",                 limit: 4,                 default: 0,                     null: false
+    t.decimal  "line_amount",                         precision: 10, default: 0,                     null: false
+    t.decimal  "discounted_amount",                   precision: 10, default: 0,                     null: false
+    t.decimal  "single_discounted_amount",            precision: 10, default: 0,                     null: false
+    t.decimal  "nett_amount",                         precision: 10, default: 0,                     null: false
+    t.decimal  "discount",                            precision: 10, default: 0,                     null: false
+    t.decimal  "surcharge_amount",                    precision: 10, default: 0,                     null: false
+    t.decimal  "vat_amount",                          precision: 10, default: 0,                     null: false
+    t.decimal  "single_vat_amount",                   precision: 10, default: 0,                     null: false
+    t.boolean  "add_surcharge",                                      default: false,                 null: false
+    t.datetime "created_at",                                                                         null: false
+    t.datetime "updated_at",                                                                         null: false
   end
 
-  create_table "users", force: :cascade do |t|
-    t.string   "email",           limit: 100, default: "",    null: false
-    t.string   "name",            limit: 50,  default: "",    null: false
-    t.boolean  "isAdministrator",             default: false, null: false
-    t.string   "password_digest", limit: 255
-    t.string   "remember_token",  limit: 255
-    t.datetime "created_at",                                  null: false
-    t.datetime "updated_at",                                  null: false
-  end
-
-  create_table "vats", force: :cascade do |t|
-    t.string   "name",       limit: 30,                default: "", null: false
-    t.decimal  "value",                 precision: 10, default: 0,  null: false
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
-  end
+  add_index "till_transaction_items", ["cashier_id"], name: "index_till_transaction_items_on_cashier_id", using: :btree
+  add_index "till_transaction_items", ["plu_id"], name: "index_till_transaction_items_on_plu_id", using: :btree
+  add_index "till_transaction_items", ["rp_sort_group_id"], name: "index_till_transaction_items_on_rp_sort_group_id", using: :btree
+  add_index "till_transaction_items", ["till_transaction_id"], name: "index_till_transaction_items_on_till_transaction_id", using: :btree
+  add_index "till_transaction_items", ["vat_id"], name: "index_till_transaction_items_on_vat_id", using: :btree
 
   add_foreign_key "addresses", "address_types"
   add_foreign_key "addresses", "members"
