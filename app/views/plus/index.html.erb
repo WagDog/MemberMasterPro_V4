@@ -1,77 +1,180 @@
-<p id="notice"><%= notice %></p>
+<div class="row wrapper border-bottom white-bg page-heading">
+  <div class="col-lg-10">
+    <h2>Products</h2>
+    <ol class="breadcrumb">
+      <li>
+        <a href="/home">Home</a>
+      </li>
+      <li class="active">
+        <strong>Products</strong>
+      </li>
+    </ol>
+  </div>
+  <div class="col-lg-2">
 
-<h1>Listing Plus</h1>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Price 1</th>
-      <th>Price 2</th>
-      <th>Price 3</th>
-      <th>Price 4</th>
-      <th>Price 5</th>
-      <th>Price 6</th>
-      <th>Group</th>
-      <th>Plu cost</th>
-      <th>Vat</th>
-      <th>Stock mode</th>
-      <th>Rp sort group</th>
-      <th>Purse no</th>
-      <th>Kp printer</th>
-      <th>Barcode</th>
-      <th>Price type</th>
-      <th>Condiment</th>
-      <th>Modifier</th>
-      <th>Popup window 1</th>
-      <th>Popup window 2</th>
-      <th>Popup window 3</th>
-      <th>Popup window 4</th>
-      <th>Popup window 5</th>
-      <th>Back colour</th>
-      <th>Font colour</th>
-      <th>Is active</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="wrapper wrapper-content animated fadeInRight ecommerce">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Filter Products</h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+              <li>
+                <a href="#">Config option 1</a>
+              </li>
+              <li>
+                <a href="#">Config option 2</a>
+              </li>
+            </ul>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content m-b-sm border-bottom">
+          <div class="row">
+            <div class="col-sm-3">
+              <div class="form-group">
+                <label class="control-label" for="product_name">Product Name</label>
+                <input type="text" id="product_name" name="product_name" value="" placeholder="Product Name" class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label class="control-label" for="group">Group</label>
+                <select name="group" id="group" class="form-control">
+                  <option value='-1' selected>Group</option>
+                  <% @groups.each do |group| %>
+                    <option value='<%= group.id %>'><%= group.name %></option>
+                  <% end %>
+                </select>
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label class="control-label" for="price">Price</label>
+                <input type="text" id="price" name="price" value="" placeholder="Price" class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label class="control-label" for="quantity">Quantity</label>
+                <input type="text" id="quantity" name="quantity" value="" placeholder="Quantity" class="form-control">
+              </div>
+            </div>
+            <div class="col-sm-2">
+              <div class="form-group">
+                <label class="control-label" for="status">Status</label>
+                <select name="status" id="status" class="form-control">
+                  <option value="1" selected>Enabled</option>
+                  <option value="0">Disabled</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <h5>Products</h5>
+          <div class="ibox-tools">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fa fa-wrench"></i>
+            </a>
+            <ul class="dropdown-menu dropdown-user">
+              <li>
+                <a href="#">Config option 1</a>
+              </li>
+              <li>
+                <a href="#">Config option 2</a>
+              </li>
+            </ul>
+            <a class="close-link">
+              <i class="fa fa-times"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content">
 
-  <tbody>
-    <% @plus.each do |plu| %>
-      <tr>
-        <td><%= plu.name %></td>
-        <td><%= plu.price_1 %></td>
-        <td><%= plu.price_2 %></td>
-        <td><%= plu.price_3 %></td>
-        <td><%= plu.price_4 %></td>
-        <td><%= plu.price_5 %></td>
-        <td><%= plu.price_6 %></td>
-        <td><%= plu.group %></td>
-        <td><%= plu.plu_cost %></td>
-        <td><%= plu.vat %></td>
-        <td><%= plu.stock_mode %></td>
-        <td><%= plu.rp_sort_group %></td>
-        <td><%= plu.purse_no %></td>
-        <td><%= plu.kp_printer %></td>
-        <td><%= plu.barcode %></td>
-        <td><%= plu.price_type %></td>
-        <td><%= plu.condiment %></td>
-        <td><%= plu.modifier %></td>
-        <td><%= plu.popup_window_1 %></td>
-        <td><%= plu.popup_window_2 %></td>
-        <td><%= plu.popup_window_3 %></td>
-        <td><%= plu.popup_window_4 %></td>
-        <td><%= plu.popup_window_5 %></td>
-        <td><%= plu.back_colour %></td>
-        <td><%= plu.font_colour %></td>
-        <td><%= plu.is_active %></td>
-        <td><%= link_to 'Show', plu %></td>
-        <td><%= link_to 'Edit', edit_plu_path(plu) %></td>
-        <td><%= link_to 'Destroy', plu, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+          <table class="table table-striped table-bordered table-hover products">
+            <thead>
+            <tr>
+              <th>id</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Group</th>
+              <th>Wallet</th>
+              <th>Active?</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% @plus.each do |plu| %>
+              <tr>
+                <td><%= plu.id %></td>
+                <td><%= plu.name %></td>
+                <td><%= number_to_currency(plu.price_1, locale: :en) %></td>
+                <td><%= plu.group.name %></td>
+                <td><%= plu.purse_no %></td>
+                <td><%= plu.is_active ? 'Yes' : 'No' %></td>
+              </tr>
+            <% end %>
+            </tbody>
+            <tfoot>
+            <tr>
+              <th>id</th>
+              <th>Name</th>
+              <th>Price</th>
+              <th>Group</th>
+              <th>Wallet</th>
+              <th>Active?</th>
+            </tr>
+            </tfoot>
+          </table>
 
-<br>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<%= link_to 'New Plu', new_plu_path %>
+<% content_for :javascript do %>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $('.products').DataTable({
+                columnDefs: [{width: '25px', targets: 0}],
+                lengthMenu: [
+                    [ 30, 60, 90, 120, -1 ],
+                    [ '30', '60', '90', '120', 'All' ]],
+                pageLength: 30,
+                dom: 'itlp',
+                ordering: true,
+                responsive: true
+            });
+
+
+        });
+
+
+
+    </script>
+
+<% end %>

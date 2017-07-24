@@ -1,10 +1,12 @@
 class PlusController < ApplicationController
   before_action :set_plu, only: [:show, :edit, :update, :destroy]
+  before_action :set_user
 
   # GET /plus
   # GET /plus.json
   def index
     @plus = Plu.all
+    @groups = Group.all
   end
 
   # GET /plus/1
@@ -63,7 +65,11 @@ class PlusController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_plu
+  def set_user
+    @user = User.find(current_user.id)
+  end
+
+  def set_plu
       @plu = Plu.find(params[:id])
     end
 

@@ -48,10 +48,5 @@ test:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
 production:
-#  adapter:
-#  host:
-#  database:
-#  user:
-#  port:
-#  password:
-   url: <%= ENV['CLEARDB_DATABASE_URL'] %>
+  adapter: mysql2
+  url: <%= ENV['JAWSDB_URL'] %>
