@@ -12,4 +12,6 @@ Rails.application.config.assets.version = '1.0'
 Rails.application.config.assets.precompile += [ 'appviews.css', 'cssanimations.css', 'dashboards.css', 'forms.css', 'gallery.css', 'graphs.css', 'mailbox.css', 'miscellaneous.css',
                                                 'pages.css', 'tables.css', 'uielements.css', 'widgets.css', 'commerce.css', 'members.css', 'plus.css' ]
 Rails.application.config.assets.precompile += [ 'appviews.js', 'cssanimations.js', 'dashboards.js', 'forms.js', 'gallery.js', 'graphs.js', 'mailbox.js', 'miscellaneous.js', 'pages.js',
-                                                'tables.js', 'uielements.js', 'widgets.js', 'commerce.js', 'metrics.js', 'landing.js', 'static_pages.js', 'members.js', 'plus.js']
+                                                'tables.js', 'uielements.js', 'widgets.js', 'commerce.js', 'metrics.js', 'landing.js', 'static_pages.js',
+                                                'jquery.flot.js', 'jquery.flot.tooltip.min.js', 'jquery.flot.resize.js', 'jquery.flot.pie.j', 'jquery.flot.time.js', 'jquery.flot.spline.js',
+                                                'members.js', 'plus.js']

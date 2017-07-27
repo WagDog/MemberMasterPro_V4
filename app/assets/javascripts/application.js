@@ -5,8 +5,6 @@
 // or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
 //
 //
-//= require highcharts
-//= require chartkick
 //= require jquery/jquery-3.1.1.min.js
 //= require toastr/toastr.min.js
 //= require bootstrap-sprockets
