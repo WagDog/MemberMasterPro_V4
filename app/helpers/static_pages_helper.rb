@@ -112,6 +112,7 @@ def chart_member_total_count
   @ticks = _ticks.to_a
   @data = _data.to_a
 end
+
 def chart_card_balances
   _ticks = {1 => 'Wallet 1', 2 => 'Wallet 2', 3 => 'Wallet 3', 4 => 'Wallet 4', 5 => 'Wallet 5'}
   _data = Hash.new

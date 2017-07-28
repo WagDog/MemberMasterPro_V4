@@ -47,9 +47,6 @@ Rails.application.routes.draw do
   get '/signout', to: 'sessions#destroy' # Manual uses:- match 'signout', to: 'sessions#destroy' via: :delete (position 9558)
   get '/password_lost', to: 'users#password_lost'
   post 'password_reset', to: 'users#password_reset'
-  get '/membership', to: 'static_pages#membership'
-  get '/epos', to: 'static_pages#epos'
-  get '/reports', to: 'static_pages#reports'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
