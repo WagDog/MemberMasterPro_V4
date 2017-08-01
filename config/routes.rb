@@ -26,15 +26,25 @@ Rails.application.routes.draw do
   resources :addresses
   resources :email_addresses
 
-  get '/members/search', to: 'members#search'
-  resources :members
+  resources :members do
+    collection do
+      # Add the search action for the Members table
+      get 'search'
+    end
+  end
   resources :cashiers
   resources :card_systems
   resources :card_revenues
   resources :card_holders
   resources :card_discount_matrices
   resources :card_profiles
-  resources :plus
+
+  resources :plus do
+    collection do
+      # Add the search action for the Plus table
+      get 'search'
+    end
+  end
   resources :groups
   resources :card_discounts
   resources :users

@@ -63,6 +63,15 @@ class PlusController < ApplicationController
     end
   end
 
+  # GET /plus/search
+  def search
+    s = "UPPER(name) LIKE UPPER('%#{params[:product_name]}%')"
+    s << " AND group_id = #{params[:group]}" if params[:group].present?
+    @plus = Plu.where(s)
+    @groups = Group.all
+    render :index
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
   def set_user
@@ -71,10 +80,11 @@ class PlusController < ApplicationController
 
   def set_plu
       @plu = Plu.find(params[:id])
-    end
+  end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def plu_params
-      params.require(:plu).permit(:name, :price_1, :price_2, :price_3, :price_4, :price_5, :price_6, :group_id, :plu_cost, :vat_id, :stock_mode, :rp_sort_group_id, :purse_no, :kp_printer, :barcode, :price_type, :condiment, :modifier_id, :popup_window_1, :popup_window_2, :popup_window_3, :popup_window_4, :popup_window_5, :back_colour, :font_colour, :is_active)
-    end
+  def plu_params
+    params.require(:plu).permit(:name, :price_1, :price_2, :price_3, :price_4, :price_5, :price_6, :group_id, :plu_cost, :vat_id, :stock_mode, :rp_sort_group_id, :purse_no, :kp_printer, :barcode, :price_type, :condiment, :modifier_id, :popup_window_1, :popup_window_2, :popup_window_3, :popup_window_4, :popup_window_5, :back_colour, :font_colour, :is_active)
+  end
+
 end

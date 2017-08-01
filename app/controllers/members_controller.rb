@@ -77,7 +77,6 @@ class MembersController < ApplicationController
 
   def search
     @members = Member.where("UPPER(surname) LIKE UPPER('%#{params[:q]}%') OR UPPER(forename) LIKE UPPER('%#{params[:q]}%')")
-    # render 'members/index'
     render :index
   end
 

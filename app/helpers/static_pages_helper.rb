@@ -117,11 +117,11 @@ def chart_card_balances
   _ticks = {1 => 'Wallet 1', 2 => 'Wallet 2', 3 => 'Wallet 3', 4 => 'Wallet 4', 5 => 'Wallet 5'}
   _data = Hash.new
   c = CardHolder.all
-  _data[1] = c.sum(:balance_1)
-  _data[2] = c.sum(:balance_2)
-  _data[3] = c.sum(:balance_3)
-  _data[4] = c.sum(:balance_4)
-  _data[5] = c.sum(:balance_5)
+  _data[1] = c.sum(:balance_1).to_int
+  _data[2] = c.sum(:balance_2).to_int
+  _data[3] = c.sum(:balance_3).to_int
+  _data[4] = c.sum(:balance_4).to_int
+  _data[5] = c.sum(:balance_5).to_int
 
   @tick_balances = _ticks.to_a
   @data_balances = _data.to_a
